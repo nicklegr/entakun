@@ -1,0 +1,18 @@
+div#incoming-tasks {
+  float: left;
+  width: 300px;
+}
+
+div#staffs {
+  float: left;
+}
+
+li.assigned-task {
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+.sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
+.sortable li span { position: absolute; margin-left: -1.3em; }
