@@ -1,3 +1,7 @@
+div.clear {
+  clear: both;
+}
+
 div#incoming-tasks {
   float: left;
   width: 300px;
@@ -35,4 +39,8 @@ ul.assigned-task {
 */
 ul.assigned-task > .ui-sortable-placeholder {
   display: none;
+}
+
+footer {
+  text-align: center;
 }
