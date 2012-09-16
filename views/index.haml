@@ -32,29 +32,18 @@
           %a.brand{:href => "#"} entakun
 
     .container
+      #add-task
+        %label タスクを追加
+        %input#task{ type: 'text' }
+
       #incoming-tasks
         %ul#tasks.sortable
           %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
             タスク1
           %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
             タスク2
           %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
             タスク3
-          %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
-            タスク4
-          %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
-            タスク5
-          %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
-            タスク6
-          %li.ui-state-default
-            %span.ui-icon.ui-icon-arrowthick-2-n-s>
-            タスク7
 
       #staffs
         .staff
