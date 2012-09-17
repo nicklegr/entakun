@@ -24,3 +24,10 @@ $ ->
       $("ul#tasks").append('<li class="ui-state-default">' + text + '</li>')
       $("input#task").val('')
   )
+
+  # trashbox
+  $("#trashbox").droppable({
+    tolerance: 'touch',
+    drop: (event, ui) ->
+      ui.draggable.remove()
+  })
