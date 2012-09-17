@@ -4,7 +4,14 @@ div.clear {
 
 div#incoming-tasks {
   float: left;
-  width: 300px;
+  width: 350px;
+  margin-right: 20px;
+  border: 1px solid black;
+}
+
+ul#tasks {
+  min-width: 340px;
+  min-height: 400px;
 }
 
 div#staffs {
@@ -12,20 +19,20 @@ div#staffs {
 }
 
 div.staff {
-  width: 280px;
-  height: 70px;
+  width: 350px;
+  height: 80px;
   border: 1px solid black;
 }
 
 div.staff-name {
-  width: 200px;
+  width: 340px;
   height: 30px;
   border: 1px solid black;
 }
 
 ul.assigned-task {
-  width: 200px;
-  height: 40px;
+  width: 340px;
+  height: 35px;
   border: 1px solid black;
 }
 
