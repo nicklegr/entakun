@@ -40,3 +40,14 @@ $ ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
       $('#trashbox-img').effect('bounce', {}, 150)
   })
+
+  # in-place task edit
+  $('.task').editable('/edit_task',{
+    event: 'edit_event',
+    cssclass: 'editing-task',
+    # onblur: 'ignore'
+  });
+
+  $('.edit').click(()->
+    $(this).prev().trigger('edit_event')
+  )

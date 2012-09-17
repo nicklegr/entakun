@@ -14,3 +14,7 @@ end
 get '/js/application.js' do
   coffee :application
 end
+
+post '/edit_task' do
+  haml params[:value]
+end

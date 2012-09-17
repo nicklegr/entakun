@@ -14,6 +14,22 @@ ul#tasks {
   min-height: 400px;
 }
 
+div.task {
+  width: 90%;
+  float: left;
+}
+
+.editing-task {
+  height: 12px;
+  margin-left: -4px;
+  margin-top: -4px;
+}
+
+div.edit {
+  width: 10%;
+  float: left;
+}
+
 div#staffs {
   float: left;
   height: 320px;
