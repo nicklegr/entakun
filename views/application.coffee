@@ -32,6 +32,9 @@ $ ->
     over: (event, ui) ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Opened.png')
 
+    out: (event, ui) ->
+      $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
+
     drop: (event, ui) ->
       ui.draggable.remove()
       $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
