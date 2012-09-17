@@ -16,6 +16,7 @@ ul#tasks {
 
 div#staffs {
   float: left;
+  height: 320px;
 }
 
 div.staff {
@@ -34,6 +35,35 @@ ul.assigned-task {
   width: 340px;
   height: 35px;
   border: 1px solid black;
+}
+
+div#commands {
+  clear: both;
+  width: 350px;
+  height: 80px;
+  border: 1px solid black;
+}
+
+div#trashs {
+  float: left;
+  width: 33%;
+  height: 64px;
+  margin-top: 16px;
+}
+
+div#trashbox {
+  float: left;
+  width: 33%;
+  height: 64px;
+  text-align: center;
+  margin-top: 16px;
+}
+
+div#undo {
+  float: left;
+  width: 33%;
+  height: 64px;
+  margin-top: 16px;
 }
 
 .sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }

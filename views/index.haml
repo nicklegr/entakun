@@ -36,30 +36,37 @@
         %label タスクを追加
         %input#task{ type: 'text' }
 
-      #incoming-tasks
-        %ul#tasks.sortable
-          %li.ui-state-default
-            タスク1
-          %li.ui-state-default
-            タスク2
-          %li.ui-state-default
-            タスク3
+      .row
+        .span5
+          #incoming-tasks
+            %ul#tasks.sortable
+              %li.ui-state-default
+                タスク1
+              %li.ui-state-default
+                タスク2
+              %li.ui-state-default
+                タスク3
 
-      #staffs
-        .staff
-          .staff-name
-            のび太
-          %ul.assigned-task.sortable
-        .staff
-          .staff-name
-            スネ夫
-          %ul.assigned-task.sortable
-        .staff
-          .staff-name
-            しずか
-          %ul.assigned-task.sortable
+        .span5
+          #staffs
+            .staff
+              .staff-name
+                のび太
+              %ul.assigned-task.sortable
+            .staff
+              .staff-name
+                スネ夫
+              %ul.assigned-task.sortable
+            .staff
+              .staff-name
+                しずか
+              %ul.assigned-task.sortable
 
-      .clear
+          #commands
+            #trashs
+            #trashbox
+              %img{ src: '/img/TrashBox_Closed.png' }
+            #undo
 
       %hr
 
