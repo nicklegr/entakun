@@ -15,7 +15,7 @@ ul#tasks {
 }
 
 div.task {
-  width: 90%;
+  width: 80%;
   float: left;
 }
 
@@ -26,6 +26,11 @@ div.task {
 }
 
 div.edit {
+  width: 10%;
+  float: left;
+}
+
+div.delete {
   width: 10%;
   float: left;
 }

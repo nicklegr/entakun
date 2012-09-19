@@ -16,6 +16,13 @@ add_task = (name) ->
     $(this).prev().trigger('edit_event')
   )
 
+  new_task.find('.delete').click(()->
+    # @todo notify server
+    $(this).parent().effect('fade', {}, 300, () ->
+      $(this).remove()
+    )
+  )
+
   $("ul#tasks").append(new_task)
 
 
@@ -57,6 +64,7 @@ $ ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
 
     drop: (event, ui) ->
+      # @todo notify server
       ui.draggable.remove()
       $('#trashbox-img').effect('bounce', {}, 150)
   })
@@ -65,4 +73,3 @@ $ ->
   add_task('test 1')
   add_task('test 2')
   add_task('test 3')
-  
