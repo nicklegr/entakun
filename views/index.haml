@@ -40,14 +40,8 @@
         .span5
           #incoming-tasks
             %ul#tasks.sortable
-              %li.ui-state-default
-                .task タスク1
-                .edit [edit]
-              %li.ui-state-default
-                .task タスク2
-                .edit [edit]
-              %li.ui-state-default
-                .task タスク3
+              %li#task-template.ui-state-default{ style: 'display: none;' }
+                .task (タスク内容)
                 .edit [edit]
 
         .span5

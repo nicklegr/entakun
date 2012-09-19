@@ -1,3 +1,24 @@
+add_task = (name) ->
+  # copy element
+  new_task = $('#task-template').clone()
+  new_task.attr('id', '')
+  new_task.find('.task').text(name)
+  new_task.show()
+
+  # in-place task edit
+  new_task.find('.task').editable('/edit_task',{
+    event: 'edit_event',
+    cssclass: 'editing-task',
+    # onblur: 'ignore'
+  })
+
+  new_task.find('.edit').click(()->
+    $(this).prev().trigger('edit_event')
+  )
+
+  $("ul#tasks").append(new_task)
+
+
 $ ->
   # task list
   $("ul#tasks").sortable({
@@ -21,7 +42,7 @@ $ ->
     text = $("input#task").val()
 
     if text != "" && (event.keyCode && event.keyCode == 13)
-      $("ul#tasks").append('<li class="ui-state-default">' + text + '</li>')
+      add_task(text)
       $("input#task").val('')
   )
 
@@ -40,13 +61,8 @@ $ ->
       $('#trashbox-img').effect('bounce', {}, 150)
   })
 
-  # in-place task edit
-  $('.task').editable('/edit_task',{
-    event: 'edit_event',
-    cssclass: 'editing-task',
-    # onblur: 'ignore'
-  });
-
-  $('.edit').click(()->
-    $(this).prev().trigger('edit_event')
-  )
+  # @todo test
+  add_task('test 1')
+  add_task('test 2')
+  add_task('test 3')
+  
