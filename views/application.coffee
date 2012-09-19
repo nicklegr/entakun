@@ -29,15 +29,14 @@ $ ->
   $("#trashbox").droppable({
     tolerance: 'touch',
 
-    over: (event, ui) ->
+    activate: (event, ui) ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Opened.png')
 
-    out: (event, ui) ->
+    deactivate: (event, ui) ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
 
     drop: (event, ui) ->
       ui.draggable.remove()
-      $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
       $('#trashbox-img').effect('bounce', {}, 150)
   })
 
