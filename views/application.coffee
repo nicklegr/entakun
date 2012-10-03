@@ -1,7 +1,23 @@
+project_key = 'test_key'
+
 add_task = (name) ->
+  # send to server
+  task_id = null
+  $.ajax({
+    async: false,
+    type: "POST",
+    url: "/new_task",
+    data: { project: project_key, name: name }
+  }).done((id) ->
+    task_id = id
+  )
+
+  add_task_html(task_id, name)
+
+add_task_html = (id, name) ->
   # copy element
   new_task = $('#task-template').clone()
-  new_task.attr('id', '')
+  new_task.attr('id', id)
   new_task.find('.task').text(name)
   new_task.show()
 
@@ -70,6 +86,6 @@ $ ->
   })
 
   # @todo test
-  add_task('test 1')
-  add_task('test 2')
-  add_task('test 3')
+  add_task_html('1', 'test 1')
+  add_task_html('2', 'test 2')
+  add_task_html('3', 'test 3')
