@@ -37,7 +37,7 @@ div.delete {
 
 div#staffs {
   float: left;
-  height: 320px;
+  height: 275px;
 }
 
 div.staff {
@@ -61,7 +61,7 @@ ul.assigned-task {
 div#commands {
   clear: both;
   width: 350px;
-  height: 80px;
+  height: 125px;
   border: 1px solid black;
 }
 
@@ -76,8 +76,7 @@ div#trashbox {
   float: left;
   width: 33%;
   height: 64px;
-  margin-top: 16px;
-  padding-left: 32px;
+  padding-left: 16px;
 }
 
 div#undo {
