@@ -42,27 +42,24 @@ div#staffs {
 
 div.staff {
   width: 350px;
-  height: 80px;
+  height: 70px;
   border: 1px solid black;
 }
 
 div.staff-name {
-  width: 340px;
   height: 30px;
-  border: 1px solid black;
+  background-color: deepskyblue;
 }
 
 ul.assigned-task {
   width: 340px;
-  height: 35px;
-  border: 1px solid black;
+  height: 30px;
 }
 
 div#commands {
   clear: both;
   width: 350px;
   height: 125px;
-  border: 1px solid black;
 }
 
 div#trashs {
