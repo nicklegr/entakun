@@ -31,9 +31,18 @@ post '/new_task' do
   project = Project.where(key: key).first
   task = project.tasks.create(name: name)
 
-  haml "#{task._id}"
+  "#{task._id}"
 end
 
 post '/edit_task' do
-  haml params[:value]
+  key = params[:project]
+  id = params[:task_id]
+  name = params[:value]
+
+  project = Project.where(key: key).first
+  task = project.tasks.find(id)
+  task.name = name
+  task.save!
+
+  name
 end

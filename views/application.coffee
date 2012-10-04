@@ -23,6 +23,11 @@ add_task_html = (id, name) ->
 
   # in-place task edit
   new_task.find('.task').editable('/edit_task',{
+    submitdata : (value, settings) ->
+      {
+        project: project_key,
+        task_id: $(this).parent().attr('id'),
+      }
     event: 'edit_event',
     cssclass: 'editing-task',
     # onblur: 'ignore'
