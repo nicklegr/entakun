@@ -18,6 +18,7 @@ end
 class Staff
   include Mongoid::Document
   field :name, type: String
+  has_one :task
   embedded_in :project
 end
 

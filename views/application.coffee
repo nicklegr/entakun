@@ -90,7 +90,18 @@ $ ->
       $('#trashbox-img').effect('bounce', {}, 150)
   })
 
-  # @todo test
-  add_task_html('1', 'test 1')
-  add_task_html('2', 'test 2')
-  add_task_html('3', 'test 3')
+  # get tasks
+  tasks = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "/tasks",
+    data: { project: project_key },
+    dataType: 'json',
+  }).done((data) ->
+    tasks = data
+  )
+
+  $.each(tasks, (i) ->
+    add_task_html(this._id, this.name)
+  )

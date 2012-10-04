@@ -24,6 +24,13 @@ get '/js/application.js' do
   coffee :application
 end
 
+get '/tasks' do
+  key = params[:project]
+  project = Project.where(key: key).first
+
+  project.tasks.to_json
+end
+
 post '/new_task' do
   key = params[:project]
   name = params[:name]
