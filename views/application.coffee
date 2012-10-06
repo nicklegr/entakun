@@ -38,7 +38,14 @@ add_task_html = (id, name) ->
   )
 
   new_task.find('.delete').click(()->
-    # @todo notify server
+    $.ajax({
+      async: true,
+      type: "POST",
+      url: "/delete_task",
+      data: { project: project_key, task_id: $(this).parent().attr('id') },
+      dataType: 'json',
+    })
+
     $(this).parent().effect('fade', {}, 300, () ->
       $(this).remove()
     )

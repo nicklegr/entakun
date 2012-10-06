@@ -53,3 +53,11 @@ post '/edit_task' do
 
   name
 end
+
+post '/delete_task' do
+  key = params[:project]
+  id = params[:task_id]
+
+  project = Project.where(key: key).first
+  project.tasks.find(id).destroy
+end
