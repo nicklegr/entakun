@@ -92,7 +92,14 @@ $ ->
       $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
 
     drop: (event, ui) ->
-      # @todo notify server
+      $.ajax({
+        async: true,
+        type: "POST",
+        url: "/complete_task",
+        data: { project: project_key, task_id: ui.draggable.attr('id') },
+        dataType: 'json',
+      })
+
       ui.draggable.remove()
       $('#trashbox-img').effect('bounce', {}, 150)
   })
@@ -102,7 +109,7 @@ $ ->
   $.ajax({
     async: false,
     type: "GET",
-    url: "/tasks",
+    url: "/incoming_tasks",
     data: { project: project_key },
     dataType: 'json',
   }).done((data) ->

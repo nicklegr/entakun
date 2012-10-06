@@ -31,12 +31,19 @@ get '/tasks' do
   project.tasks.to_json
 end
 
+get '/incoming_tasks' do
+  key = params[:project]
+  project = Project.where(key: key).first
+
+  project.tasks.where(complete: false).to_json
+end
+
 post '/new_task' do
   key = params[:project]
   name = params[:name]
 
   project = Project.where(key: key).first
-  task = project.tasks.create(name: name)
+  task = project.tasks.create(name: name, complete: false)
 
   "#{task._id}"
 end
@@ -60,4 +67,14 @@ post '/delete_task' do
 
   project = Project.where(key: key).first
   project.tasks.find(id).destroy
+end
+
+post '/complete_task' do
+  key = params[:project]
+  id = params[:task_id]
+
+  project = Project.where(key: key).first
+  task = project.tasks.find(id)
+  task.complete = true
+  task.save!
 end

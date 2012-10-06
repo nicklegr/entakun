@@ -12,6 +12,7 @@ end
 class Task
   include Mongoid::Document
   field :name, type: String
+  field :complete, type: Boolean
   embedded_in :project
 end
 
