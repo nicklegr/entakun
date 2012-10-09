@@ -1,4 +1,6 @@
 source :rubyforge
+
+ruby '1.9.3'
 gem 'sinatra'
 gem 'sinatra-reloader'
 gem 'thin'

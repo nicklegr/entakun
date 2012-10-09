@@ -13,8 +13,8 @@ set :haml, :format => :html5
 
 get '/' do
   # @todo プロジェクト作成機能ができるまでの仮
-  project = Project.where(key: PROJECT_KEY).first
-  unless project
+  project = Project.where(key: PROJECT_KEY)
+  if project.size == 0
     Project.create({ key: PROJECT_KEY, name: 'test' })
   end
 
