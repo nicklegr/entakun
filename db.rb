@@ -23,4 +23,11 @@ class Staff
   embedded_in :project
 end
 
-Mongoid.load!("./mongoid.yml")
+Mongoid.configure do |config|
+  if ENV.key?('MONGOHQ_URL')
+    # for heroku
+    config.sessions = { default: { uri: ENV['MONGOHQ_URL'] }}
+  else
+    config.sessions = { default: { database: 'entakun', hosts: [ 'localhost:27017' ] }}
+  end
+end
