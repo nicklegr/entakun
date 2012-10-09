@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'sinatra'
+require 'sinatra/url_for'
 require 'sinatra/reloader' if development?
 require 'haml'
 require 'coffee-script'
@@ -21,7 +22,7 @@ get '/' do
 end
 
 get '/js/application.js' do
-  coffee :application
+  coffee erb(:"application.coffee")
 end
 
 get '/tasks' do

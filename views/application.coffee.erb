@@ -6,7 +6,7 @@ add_task = (name) ->
   $.ajax({
     async: false,
     type: "POST",
-    url: "/new_task",
+    url: "<%= url_for "/new_task" %>",
     data: { project: project_key, name: name }
   }).done((id) ->
     task_id = id
@@ -41,7 +41,7 @@ add_task_html = (id, name) ->
     $.ajax({
       async: true,
       type: "POST",
-      url: "/delete_task",
+      url: "<%= url_for "/delete_task" %>",
       data: { project: project_key, task_id: $(this).parent().attr('id') },
       dataType: 'json',
     })
@@ -95,7 +95,7 @@ $ ->
       $.ajax({
         async: true,
         type: "POST",
-        url: "/complete_task",
+        url: "<%= url_for "/complete_task" %>",
         data: { project: project_key, task_id: ui.draggable.attr('id') },
         dataType: 'json',
       })
@@ -109,7 +109,7 @@ $ ->
   $.ajax({
     async: false,
     type: "GET",
-    url: "/incoming_tasks",
+    url: "<%= url_for "/incoming_tasks" %>",
     data: { project: project_key },
     dataType: 'json',
   }).done((data) ->

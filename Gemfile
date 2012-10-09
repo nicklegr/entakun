@@ -6,3 +6,4 @@ gem 'haml'
 gem 'therubyracer', :platforms => :ruby
 gem 'coffee-script'
 gem 'mongoid'
+gem 'emk-sinatra-url-for'
