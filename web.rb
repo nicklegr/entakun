@@ -7,22 +7,25 @@ require 'haml'
 require 'coffee-script'
 require './db'
 
-PROJECT_KEY = 'test_key'
-
 set :haml, :format => :html5
-
-get '/' do
-  # @todo プロジェクト作成機能ができるまでの仮
-  project = Project.where(key: PROJECT_KEY)
-  if project.size == 0
-    Project.create({ key: PROJECT_KEY, name: 'test' })
-  end
-
-  haml :index
-end
 
 get '/js/application.js' do
   coffee erb(:"application.coffee")
+end
+
+get '/' do
+  haml :index
+end
+
+get '/new_project' do
+  project_key = SecureRandom.urlsafe_base64
+  Project.create({ key: project_key, name: '新規プロジェクト' })
+  redirect "/projects/#{project_key}"
+end
+
+get '/projects/:key' do
+  @project_key = params[:key]
+  haml :project
 end
 
 get '/tasks' do
