@@ -86,10 +86,10 @@ $ ->
     tolerance: 'touch',
 
     activate: (event, ui) ->
-      $('#trashbox-img').attr('src', '/img/TrashBox_Opened.png')
+      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Opened.png" %>')
 
     deactivate: (event, ui) ->
-      $('#trashbox-img').attr('src', '/img/TrashBox_Closed.png')
+      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Closed.png" %>')
 
     drop: (event, ui) ->
       $.ajax({
