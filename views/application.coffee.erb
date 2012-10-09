@@ -22,7 +22,7 @@ add_task_html = (id, name) ->
   new_task.show()
 
   # in-place task edit
-  new_task.find('.task').editable('/edit_task',{
+  new_task.find('.task').editable("<%= url_for "/edit_task" %>", {
     submitdata : (value, settings) ->
       {
         project: project_key,
