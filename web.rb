@@ -54,7 +54,7 @@ end
 
 post '/edit_task' do
   key = params[:project]
-  id = params[:task_id]
+  id = params[:id]
   name = params[:value]
 
   project = Project.where(key: key).first
@@ -67,7 +67,7 @@ end
 
 post '/delete_task' do
   key = params[:project]
-  id = params[:task_id]
+  id = params[:id]
 
   project = Project.where(key: key).first
   project.tasks.find(id).destroy

@@ -19,12 +19,12 @@ ul#tasks {
   min-height: 400px;
 }
 
-div.task {
+div.name {
   width: 84%;
   float: left;
 }
 
-.editing-task {
+.editing {
   height: 12px;
   margin-left: -4px;
   margin-top: -4px;
