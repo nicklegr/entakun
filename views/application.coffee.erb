@@ -64,6 +64,20 @@ add_task_html = (id, name) ->
 
   $("ul#tasks").append(new_task)
 
+add_staff = (name) ->
+  # send to server
+  staff_id = null
+  $.ajax({
+    async: false,
+    type: "POST",
+    url: "<%= url_for "/new_staff" %>",
+    data: { project: project_key, name: name }
+  }).done((id) ->
+    staff_id = id
+  )
+
+  add_staff_html(staff_id, name)
+
 add_staff_html = (id, name) ->
   # copy element
   new_staff = $('#staff-template').clone()
@@ -85,6 +99,13 @@ add_staff_html = (id, name) ->
   enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>', '<%= url_for "/delete_staff" %>')
 
   $("#staffs").append(new_staff)
+
+add_staff_event = () ->
+  name = window.prompt('名前を入力してください')
+  if name == null
+    name = 'スタッフ'
+
+  add_staff(name)
 
 $ ->
   # task list
@@ -145,3 +166,6 @@ $ ->
   add_staff_html('0', 'staff0')
   add_staff_html('1', 'staff1')
   add_staff_html('2', 'staff2')
+
+  # add staff handler
+  $('#add-staff').click(add_staff_event)

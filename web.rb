@@ -82,3 +82,13 @@ post '/complete_task' do
   task.complete = true
   task.save!
 end
+
+post '/new_staff' do
+  key = params[:project]
+  name = params[:name]
+
+  project = Project.where(key: key).first
+  staff = project.staffs.create(name: name)
+
+  "#{staff._id}"
+end

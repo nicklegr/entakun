@@ -61,6 +61,10 @@ ul.assigned-task {
   height: 30px;
 }
 
+div.add-staff {
+  clear: both;
+}
+
 div#commands {
   clear: both;
   width: 350px;
