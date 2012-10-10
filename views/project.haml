@@ -15,17 +15,13 @@
 
   .span5
     #staffs
-      .staff
+      .staff#staff-template{ style: 'display: none;' }
         .staff-name
-          のび太
-        %ul.assigned-task.sortable
-      .staff
-        .staff-name
-          スネ夫
-        %ul.assigned-task.sortable
-      .staff
-        .staff-name
-          しずか
+          .name (スタッフ名)
+          .edit{ style: "display: none;" }
+            %img.edit_button{ src: url_for('/img/pencil.png') }
+          .delete{ style: "display: none;" }
+            %img.edit_button{ src: url_for('/img/cancel.png') }
         %ul.assigned-task.sortable
 
     #commands
