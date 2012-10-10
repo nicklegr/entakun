@@ -2,8 +2,9 @@ div.clear {
   clear: both;
 }
 
-img.icon {
+img.edit_button {
   margin-top: -5px;
+  cursor: pointer;
 }
 
 div#incoming-tasks {
