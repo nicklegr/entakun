@@ -8,8 +8,10 @@
       %ul#tasks.sortable
         %li#task-template.ui-state-default{ style: 'display: none;' }
           .task (タスク内容)
-          .edit [edit]
-          .delete [del]
+          .edit
+            %img.icon{ src: url_for('/img/pencil.png') }
+          .delete
+            %img.icon{ src: url_for('/img/cancel.png') }
 
   .span5
     #staffs

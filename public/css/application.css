@@ -2,6 +2,10 @@ div.clear {
   clear: both;
 }
 
+img.icon {
+  margin-top: -5px;
+}
+
 div#incoming-tasks {
   float: left;
   width: 350px;
@@ -15,7 +19,7 @@ ul#tasks {
 }
 
 div.task {
-  width: 80%;
+  width: 84%;
   float: left;
 }
 
@@ -26,12 +30,12 @@ div.task {
 }
 
 div.edit {
-  width: 10%;
+  width: 8%;
   float: left;
 }
 
 div.delete {
-  width: 10%;
+  width: 8%;
   float: left;
 }
 
