@@ -8,9 +8,9 @@
       %ul#tasks.sortable
         %li#task-template.ui-state-default{ style: 'display: none;' }
           .task (タスク内容)
-          .edit
+          .edit{ style: "display: none;" }
             %img.icon{ src: url_for('/img/pencil.png') }
-          .delete
+          .delete{ style: "display: none;" }
             %img.icon{ src: url_for('/img/cancel.png') }
 
   .span5

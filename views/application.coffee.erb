@@ -49,6 +49,17 @@ add_task_html = (id, name) ->
     )
   )
 
+  # show edit icons when mouse hover
+  new_task.hover(
+    () ->
+      $(this).find('.edit').show()
+      $(this).find('.delete').show()
+    ,
+    () ->
+      $(this).find('.edit').hide()
+      $(this).find('.delete').hide()
+  )
+
   $("ul#tasks").append(new_task)
 
 
