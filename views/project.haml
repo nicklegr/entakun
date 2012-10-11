@@ -14,20 +14,21 @@
             %img.edit_button{ src: url_for('/img/cancel.png') }
 
   .span5
-    #staffs
-      .staff#staff-template{ style: 'display: none;' }
-        .staff-name
-          .name (スタッフ名)
-          .edit{ style: "display: none;" }
-            %img.edit_button{ src: url_for('/img/pencil.png') }
-          .delete{ style: "display: none;" }
-            %img.edit_button{ src: url_for('/img/cancel.png') }
-        %ul.assigned-task.sortable
+    #staff-container
+      #staffs
+        .staff#staff-template{ style: 'display: none;' }
+          .staff-name
+            .name (スタッフ名)
+            .edit{ style: "display: none;" }
+              %img.edit_button{ src: url_for('/img/pencil.png') }
+            .delete{ style: "display: none;" }
+              %img.edit_button{ src: url_for('/img/cancel.png') }
+          %ul.assigned-task.sortable
 
-    .add-staff
-      %a#add-staff
-        %img.edit_button{ src: url_for('/img/add.png') }
-        スタッフを追加
+      .add-staff
+        %a#add-staff
+          %img.edit_button{ src: url_for('/img/add.png') }
+          追加
 
     #commands
       #trashs

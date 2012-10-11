@@ -40,13 +40,15 @@ div.delete {
   float: left;
 }
 
-div#staffs {
-  float: left;
+div#staff-container {
+  width: 350px;
   height: 275px;
 }
 
+div#staffs {
+}
+
 div.staff {
-  width: 350px;
   height: 70px;
   border: 1px solid black;
 }
@@ -63,6 +65,7 @@ ul.assigned-task {
 
 div.add-staff {
   clear: both;
+  text-align: right;
 }
 
 div#commands {
