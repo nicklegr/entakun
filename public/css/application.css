@@ -86,7 +86,6 @@ div#commands {
 div#trashs {
   float: left;
   width: 33%;
-  height: 64px;
   margin-top: 45px;
   text-align: center;
 }
@@ -94,14 +93,13 @@ div#trashs {
 div#trashbox {
   float: left;
   width: 33%;
-  height: 64px;
-  padding-left: 16px;
+  padding-left: 36px;
+  padding-top: 16px;
 }
 
 div#undo {
   float: left;
   width: 33%;
-  height: 64px;
   margin-top: 16px;
 }
 
