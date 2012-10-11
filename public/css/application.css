@@ -7,16 +7,20 @@ img.edit_button {
   cursor: pointer;
 }
 
+input#task {
+  width: 338px;
+}
+
 div#incoming-tasks {
   float: left;
   width: 350px;
   margin-right: 20px;
-  border: 1px solid black;
+  border: 1px solid silver;
 }
 
 ul#tasks {
   min-width: 340px;
-  min-height: 400px;
+  min-height: 440px;
 }
 
 div.name {
@@ -42,25 +46,29 @@ div.delete {
 
 div#staff-container {
   width: 350px;
-  height: 275px;
+  height: 325px;
 }
 
 div#staffs {
 }
 
 div.staff {
-  height: 70px;
-  border: 1px solid black;
+  height: 56px;
+  border: 1px solid silver;
+  margin-bottom: 5px;
 }
 
 div.staff-name {
-  height: 30px;
+  height: 23px;
+  padding-left: 5px;
   background-color: deepskyblue;
 }
 
 ul.assigned-task {
   width: 340px;
   height: 30px;
+  padding-top: 1px;
+  padding-left: 10px;
 }
 
 div.add-staff {
@@ -72,6 +80,7 @@ div#commands {
   clear: both;
   width: 350px;
   height: 125px;
+  border-top: 1px dashed silver;
 }
 
 div#trashs {
