@@ -104,10 +104,8 @@ add_staff_html = (id, name) ->
 
 add_staff_event = () ->
   name = window.prompt('名前を入力してください')
-  if name == null
-    name = 'スタッフ'
-
-  add_staff(name)
+  if name
+    add_staff(name)
 
 $ ->
   # task list
