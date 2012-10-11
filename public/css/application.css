@@ -75,7 +75,8 @@ div#trashs {
   float: left;
   width: 33%;
   height: 64px;
-  margin-top: 16px;
+  margin-top: 45px;
+  text-align: center;
 }
 
 div#trashbox {
@@ -95,6 +96,10 @@ div#undo {
 .sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 .sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
 .sortable li span { position: absolute; margin-left: -1.3em; }
+
+.complete-task {
+  color: silver;
+}
 
 /*
   タスク割り当て済みのSortableにドロップしようとしたとき、

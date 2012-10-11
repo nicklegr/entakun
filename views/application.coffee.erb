@@ -63,6 +63,7 @@ add_task_html = (id, name) ->
   enable_inplace_edit(new_task, '<%= url_for "/edit_task" %>', '<%= url_for "/delete_task" %>')
 
   $("ul#tasks").append(new_task)
+  new_task
 
 add_staff = (name) ->
   # send to server
@@ -99,6 +100,7 @@ add_staff_html = (id, name) ->
   enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>', '<%= url_for "/delete_staff" %>')
 
   $("#staffs").append(new_staff)
+  new_staff
 
 add_staff_event = () ->
   name = window.prompt('名前を入力してください')
@@ -151,7 +153,7 @@ $ ->
   $.ajax({
     async: false,
     type: "GET",
-    url: "<%= url_for "/incoming_tasks" %>",
+    url: "<%= url_for "/tasks" %>",
     data: { project: project_key },
     dataType: 'json',
   }).done((data) ->
@@ -159,7 +161,11 @@ $ ->
   )
 
   $.each(tasks, (i) ->
-    add_task_html(this._id, this.name)
+    task = add_task_html(this._id, this.name)
+    if this.complete
+      task.addClass('ui-state-disabled')
+      if !$('#show_trashes_check').attr('checked')
+        task.hide()
   )
 
   # get staffs
@@ -169,3 +175,12 @@ $ ->
 
   # add staff handler
   $('#add-staff').click(add_staff_event)
+
+  # show trash toggle
+  $('#show_trashes').toggleButtons(
+    onChange: (event, status, e) ->
+      if status
+        $('.ui-state-disabled').show()
+      else
+        $('.ui-state-disabled').hide()
+  )

@@ -32,7 +32,7 @@ get '/tasks' do
   key = params[:project]
   project = Project.where(key: key).first
 
-  project.tasks.to_json
+  project.tasks.order_by('complete asc').to_json
 end
 
 get '/incoming_tasks' do
