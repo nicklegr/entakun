@@ -83,6 +83,13 @@ post '/complete_task' do
   task.save!
 end
 
+get '/staffs' do
+  key = params[:project]
+  project = Project.where(key: key).first
+
+  project.staffs.to_json
+end
+
 post '/new_staff' do
   key = params[:project]
   name = params[:name]

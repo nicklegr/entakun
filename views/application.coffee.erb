@@ -182,9 +182,20 @@ $ ->
   )
 
   # get staffs
-  add_staff_html('0', 'staff0')
-  add_staff_html('1', 'staff1')
-  add_staff_html('2', 'staff2')
+  staffs = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "<%= url_for "/staffs" %>",
+    data: { project: project_key },
+    dataType: 'json',
+  }).done((data) ->
+    staffs = data
+  )
+
+  $.each(staffs, (i) ->
+    add_staff_html(this._id, this.name)
+  )
 
   # add staff handler
   $('#add-staff').click(add_staff_event)
