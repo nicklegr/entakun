@@ -1,9 +1,18 @@
+find_object_top = (elem) ->
+  e = elem.parent()
+  while true
+    if e.attr('id')
+      return e
+
+    e = e.parent()
+
 enable_inplace_edit = (elem, edit_url, delete_url) ->
   elem.find('.name').editable(edit_url, {
     submitdata : (value, settings) ->
+      top_elem = find_object_top($(this))
       {
         project: project_key,
-        id: $(this).parent().attr('id'),
+        id: top_elem.attr('id'),
       }
     event: 'edit_event',
     cssclass: 'editing',
@@ -15,15 +24,17 @@ enable_inplace_edit = (elem, edit_url, delete_url) ->
   )
 
   elem.find('.delete').click(()->
+    top_elem = find_object_top($(this))
+
     $.ajax({
       async: true,
       type: "POST",
       url: delete_url,
-      data: { project: project_key, id: $(this).parent().attr('id') },
+      data: { project: project_key, id: top_elem.attr('id') },
       dataType: 'json',
     })
 
-    $(this).parent().effect('fade', {}, 300, () ->
+    top_elem.effect('fade', {}, 300, () ->
       $(this).remove()
     )
   )
@@ -98,22 +109,6 @@ add_staff_html = (id, name) ->
   new_staff.find("ul.assigned-task").disableSelection()
 
   enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>', '<%= url_for "/delete_staff" %>')
-
-  # delete is little bit different
-  new_staff.find('.delete').unbind()
-  new_staff.find('.delete').click(()->
-    $.ajax({
-      async: true,
-      type: "POST",
-      url: '<%= url_for "/delete_staff" %>',
-      data: { project: project_key, id: $(this).parent().parent().attr('id') },
-      dataType: 'json',
-    })
-
-    $(this).parent().parent().effect('fade', {}, 300, () ->
-      $(this).remove()
-    )
-  )
 
   $("#staffs").append(new_staff)
   new_staff

@@ -93,6 +93,19 @@ post '/new_staff' do
   "#{staff._id}"
 end
 
+post '/edit_staff' do
+  key = params[:project]
+  id = params[:id]
+  name = params[:value]
+
+  project = Project.where(key: key).first
+  staff = project.staffs.find(id)
+  staff.name = name
+  staff.save!
+
+  name
+end
+
 post '/delete_staff' do
   key = params[:project]
   id = params[:id]
