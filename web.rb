@@ -92,3 +92,11 @@ post '/new_staff' do
 
   "#{staff._id}"
 end
+
+post '/delete_staff' do
+  key = params[:project]
+  id = params[:id]
+
+  project = Project.where(key: key).first
+  project.staffs.find(id).destroy
+end
