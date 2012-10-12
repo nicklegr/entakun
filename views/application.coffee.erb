@@ -101,10 +101,14 @@ add_staff_html = (id, name) ->
   new_staff.find(".assigned-task").sortable({
     connectWith: "ul#tasks,ul.assigned-task",
 
-    # Don't assign multiple tasks to one person
     receive: (event, ui) ->
+      # Don't assign multiple tasks to one person
       if $(this).find('li').length >= 2
-        $(ui.sender).sortable('cancel');
+        $(ui.sender).sortable('cancel')
+
+      # avoid completed task assign
+      if ui.item.hasClass('ui-state-disabled')
+        $(ui.sender).sortable('cancel')
   })
   new_staff.find("ul.assigned-task").disableSelection()
 
