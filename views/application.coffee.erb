@@ -142,7 +142,11 @@ $ ->
         dataType: 'json',
       })
 
-      ui.draggable.remove()
+      $('#tasks').append(ui.draggable)
+      ui.draggable.addClass('ui-state-disabled')
+      if !$('#show_trashes_check').attr('checked')
+        ui.draggable.hide()
+
       $('#trashbox-img').effect('bounce', {}, 150)
   })
 
