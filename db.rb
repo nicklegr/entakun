@@ -19,7 +19,7 @@ end
 class Staff
   include Mongoid::Document
   field :name, type: String
-  has_one :task
+  # has_one :task # @todo staff.saveがこける
   embedded_in :project
 end
 
