@@ -139,13 +139,19 @@ post '/assign_task' do
   staff_id = params[:staff_id]
 
   project = Project.where(key: key).first
+
+  # 誰かに割り当て済みならそちらを解除する
+  old_staff = project.staffs.where(task_id: task_id).first
+  if old_staff
+    old_staff.unset(:task_id)
+    old_staff.save!
+  end
+
+  # 割り当て
   task = project.tasks.find(task_id)
   staff = project.staffs.find(staff_id)
-
-  unless staff.task_id
-    staff.task_id = task._id
-    staff.save!
-  end
+  staff.task_id = task._id
+  staff.save!
 
   'OK'
 end
