@@ -149,3 +149,15 @@ post '/assign_task' do
 
   'OK'
 end
+
+post '/deassign_task' do
+  key = params[:project]
+  task_id = params[:task_id]
+
+  project = Project.where(key: key).first
+  staff = project.staffs.where(task_id: task_id).first
+  staff.unset(:task_id)
+  staff.save!
+
+  'OK'
+end

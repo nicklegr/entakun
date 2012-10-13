@@ -142,7 +142,16 @@ add_staff_event = () ->
 $ ->
   # task list
   $("ul#tasks").sortable({
-    connectWith: "ul.assigned-task"
+    connectWith: "ul.assigned-task",
+    receive: (event, ui) ->
+      $.ajax({
+        async: true,
+        type: "POST",
+        url: "<%= url_for "/deassign_task" %>",
+        data: { project: project_key, task_id: ui.item.attr('id') },
+        dataType: 'json',
+      })
+
   })
   $("ul#tasks").disableSelection()
 
