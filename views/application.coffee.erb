@@ -121,6 +121,15 @@ add_staff_html = (id, name) ->
           dataType: 'json',
         })
 
+    remove: (event, ui) ->
+      $.ajax({
+        async: true,
+        type: "POST",
+        url: "<%= url_for "/deassign_task" %>",
+        data: { project: project_key, task_id: ui.item.attr('id') },
+        dataType: 'json',
+      })
+
     stop: (event, ui) ->
       # if task was completed, move to incoming list
       # should be in trashbox's drop handler, but it does not work
@@ -142,16 +151,7 @@ add_staff_event = () ->
 $ ->
   # task list
   $("ul#tasks").sortable({
-    connectWith: "ul.assigned-task",
-    receive: (event, ui) ->
-      $.ajax({
-        async: true,
-        type: "POST",
-        url: "<%= url_for "/deassign_task" %>",
-        data: { project: project_key, task_id: ui.item.attr('id') },
-        dataType: 'json',
-      })
-
+    connectWith: "ul.assigned-task"
   })
   $("ul#tasks").disableSelection()
 
