@@ -120,6 +120,12 @@ add_staff_html = (id, name) ->
           },
           dataType: 'json',
         })
+
+    stop: (event, ui) ->
+      # if task was completed, move to incoming list
+      # should be in trashbox's drop handler, but it does not work
+      if ui.item.hasClass('ui-state-disabled')
+        $('#tasks').append(ui.item)
   })
   new_staff.find("ul.assigned-task").disableSelection()
 
@@ -168,7 +174,6 @@ $ ->
         dataType: 'json',
       })
 
-      $('#tasks').append(ui.draggable)
       ui.draggable.addClass('ui-state-disabled')
       if !$('#show_trashes_check').attr('checked')
         ui.draggable.hide()

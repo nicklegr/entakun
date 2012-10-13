@@ -81,6 +81,13 @@ post '/complete_task' do
   task = project.tasks.find(id)
   task.complete = true
   task.save!
+
+  project.staffs.where(task_id: id).each do |e|
+    e.unset(:task_id)
+    e.save!
+  end
+
+  'OK'
 end
 
 get '/staffs' do
