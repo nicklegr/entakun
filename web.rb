@@ -19,7 +19,12 @@ end
 
 get '/new_project' do
   project_key = SecureRandom.urlsafe_base64
-  Project.create({ key: project_key, name: '新規プロジェクト' })
+  project = Project.create({ key: project_key, name: '新規プロジェクト' })
+  project.tasks.create(name: 'タスク1')
+  project.tasks.create(name: 'タスク2')
+  project.staffs.create(name: '担当者1')
+  project.staffs.create(name: '担当者2')
+
   redirect url_for("/projects/#{project_key}")
 end
 
