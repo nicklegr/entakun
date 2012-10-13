@@ -120,3 +120,20 @@ post '/delete_staff' do
   project = Project.where(key: key).first
   project.staffs.find(id).destroy
 end
+
+post '/assign_task' do
+  key = params[:project]
+  task_id = params[:task_id]
+  staff_id = params[:staff_id]
+
+  project = Project.where(key: key).first
+  task = project.tasks.find(task_id)
+  staff = project.staffs.find(staff_id)
+
+  unless staff.task_id
+    staff.task_id = task._id
+    staff.save!
+  end
+
+  'OK'
+end

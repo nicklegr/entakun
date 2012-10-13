@@ -102,13 +102,24 @@ add_staff_html = (id, name) ->
     connectWith: "ul#tasks,ul.assigned-task",
 
     receive: (event, ui) ->
-      # Don't assign multiple tasks to one person
       if $(this).find('li').length >= 2
+        # Don't assign multiple tasks to one person
         $(ui.sender).sortable('cancel')
-
-      # avoid completed task assign
-      if ui.item.hasClass('ui-state-disabled')
+      else if ui.item.hasClass('ui-state-disabled')
+        # avoid completed task assign
         $(ui.sender).sortable('cancel')
+      else
+        $.ajax({
+          async: true,
+          type: "POST",
+          url: "<%= url_for "/assign_task" %>",
+          data: {
+            project: project_key,
+            task_id: ui.item.attr('id'),
+            staff_id: $(this).parent().attr('id'),
+          },
+          dataType: 'json',
+        })
   })
   new_staff.find("ul.assigned-task").disableSelection()
 
@@ -198,7 +209,10 @@ $ ->
   )
 
   $.each(staffs, (i) ->
-    add_staff_html(this._id, this.name)
+    staff = add_staff_html(this._id, this.name)
+
+    if this.task_id
+      staff.find('.assigned-task').append($('#' + this.task_id))
   )
 
   # add staff handler

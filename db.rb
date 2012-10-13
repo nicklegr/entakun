@@ -19,7 +19,7 @@ end
 class Staff
   include Mongoid::Document
   field :name, type: String
-  # has_one :task # @todo staff.saveがこける
+  field :task_id, type: Moped::BSON::ObjectId # embedded docはhas_oneできないので
   embedded_in :project
 end
 
