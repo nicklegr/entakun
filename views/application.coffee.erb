@@ -143,6 +143,12 @@ $ ->
   # prevent XHR response caching by IE
   $.ajaxSetup({ cache: false })
 
+  $('[placeholder]').ahPlaceholder({
+    placeholderColor : 'silver',
+    placeholderAttr  : 'placeholder',
+    likeApple        : true
+  })
+
   # task list
   $("ul#tasks").sortable({
     connectWith: "ul.assigned-task",
