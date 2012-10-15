@@ -25,6 +25,24 @@ get '/new_project' do
   redirect url_for("/projects/#{project_key}")
 end
 
+get '/project_name' do
+  key = params[:project]
+
+  project = Project.where(key: key).first
+  project.name
+end
+
+post '/edit_project' do
+  key = params[:project]
+  name = params[:value]
+
+  project = Project.where(key: key).first
+  project.name = name
+  project.save!
+
+  name
+end
+
 get '/projects/:key' do
   @project_key = params[:key]
   haml :project

@@ -1,42 +1,51 @@
-#add-task
-  %input#task{ type: 'text', placeholder: 'タスクを追加' }
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      #project-name
+        .name.brand entakun
+        .edit{ style: "display: none;" }
+          %img.edit_button{ src: url_for('/img/pencil.png') }
 
-.row
-  .span5
-    #incoming-tasks
-      %ul#tasks.sortable
-        %li#task-template.ui-state-default{ style: 'display: none;' }
-          .name (タスク内容)
-          .edit{ style: "display: none;" }
-            %img.edit_button{ src: url_for('/img/pencil.png') }
-          .delete{ style: "display: none;" }
-            %img.edit_button{ src: url_for('/img/cancel.png') }
+.container
+  #add-task
+    %input#task{ type: 'text', placeholder: 'タスクを追加' }
 
-  .span5
-    #staff-container
-      #staffs
-        .staff#staff-template{ style: 'display: none;' }
-          .staff-name
-            .name (スタッフ名)
+  .row
+    .span5
+      #incoming-tasks
+        %ul#tasks.sortable
+          %li#task-template.ui-state-default{ style: 'display: none;' }
+            .name (タスク内容)
             .edit{ style: "display: none;" }
               %img.edit_button{ src: url_for('/img/pencil.png') }
             .delete{ style: "display: none;" }
               %img.edit_button{ src: url_for('/img/cancel.png') }
-          %ul.assigned-task.sortable
 
-      .add-staff
-        %a#add-staff
-          %img.edit_button{ src: url_for('/img/add.png') }
-          追加
+    .span5
+      #staff-container
+        #staffs
+          .staff#staff-template{ style: 'display: none;' }
+            .staff-name
+              .name (スタッフ名)
+              .edit{ style: "display: none;" }
+                %img.edit_button{ src: url_for('/img/pencil.png') }
+              .delete{ style: "display: none;" }
+                %img.edit_button{ src: url_for('/img/cancel.png') }
+            %ul.assigned-task.sortable
 
-    #commands
-      #trashs
-        %label 完了を表示
-        #show_trashes
-          %input#show_trashes_check{ type: "checkbox" }
-      #trashbox
-        %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
-      #undo
+        .add-staff
+          %a#add-staff
+            %img.edit_button{ src: url_for('/img/add.png') }
+            追加
 
-:javascript
-  var project_key = "#{@project_key}";
+      #commands
+        #trashs
+          %label 完了を表示
+          #show_trashes
+            %input#show_trashes_check{ type: "checkbox" }
+        #trashbox
+          %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
+        #undo
+
+  :javascript
+    var project_key = "#{@project_key}";

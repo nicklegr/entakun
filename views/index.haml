@@ -1,20 +1,30 @@
-.hero-unit
-  %h1 entakun
-  %p
-    重厚長大なタスク管理ツールに疲れていませんか？
-    %br
-    少人数のプロジェクトには、限界までシンプルなツールをどうぞ。
-  %p
-    %a.btn.btn-primary.btn-large{ href: url_for('/new_project') }
-      プロジェクトをはじめる
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "#"} entakun
 
-.row
-  .span4
-    %h2 ログイン不要
-    %p 1クリックでプロジェクト作成。メンバーにURLを伝えるだけで、共同作業をスタートできます。
-  .span4
-    %h2 すばやくタスクを追加
-    %p 見出しを入力してEnterキーを押すだけ。会議中でも、その場でサクサク追加できます。
-  .span4
-    %h2 マウスで直感操作
-    %p 担当者の割り当て、タスクの完了はドラッグ&ドロップで。画面切り替えは一切ありません。
+.container
+  .hero-unit
+    %h1 entakun
+    %p
+      重厚長大なタスク管理ツールに疲れていませんか？
+      %br
+      少人数のプロジェクトには、限界までシンプルなツールをどうぞ。
+    %p
+      %a.btn.btn-primary.btn-large{ href: url_for('/new_project') }
+        プロジェクトをはじめる
+
+  .row
+    .span4
+      %h2 ログイン不要
+      %p 1クリックでプロジェクト作成。メンバーにURLを伝えるだけで、共同作業をスタートできます。
+    .span4
+      %h2 すばやくタスクを追加
+      %p 見出しを入力してEnterキーを押すだけ。会議中でも、その場でサクサク追加できます。
+    .span4
+      %h2 マウスで直感操作
+      %p 担当者の割り当て、タスクの完了はドラッグ&ドロップで。画面切り替えは一切ありません。

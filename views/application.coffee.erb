@@ -1,3 +1,16 @@
+update_project_title = () ->
+  title = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "<%= url_for "/project_name" %>",
+    data: { project: project_key }
+  }).done((data) ->
+    title = data
+  )
+
+  $('#project-name').find('.name').text(title)
+
 find_object_top = (elem) ->
   e = elem.parent()
   while true
@@ -258,3 +271,7 @@ $ ->
       else
         $('.ui-state-disabled').hide()
   )
+
+  # project title
+  update_project_title()
+  enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>')
