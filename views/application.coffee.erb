@@ -140,6 +140,9 @@ add_staff_event = () ->
     add_staff(name)
 
 $ ->
+  # prevent XHR response caching by IE
+  $.ajaxSetup({ cache: false })
+
   # task list
   $("ul#tasks").sortable({
     connectWith: "ul.assigned-task",
