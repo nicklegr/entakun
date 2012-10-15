@@ -7,6 +7,25 @@ img.edit_button {
   cursor: pointer;
 }
 
+#project-name > .name {
+  float: left;
+}
+
+#project-name .editing {
+  margin-bottom: 0px;
+  height: 13px;
+}
+
+#project-name input {
+  width: 338px;
+}
+
+#project-name > .edit {
+  float: left;
+  margin-left: -10px;
+  margin-top: 12px;
+}
+
 input#task {
   width: 338px;
 }
@@ -23,23 +42,23 @@ ul#tasks {
   min-height: 440px;
 }
 
-div.name {
+.task > .name {
   width: 84%;
   float: left;
 }
 
-.editing {
+.task .editing {
   height: 12px;
   margin-left: -4px;
   margin-top: -4px;
 }
 
-div.edit {
+.task > .edit {
   width: 8%;
   float: left;
 }
 
-div.delete {
+.task > .delete {
   width: 8%;
   float: left;
 }
@@ -62,6 +81,27 @@ div.staff-name {
   height: 23px;
   padding-left: 5px;
   background-color: deepskyblue;
+}
+
+.staff-name > .name {
+  width: 84%;
+  float: left;
+}
+
+.staff-name .editing {
+  height: 12px;
+  margin-left: -4px;
+  margin-top: -4px;
+}
+
+.staff-name > .edit {
+  width: 8%;
+  float: left;
+}
+
+.staff-name > .delete {
+  width: 8%;
+  float: left;
 }
 
 ul.assigned-task {
