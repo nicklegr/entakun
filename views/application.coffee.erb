@@ -6,7 +6,7 @@ find_object_top = (elem) ->
 
     e = e.parent()
 
-enable_inplace_edit = (elem, edit_url, delete_url) ->
+enable_inplace_edit = (elem, edit_url) ->
   elem.find('.name').editable(edit_url, {
     submitdata : (value, settings) ->
       top_elem = find_object_top($(this))
@@ -23,6 +23,16 @@ enable_inplace_edit = (elem, edit_url, delete_url) ->
     $(this).prev().trigger('edit_event')
   )
 
+  # show edit icons when mouse hover
+  elem.hover(
+    () ->
+      $(this).find('.edit').show()
+    ,
+    () ->
+      $(this).find('.edit').hide()
+  )
+
+enable_inplace_delete = (elem, delete_url) ->
   elem.find('.delete').click(()->
     top_elem = find_object_top($(this))
 
@@ -42,11 +52,9 @@ enable_inplace_edit = (elem, edit_url, delete_url) ->
   # show edit icons when mouse hover
   elem.hover(
     () ->
-      $(this).find('.edit').show()
       $(this).find('.delete').show()
     ,
     () ->
-      $(this).find('.edit').hide()
       $(this).find('.delete').hide()
   )
 
@@ -71,7 +79,8 @@ add_task_html = (id, name) ->
   new_task.find('.name').text(name)
   new_task.show()
 
-  enable_inplace_edit(new_task, '<%= url_for "/edit_task" %>', '<%= url_for "/delete_task" %>')
+  enable_inplace_edit(new_task, '<%= url_for "/edit_task" %>')
+  enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>')
 
   $("ul#tasks").append(new_task)
   new_task
@@ -129,7 +138,8 @@ add_staff_html = (id, name) ->
   })
   new_staff.find("ul.assigned-task").disableSelection()
 
-  enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>', '<%= url_for "/delete_staff" %>')
+  enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>')
+  enable_inplace_delete(new_staff.find('.staff-name'), '<%= url_for "/delete_staff" %>')
 
   $("#staffs").append(new_staff)
   new_staff
