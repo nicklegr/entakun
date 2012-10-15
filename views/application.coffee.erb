@@ -1,3 +1,6 @@
+update_title = (title) ->
+  document.title = title + ' - entakun'
+
 update_project_title = () ->
   title = null
   $.ajax({
@@ -10,6 +13,7 @@ update_project_title = () ->
   )
 
   $('#project-name').find('.name').text(title)
+  update_title(title)
 
 find_object_top = (elem) ->
   e = elem.parent()
@@ -19,7 +23,7 @@ find_object_top = (elem) ->
 
     e = e.parent()
 
-enable_inplace_edit = (elem, edit_url) ->
+enable_inplace_edit = (elem, edit_url, callback) ->
   elem.find('.name').editable(edit_url, {
     submitdata : (value, settings) ->
       top_elem = find_object_top($(this))
@@ -29,6 +33,7 @@ enable_inplace_edit = (elem, edit_url) ->
       }
     event: 'edit_event',
     cssclass: 'editing',
+    callback: callback,
     # onblur: 'ignore'
   })
 
@@ -274,4 +279,6 @@ $ ->
 
   # project title
   update_project_title()
-  enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>')
+  enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>', (value, settings) ->
+    update_title(value)
+  )
