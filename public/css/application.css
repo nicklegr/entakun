@@ -133,8 +133,8 @@ div#trashs {
 div#trashbox {
   float: left;
   width: 33%;
-  padding-left: 36px;
-  padding-top: 16px;
+  padding-left: 30px;
+  padding-top: 10px;
 }
 
 div#undo {
