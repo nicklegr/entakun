@@ -53,6 +53,10 @@ ul#tasks {
   margin-top: -3px;
 }
 
+.task input {
+  width: 260px;
+}
+
 .task > .edit {
   width: 8%;
   float: left;
@@ -92,6 +96,10 @@ div.staff-name {
   height: 12px;
   margin-left: -4px;
   margin-top: -2px;
+}
+
+.staff-name input {
+  width: 280px;
 }
 
 .staff-name > .edit {
