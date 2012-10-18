@@ -38,12 +38,13 @@ div#incoming-tasks {
 }
 
 ul#tasks {
-  min-width: 340px;
+  padding: 3px;
+  width: auto;
   min-height: 440px;
 }
 
 .task > .name {
-  width: 84%;
+  width: 87.5%;
   float: left;
 }
 
@@ -54,21 +55,21 @@ ul#tasks {
 }
 
 .task input {
-  width: 260px;
+  width: 280px;
 }
 
 .task > .edit {
-  width: 8%;
+  width: 7%;
   float: left;
 }
 
 .task > .delete {
-  width: 8%;
+  width: 5.5%;
   float: left;
 }
 
 div#staff-container {
-  width: 350px;
+  width: 348px;
   height: 325px;
 }
 
@@ -115,10 +116,9 @@ div.staff-name {
 }
 
 ul.assigned-task {
-  width: 340px;
+  width: auto;
   height: 30px;
-  padding-top: 1px;
-  padding-left: 10px;
+  padding: 1px;
 }
 
 div.add-staff {
@@ -153,9 +153,25 @@ div#undo {
   margin-top: 16px;
 }
 
-.sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-.sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
-.sortable li span { position: absolute; margin-left: -1.3em; }
+.sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 60%;
+}
+
+.sortable li {
+  margin: 0px;
+  margin-bottom: 3px;
+  padding: 0.4em;
+  font-size: 1.0em;
+  height: 18px;
+}
+
+.sortable li span {
+  position: absolute;
+  margin-left: -1.3em;
+}
 
 .complete-task {
   color: silver;
