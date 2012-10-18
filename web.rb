@@ -107,7 +107,7 @@ post '/complete_task' do
     e.save!
   end
 
-  'OK'
+  'OK'.to_json
 end
 
 get '/staffs' do
@@ -168,7 +168,7 @@ post '/assign_task' do
   staff.task_id = task._id
   staff.save!
 
-  'OK'
+  'OK'.to_json
 end
 
 post '/deassign_task' do
@@ -180,5 +180,5 @@ post '/deassign_task' do
   staff.unset(:task_id)
   staff.save!
 
-  'OK'
+  'OK'.to_json
 end
