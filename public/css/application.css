@@ -50,7 +50,7 @@ ul#tasks {
 .task .editing {
   height: 12px;
   margin-left: -4px;
-  margin-top: -4px;
+  margin-top: -3px;
 }
 
 .task > .edit {
@@ -84,23 +84,25 @@ div.staff-name {
 }
 
 .staff-name > .name {
-  width: 84%;
+  width: 86%;
   float: left;
 }
 
 .staff-name .editing {
   height: 12px;
   margin-left: -4px;
-  margin-top: -4px;
+  margin-top: -2px;
 }
 
 .staff-name > .edit {
-  width: 8%;
+  width: 7%;
+  margin-top: 2px;
   float: left;
 }
 
 .staff-name > .delete {
-  width: 8%;
+  width: 7%;
+  margin-top: 2px;
   float: left;
 }
 
