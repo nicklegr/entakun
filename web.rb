@@ -100,12 +100,13 @@ post '/complete_task' do
   project = Project.where(key: key).first
   task = project.tasks.find(id)
   task.complete = true
-  task.save!
 
-  project.staffs.where(task_id: id).each do |e|
-    e.unset(:task_id)
-    e.save!
+  assigned_staff = project.staffs.where(task_id: id).first
+  if assigned_staff
+    assigned_staff.remove_attribute(:task_id)
   end
+
+  project.save!
 
   'OK'.to_json
 end
