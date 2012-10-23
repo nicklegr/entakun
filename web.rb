@@ -156,19 +156,22 @@ post '/assign_task' do
 
   project = Project.where(key: key).first
 
-  # 誰かに割り当て済みならそちらを解除する
-  old_staff = project.staffs.where(task_id: task_id).first
-  if old_staff
-    old_staff.remove_attribute(:task_id)
+  # 複数人で使っている場合に、他の人が完了したタスクは割り当てられないようにする
+  task = project.tasks.where(_id: task_id, complete: false).first
+  if task
+    # 誰かに割り当て済みならそちらを解除する
+    old_staff = project.staffs.where(task_id: task_id).first
+    if old_staff
+      old_staff.remove_attribute(:task_id)
+    end
+
+    # 割り当て
+    staff = project.staffs.find(staff_id)
+    staff.task_id = task_id
+
+    # 以上をアトミックに保存する
+    project.save!
   end
-
-  # 割り当て
-  task = project.tasks.find(task_id)
-  staff = project.staffs.find(staff_id)
-  staff.task_id = task._id
-
-  # 以上をアトミックに保存する
-  project.save!
 
   'OK'.to_json
 end
