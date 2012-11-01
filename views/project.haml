@@ -6,6 +6,10 @@
         .edit{ style: "display: none;" }
           %img.edit_button{ src: url_for('/img/pencil.png') }
 
+      %form#show_trashes.navbar-form.pull-right
+        %label.checkbox
+          %input#show_trashes_check{ type: "checkbox" } 完了を表示
+
 .container
   #add-task
     %input#task{ type: 'text', placeholder: 'タスクを追加' }
@@ -38,14 +42,9 @@
             %img.edit_button{ src: url_for('/img/add.png') }
             追加
 
-      #commands
-        #trashs
-          %label 完了を表示
-          #show_trashes
-            %input#show_trashes_check{ type: "checkbox" }
-        #trashbox
-          %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
-        #undo
+    .span1
+      #trashbox
+        %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
 
   :javascript
     var project_key = "#{@project_key}";

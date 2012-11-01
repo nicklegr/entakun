@@ -26,6 +26,10 @@ img.edit_button {
   margin-top: 12px;
 }
 
+#show_trashes {
+  margin-top: 5px;
+}
+
 input#task {
   width: 338px;
 }
@@ -126,25 +130,9 @@ div.add-staff {
   text-align: right;
 }
 
-div#commands {
-  clear: both;
-  width: 350px;
-  height: 125px;
-  border-top: 1px dashed silver;
-}
-
-div#trashs {
-  float: left;
-  width: 33%;
-  margin-top: 45px;
-  text-align: center;
-}
-
 div#trashbox {
-  float: left;
-  width: 33%;
-  padding-left: 30px;
-  padding-top: 10px;
+  width: 100px;
+  margin-top: 170px;
 }
 
 div#undo {
