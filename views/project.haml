@@ -42,9 +42,54 @@
             %img.edit_button{ src: url_for('/img/add.png') }
             追加
 
+      #followee-container
+        #followees
+          .followee#followee-template{ style: 'display: none;' }
+            .followee-name
+              .name (スタッフ名)
+              .delete{ style: "display: none;" }
+                %img.edit_button{ src: url_for('/img/cancel.png') }
+            %ul.assigned-task
+
+        .add-followee
+          %a{ 'href' => '#add-followee', 'data-toggle' => 'modal' }
+            %img.edit_button{ src: url_for('/img/add.png') }
+            フォローを追加
+
     .span1
       #trashbox
         %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
+
+  #add-followee.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel フォローを追加
+    .modal-body
+      %p
+        他のプロジェクトのメンバーをフォローできます。
+        %br
+        フォローした人の作業内容を、いつでも横目に見ることができます。
+      %p
+        設定は個人ごとに、ブラウザに保存されます。
+      %hr
+      %form#follow-url.form-inline{ action: '/staffs' }
+        %fieldset
+          %input.span6{ type: 'text', name: 'project', placeholder: 'プロジェクトのURL' }
+          %button.btn{ type: 'submit' } 送信
+      %hr
+      %form#follow-members
+        %fieldset
+          %input{ type: 'hidden', name: 'project', value: '' }
+          %label#follow-member-template.checkbox{ style: 'display: none;' }
+            %input{ type: 'checkbox' }
+            %span (メンバー名)
+          .row
+            .span2#followee-select-0
+            .span2#followee-select-1
+            .span2#followee-select-2
+    .modal-footer
+      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} キャンセル
+      %button#follow-members-submit.btn.btn-primary フォローする
 
   :javascript
     var project_key = "#{@project_key}";

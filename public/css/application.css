@@ -74,7 +74,6 @@ ul#tasks {
 
 div#staff-container {
   width: 348px;
-  height: 325px;
 }
 
 div#staffs {
@@ -128,6 +127,44 @@ ul.assigned-task {
 div.add-staff {
   clear: both;
   text-align: right;
+}
+
+div#followee-container {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px dashed silver;
+  width: 348px;
+}
+div.followee {
+  height: 56px;
+  border: 1px solid silver;
+  margin-bottom: 5px;
+}
+
+div.followee-name {
+  height: 23px;
+  padding-left: 5px;
+  background-color: gray;
+}
+
+.followee-name > .name {
+  width: 93%;
+  float: left;
+}
+
+.followee-name > .delete {
+  width: 7%;
+  margin-top: 2px;
+  float: left;
+}
+
+div.add-followee {
+  clear: both;
+  text-align: right;
+}
+
+[id*="followee-select"] {
+  width: 160px;
 }
 
 div#trashbox {

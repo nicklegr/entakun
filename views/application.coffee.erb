@@ -181,9 +181,82 @@ add_staff_event = () ->
   if name
     add_staff(name)
 
+setup_add_follow_modal = () ->
+  # @todo disable submit, until at least one staff checked
+
+  $('#follow-url').submit(() ->
+    url = $(this).find('input').val()
+    project = url.replace(/// .+projects/ ///, '')
+    send_data = "project=#{project}"
+
+    # for after use
+    $('#follow-members').find('input[name="project"]').val(project)
+
+    # @todo show project title?
+
+    # clear existing staff
+    $('[id*="followee-select"]').empty()
+
+    # get staff list
+    $.get($(this).attr('action'), send_data, (data) ->
+      $.each(data, (i) ->
+        staff = this
+        elem = $('#follow-member-template').clone()
+        elem.removeAttr('id')
+        elem.find('input').removeAttr('checked')
+        elem.find('input').attr('name', staff['_id'])
+        elem.find('span').text(staff['name'])
+        elem.show()
+        $('#followee-select-0').append(elem) # @todo distibute to 0,1,2
+      )
+    , 'json')
+
+    return false
+  )
+
+  $('#follow-members').submit(()->
+    follow_project_key = $(this).find('input[name="project"]').val()
+
+    # save to cookie
+    # @todo remove dup staffs?
+    followees = load_followees()
+
+    $(this).find('[id*="followee-select"] > label').each((i)->
+      if $(this).find('input').attr('checked')
+        staff_id = $(this).find('input').attr('name')
+        followees.push({ project: follow_project_key, staff: staff_id })
+    )
+
+    save_followees(followees)
+
+    # @todo reload followees
+
+    $('#add-followee').modal('hide')
+
+    return false
+  )
+
+  $('#follow-members-submit').click(()->
+    $('#follow-members').submit()
+  )
+
+load_followees = () ->
+  followees = $.cookie("entakun-#{project_key}-followees")
+
+  if followees == null
+    followees = []
+
+  followees
+
+save_followees = (list) ->
+  $.cookie("entakun-#{project_key}-followees", list)
+
 $ ->
   # prevent XHR response caching by IE
   $.ajaxSetup({ cache: false })
+
+  $.cookie.defaults['expires'] = 365
+  $.cookie.json = true
 
   $('[placeholder]').ahPlaceholder({
     placeholderColor : 'silver',
@@ -294,3 +367,5 @@ $ ->
   enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>', (value, settings) ->
     update_title(value)
   )
+
+  setup_add_follow_modal()
