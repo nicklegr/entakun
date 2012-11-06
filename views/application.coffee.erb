@@ -190,7 +190,10 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
 
   new_followee.data('followee', { project: project_key, staff: staff_id })
 
-  new_followee.find('.task > .name').text(task_name)
+  if task_name != ''
+    new_followee.find('.task > .name').text(task_name)
+  else
+    new_followee.find('.task').hide()
 
   # in-place delete
   name = new_followee.find('.followee-name')
