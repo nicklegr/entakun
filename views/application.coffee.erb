@@ -241,7 +241,7 @@ setup_add_follow_modal = () ->
   )
 
 load_followees = () ->
-  followees = $.cookie("entakun-#{project_key}-followees")
+  followees = $.cookie("entakun-followees")
 
   if followees == null
     followees = []
@@ -249,13 +249,13 @@ load_followees = () ->
   followees
 
 save_followees = (list) ->
-  $.cookie("entakun-#{project_key}-followees", list)
+  $.cookie("entakun-followees", list)
 
 $ ->
   # prevent XHR response caching by IE
   $.ajaxSetup({ cache: false })
 
-  $.cookie.defaults['expires'] = 365
+  $.cookie.defaults['expires'] = 365 # @todo unlimited?
   $.cookie.json = true
 
   $('[placeholder]').ahPlaceholder({
