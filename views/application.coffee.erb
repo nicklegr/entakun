@@ -181,6 +181,42 @@ add_staff_event = () ->
   if name
     add_staff(name)
 
+add_followee_html = (project_key, staff_id, staff_name, task_name) ->
+  # copy element
+  new_followee = $('#followee-template').clone()
+  new_followee.attr('id', staff_id)
+  new_followee.find('.followee-name > .name').text(staff_name)
+  new_followee.show()
+
+  new_followee.data('followee', { project: project_key, staff: staff_id })
+
+  new_followee.find('.task > .name').text(task_name)
+
+  # in-place delete
+  name = new_followee.find('.followee-name')
+  name.find('.delete').click(()->
+    top_elem = find_object_top($(this))
+
+    # @todo remove cookie
+    data = new_followee.data('followee')
+
+    top_elem.effect('fade', {}, 300, () ->
+      $(this).remove()
+    )
+  )
+
+  # show delete icon when mouse hover
+  name.hover(
+    () ->
+      $(this).find('.delete').show()
+    ,
+    () ->
+      $(this).find('.delete').hide()
+  )
+
+  $("#followees").append(new_followee)
+  new_followee
+
 setup_add_follow_modal = () ->
   # @todo disable submit, until at least one staff checked
 
@@ -353,6 +389,25 @@ $ ->
 
   # add staff handler
   $('#add-staff').click(add_staff_event)
+
+  # get followees
+  followees = load_followees()
+
+  if followees.length > 0
+    followees_data = null
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "<%= url_for "/lookup_followees" %>",
+      data: { followees: followees },
+      dataType: 'json',
+    }).done((data) ->
+      followees_data = data
+    )
+
+    $.each(followees_data, (i) ->
+      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+    )
 
   # show trash toggle
   $('#show_trashes_check').change(() ->

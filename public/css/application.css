@@ -118,7 +118,7 @@ div.staff-name {
   float: left;
 }
 
-ul.assigned-task {
+ul.assigned-task, followee-task {
   width: auto;
   height: 30px;
   padding: 1px;

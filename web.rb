@@ -187,3 +187,26 @@ post '/deassign_task' do
 
   'OK'.to_json
 end
+
+get '/lookup_followees' do
+  followees = params[:followees]
+  result = []
+
+  followees.each do |dummy, e|
+    project = Project.where(key: e['project']).first
+    staff = project.staffs.find(e['staff'])
+
+    staff_name = staff.name
+
+    task_name =
+      if staff.task_id
+        project.tasks.find(staff.task_id).name
+      else
+        ''
+      end
+
+    result << e.update({ staff_name: staff_name, task_name: task_name })
+  end
+
+  result.to_json
+end

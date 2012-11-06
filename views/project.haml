@@ -49,7 +49,9 @@
               .name (スタッフ名)
               .delete{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/cancel.png') }
-            %ul.assigned-task
+            %ul.followee-task
+              %li.task.ui-state-default
+                .name (タスク内容)
 
         .add-followee
           %a{ 'href' => '#add-followee', 'data-toggle' => 'modal' }
