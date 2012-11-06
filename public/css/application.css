@@ -41,10 +41,21 @@ div#incoming-tasks {
   border: 1px solid silver;
 }
 
-ul#tasks {
+#tasks, .assigned-task, .followee-task {
+  list-style-type: none;
+  margin: 0;
+}
+
+#tasks {
   padding: 3px;
   width: auto;
   min-height: 440px;
+}
+
+.assigned-task, .followee-task {
+  width: auto;
+  height: 30px;
+  padding: 1px;
 }
 
 .task > .name {
@@ -118,12 +129,6 @@ div.staff-name {
   float: left;
 }
 
-ul.assigned-task, followee-task {
-  width: auto;
-  height: 30px;
-  padding: 1px;
-}
-
 div.add-staff {
   clear: both;
   text-align: right;
@@ -182,14 +187,7 @@ div#undo {
   margin-top: 16px;
 }
 
-.sortable {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 60%;
-}
-
-.sortable li {
+.task {
   margin: 0px;
   margin-bottom: 3px;
   padding: 0.4em;
@@ -197,7 +195,7 @@ div#undo {
   height: 18px;
 }
 
-.sortable li span {
+.task span {
   position: absolute;
   margin-left: -1.3em;
 }
