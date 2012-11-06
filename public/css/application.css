@@ -163,6 +163,10 @@ div.add-followee {
   text-align: right;
 }
 
+input.follow-project {
+  width: 450px;
+}
+
 [id*="followee-select"] {
   width: 160px;
 }
