@@ -252,7 +252,7 @@ setup_add_follow_modal = () ->
         elem.find('input').attr('name', staff['_id'])
         elem.find('span').text(staff['name'])
         elem.show()
-        $('#followee-select-0').append(elem) # @todo distibute to 0,1,2
+        $('#followee-select-' + i).append(elem)
       )
     , 'json')
 
