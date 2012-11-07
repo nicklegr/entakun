@@ -226,8 +226,28 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   $("#followees").append(new_followee)
   new_followee
 
+update_followee_submit_button = () ->
+  enable = false
+
+  $('[id*="followee-select"] input').each((i)->
+    if $(this).attr('checked')
+      enable = true
+  )
+
+  if enable
+    $('#follow-members-submit').removeClass('disabled')
+    $('#follow-members-submit').unbind('click')
+    $('#follow-members-submit').click(()->
+      $('#follow-members').submit()
+    )
+  else
+    $('#follow-members-submit').addClass('disabled')
+    $('#follow-members-submit').unbind('click')
+
 setup_add_follow_modal = () ->
-  # @todo disable submit, until at least one staff checked
+  $('#add-followee').on('show', () ->
+    update_followee_submit_button()
+  )
 
   $('#follow-url').submit(() ->
     url = $(this).find('input').val()
@@ -254,6 +274,12 @@ setup_add_follow_modal = () ->
         elem.show()
         $('#followee-select-' + i).append(elem)
       )
+
+      # update submit button when check state changed
+      $('[id*="followee-select"] input').unbind('click')
+      $('[id*="followee-select"] input').click(() ->
+        update_followee_submit_button()
+      )
     , 'json')
 
     return false
@@ -279,10 +305,6 @@ setup_add_follow_modal = () ->
     $('#add-followee').modal('hide')
 
     return false
-  )
-
-  $('#follow-members-submit').click(()->
-    $('#follow-members').submit()
   )
 
 load_followees = () ->
