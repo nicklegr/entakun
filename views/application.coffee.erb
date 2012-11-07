@@ -200,9 +200,15 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   name.find('.delete').click(()->
     top_elem = find_object_top($(this))
 
-    # @todo remove cookie
+    # remove cookie
     data = new_followee.data('followee')
+    followees = load_followees()
+    followees = $.grep(followees, (e) ->
+      return !(e['project'] == data['project'] && e['staff'] == data['staff'])
+    )
+    save_followees(followees)
 
+    # fade out
     top_elem.effect('fade', {}, 300, () ->
       $(this).remove()
     )
