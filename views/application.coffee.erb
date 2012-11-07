@@ -274,7 +274,7 @@ setup_add_follow_modal = () ->
 
     save_followees(followees)
 
-    # @todo reload followees
+    update_followees()
 
     $('#add-followee').modal('hide')
 
@@ -295,6 +295,30 @@ load_followees = () ->
 
 save_followees = (list) ->
   $.cookie("entakun-followees", list)
+
+update_followees = () ->
+  elems = $.grep($('#followees > .followee'), (e) ->
+    $(e).attr('id') != 'followee-template'
+  )
+  $(elems).remove()
+
+  followees = load_followees()
+
+  if followees.length > 0
+    followees_data = null
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "<%= url_for "/lookup_followees" %>",
+      data: { followees: followees },
+      dataType: 'json',
+    }).done((data) ->
+      followees_data = data
+    )
+
+    $.each(followees_data, (i) ->
+      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+    )
 
 $ ->
   # prevent XHR response caching by IE
@@ -399,24 +423,7 @@ $ ->
   # add staff handler
   $('#add-staff').click(add_staff_event)
 
-  # get followees
-  followees = load_followees()
-
-  if followees.length > 0
-    followees_data = null
-    $.ajax({
-      async: false,
-      type: "GET",
-      url: "<%= url_for "/lookup_followees" %>",
-      data: { followees: followees },
-      dataType: 'json',
-    }).done((data) ->
-      followees_data = data
-    )
-
-    $.each(followees_data, (i) ->
-      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
-    )
+  update_followees()
 
   # show trash toggle
   $('#show_trashes_check').change(() ->
