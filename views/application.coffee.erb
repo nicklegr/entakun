@@ -35,7 +35,7 @@ enable_inplace_edit = (elem, edit_url, callback, disable_sortable) ->
       top_elem = find_object_top($(this))
       {
         project: project_key,
-        id: top_elem.attr('id'),
+        id: top_elem.data('id'),
       }
     event: 'edit_event',
     cssclass: 'editing',
@@ -73,7 +73,7 @@ enable_inplace_delete = (elem, delete_url) ->
       async: true,
       type: "POST",
       url: delete_url,
-      data: { project: project_key, id: top_elem.attr('id') },
+      data: { project: project_key, id: top_elem.data('id') },
       dataType: 'json',
     })
 
@@ -108,7 +108,8 @@ add_task = (name) ->
 add_task_html = (id, name) ->
   # copy element
   new_task = $('#task-template').clone()
-  new_task.attr('id', id)
+  new_task.attr('id', 'task_' + id)
+  new_task.data('id', id)
   new_task.find('.name').text(name)
   new_task.show()
 
@@ -135,7 +136,8 @@ add_staff = (name) ->
 add_staff_html = (id, name) ->
   # copy element
   new_staff = $('#staff-template').clone()
-  new_staff.attr('id', id)
+  new_staff.attr('id', 'staff_' + id)
+  new_staff.data('id', id)
   new_staff.find('.name').text(name)
   new_staff.show()
 
@@ -157,8 +159,8 @@ add_staff_html = (id, name) ->
           url: "<%= url_for "/assign_task" %>",
           data: {
             project: project_key,
-            task_id: ui.item.attr('id'),
-            staff_id: $(this).parent().attr('id'),
+            task_id: ui.item.data('id'),
+            staff_id: $(this).parent().data('id'),
           },
           dataType: 'json',
         })
@@ -184,7 +186,7 @@ add_staff_event = () ->
 add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   # copy element
   new_followee = $('#followee-template').clone()
-  new_followee.attr('id', staff_id)
+  new_followee.removeAttr('id') # don't set. to avoid dup id with staff
   new_followee.find('.followee-name > .name').text(staff_name)
   new_followee.show()
 
@@ -198,8 +200,6 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   # in-place delete
   name = new_followee.find('.followee-name')
   name.find('.delete').click(()->
-    top_elem = find_object_top($(this))
-
     # remove cookie
     data = new_followee.data('followee')
     followees = load_followees()
@@ -209,7 +209,7 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
     save_followees(followees)
 
     # fade out
-    top_elem.effect('fade', {}, 300, () ->
+    $(this).parents('.followee').effect('fade', {}, 300, () ->
       $(this).remove()
     )
   )
@@ -365,7 +365,7 @@ $ ->
         async: true,
         type: "POST",
         url: "<%= url_for "/deassign_task" %>",
-        data: { project: project_key, task_id: ui.item.attr('id') },
+        data: { project: project_key, task_id: ui.item.data('id') },
         dataType: 'json',
       })
   })
@@ -394,7 +394,7 @@ $ ->
         async: true,
         type: "POST",
         url: "<%= url_for "/complete_task" %>",
-        data: { project: project_key, task_id: ui.draggable.attr('id') },
+        data: { project: project_key, task_id: ui.draggable.data('id') },
         dataType: 'json',
       })
 
@@ -441,7 +441,7 @@ $ ->
     staff = add_staff_html(this._id, this.name)
 
     if this.task_id
-      staff.find('.assigned-task').append($('#' + this.task_id))
+      staff.find('.assigned-task').append($('#task_' + this.task_id))
   )
 
   # add staff handler
