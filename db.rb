@@ -2,6 +2,7 @@ require 'mongoid'
 
 class Project
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :key, type: String
   field :name, type: String
   embeds_many :tasks
@@ -11,6 +12,7 @@ end
 
 class Task
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :name, type: String
   field :complete, type: Boolean
   embedded_in :project
@@ -18,6 +20,7 @@ end
 
 class Staff
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :name, type: String
   field :task_id, type: Moped::BSON::ObjectId # embedded docはhas_oneできないので
   embedded_in :project
