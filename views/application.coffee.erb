@@ -358,7 +358,7 @@ $ ->
   })
 
   # task list
-  $("ul#tasks").sortable({
+  $("#tasks").sortable({
     connectWith: "ul.assigned-task",
     receive: (event, ui) ->
       $.ajax({
@@ -368,6 +368,12 @@ $ ->
         data: { project: project_key, task_id: ui.item.data('id') },
         dataType: 'json',
       })
+
+    update: (event, ui) ->
+      data = $("#tasks").sortable('serialize')
+      data = data.replace(/.*template&/, '') # remove template element
+      data = "project=#{project_key}&" + data
+      $.post("<%= url_for "/task_sorted" %>", data)
   })
 
   # task input

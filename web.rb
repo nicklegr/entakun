@@ -52,7 +52,19 @@ get '/tasks' do
   key = params[:project]
   project = Project.where(key: key).first
 
-  project.tasks.order_by('complete asc').to_json
+  # order_by([[:position, :asc], [:created_at, :asc]])を意図
+  # なぜか複数のキーでorder_byできないので手動で
+  project.tasks.sort{|a, b|
+    if a.position && b.position
+      a.position <=> b.position
+    elsif a.position
+      -1
+    elsif b.position
+      1
+    else
+      a.created_at <=> b.created_at
+    end
+  }.to_json
 end
 
 get '/incoming_tasks' do
@@ -104,6 +116,20 @@ post '/complete_task' do
   assigned_staff = project.staffs.where(task_id: id).first
   if assigned_staff
     assigned_staff.remove_attribute(:task_id)
+  end
+
+  project.save!
+
+  'OK'.to_json
+end
+
+post '/task_sorted' do
+  key = params[:project]
+  order = params['task']
+
+  project = Project.where(key: key).first
+  order.each_with_index do |task_id, i|
+    project.tasks.find(task_id).position = i
   end
 
   project.save!

@@ -15,6 +15,7 @@ class Task
   include Mongoid::Timestamps
   field :name, type: String
   field :complete, type: Boolean
+  field :position, type: Integer
   embedded_in :project
 end
 
@@ -34,3 +35,6 @@ Mongoid.configure do |config|
     config.sessions = { default: { database: 'entakun', hosts: [ 'localhost:27017' ] }}
   end
 end
+
+# Mongoid.logger.level = Logger::DEBUG
+# Moped.logger.level = Logger::DEBUG
