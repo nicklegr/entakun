@@ -289,13 +289,15 @@ setup_add_follow_modal = () ->
     follow_project_key = $(this).find('input[name="project"]').val()
 
     # save to cookie
-    # @todo remove dup staffs?
     followees = load_followees()
 
     $(this).find('[id*="followee-select"] > label').each((i)->
       if $(this).find('input').attr('checked')
         staff_id = $(this).find('input').attr('name')
-        followees.push({ project: follow_project_key, staff: staff_id })
+
+        # follow if not already followed
+        if $.grep(followees, (e) -> e.project == follow_project_key && e.staff == staff_id).length == 0
+          followees.push({ project: follow_project_key, staff: staff_id })
     )
 
     save_followees(followees)
