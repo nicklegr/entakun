@@ -1,3 +1,9 @@
+setup_titlebar = () ->
+  update_project_title()
+  enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>', (value, settings) ->
+    update_title(value)
+  )
+
 update_project_title = () ->
   title = null
   $.ajax({

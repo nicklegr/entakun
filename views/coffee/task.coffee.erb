@@ -1,8 +1,50 @@
-disableSortable = (settings, self) ->
-  $("#tasks, .assigned-task").sortable('disable')
+setup_task_list = () ->
+  $("#tasks").sortable({
+    connectWith: "ul.assigned-task",
+    receive: (event, ui) ->
+      $.ajax({
+        async: true,
+        type: "POST",
+        url: "<%= url_for "/deassign_task" %>",
+        data: { project: project_key, task_id: ui.item.data('id') },
+        dataType: 'json',
+      })
 
-enableSortable = (settings, self) ->
-  $("#tasks, .assigned-task").sortable('enable')
+    update: (event, ui) ->
+      data = $("#tasks").sortable('serialize')
+      data = data.replace(/.*template&/, '') # remove template element
+      data = "project=#{project_key}&" + data
+      $.post("<%= url_for "/task_sorted" %>", data)
+  })
+
+setup_task_input = () ->
+  $("input#task").keypress((event) ->
+    text = $("input#task").val()
+
+    if text != "" && (event.keyCode && event.keyCode == 13)
+      add_task(text)
+      $("input#task").val('')
+  )
+
+load_tasks = () ->
+  tasks = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "<%= url_for "/tasks" %>",
+    data: { project: project_key },
+    dataType: 'json',
+  }).done((data) ->
+    tasks = data
+  )
+
+  $.each(tasks, (i) ->
+    task = add_task_html(this._id, this.name)
+    if this.complete
+      task.addClass('ui-state-disabled')
+      if !$('#show_trashes_check').attr('checked')
+        task.hide()
+  )
 
 add_task = (name) ->
   # send to server

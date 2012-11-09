@@ -67,3 +67,9 @@ find_object_top = (elem) ->
       return e
 
     e = e.parent()
+
+disableSortable = (settings, self) ->
+  $("#tasks, .assigned-task").sortable('disable')
+
+enableSortable = (settings, self) ->
+  $("#tasks, .assigned-task").sortable('enable')

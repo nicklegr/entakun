@@ -1,3 +1,25 @@
+load_staffs = () ->
+  staffs = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "<%= url_for "/staffs" %>",
+    data: { project: project_key },
+    dataType: 'json',
+  }).done((data) ->
+    staffs = data
+  )
+
+  $.each(staffs, (i) ->
+    staff = add_staff_html(this._id, this.name)
+
+    if this.task_id
+      staff.find('.assigned-task').append($('#task_' + this.task_id))
+  )
+
+setup_add_staff_link = () ->
+  $('#add-staff').click(add_staff_event)
+
 add_staff_event = () ->
   name = window.prompt('名前を入力してください')
   if name

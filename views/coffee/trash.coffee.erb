@@ -1,0 +1,33 @@
+setup_trashbox = () ->
+  $("#trashbox").droppable({
+    tolerance: 'touch',
+
+    activate: (event, ui) ->
+      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Opened.png" %>')
+
+    deactivate: (event, ui) ->
+      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Closed.png" %>')
+
+    drop: (event, ui) ->
+      $.ajax({
+        async: true,
+        type: "POST",
+        url: "<%= url_for "/complete_task" %>",
+        data: { project: project_key, task_id: ui.draggable.data('id') },
+        dataType: 'json',
+      })
+
+      ui.draggable.addClass('ui-state-disabled')
+      if !$('#show_trashes_check').attr('checked')
+        ui.draggable.hide()
+
+      $('#trashbox-img').effect('bounce', {}, 150)
+  })
+
+setup_trash_toggle = () ->
+  $('#show_trashes_check').change(() ->
+      if $(this).attr("checked")
+        $('.ui-state-disabled').show()
+      else
+        $('.ui-state-disabled').hide()
+  )
