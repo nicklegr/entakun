@@ -1,0 +1,16 @@
+update_project_title = () ->
+  title = null
+  $.ajax({
+    async: false,
+    type: "GET",
+    url: "<%= url_for "/project_name" %>",
+    data: { project: project_key }
+  }).done((data) ->
+    title = data
+  )
+
+  $('#project-name').find('.name').text(title)
+  update_title(title)
+
+update_title = (title) ->
+  document.title = title + ' - entakun'

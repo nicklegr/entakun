@@ -1,0 +1,77 @@
+load_followees = () ->
+  followees = $.cookie("entakun-followees")
+
+  if followees == null
+    followees = []
+
+  followees
+
+save_followees = (list) ->
+  $.cookie("entakun-followees", list)
+
+update_followees = () ->
+  elems = $.grep($('#followees > .followee'), (e) ->
+    $(e).attr('id') != 'followee-template'
+  )
+  $(elems).remove()
+
+  followees = load_followees()
+
+  if followees.length > 0
+    followees_data = null
+    $.ajax({
+      async: false,
+      type: "GET",
+      url: "<%= url_for "/lookup_followees" %>",
+      data: { followees: followees },
+      dataType: 'json',
+    }).done((data) ->
+      followees_data = data
+    )
+
+    $.each(followees_data, (i) ->
+      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+    )
+
+add_followee_html = (project_key, staff_id, staff_name, task_name) ->
+  # copy element
+  new_followee = $('#followee-template').clone()
+  new_followee.removeAttr('id') # don't set. to avoid dup id with staff
+  new_followee.find('.followee-name > .name').text(staff_name)
+  new_followee.show()
+
+  new_followee.data('followee', { project: project_key, staff: staff_id })
+
+  if task_name != ''
+    new_followee.find('.task > .name').text(task_name)
+  else
+    new_followee.find('.task').hide()
+
+  # in-place delete
+  name = new_followee.find('.followee-name')
+  name.find('.delete').click(()->
+    # remove cookie
+    data = new_followee.data('followee')
+    followees = load_followees()
+    followees = $.grep(followees, (e) ->
+      return !(e['project'] == data['project'] && e['staff'] == data['staff'])
+    )
+    save_followees(followees)
+
+    # fade out
+    $(this).parents('.followee').effect('fade', {}, 300, () ->
+      $(this).remove()
+    )
+  )
+
+  # show delete icon when mouse hover
+  name.hover(
+    () ->
+      $(this).find('.delete').show()
+    ,
+    () ->
+      $(this).find('.delete').hide()
+  )
+
+  $("#followees").append(new_followee)
+  new_followee

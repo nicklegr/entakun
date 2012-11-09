@@ -1,0 +1,33 @@
+disableSortable = (settings, self) ->
+  $("#tasks, .assigned-task").sortable('disable')
+
+enableSortable = (settings, self) ->
+  $("#tasks, .assigned-task").sortable('enable')
+
+add_task = (name) ->
+  # send to server
+  task_id = null
+  $.ajax({
+    async: false,
+    type: "POST",
+    url: "<%= url_for "/new_task" %>",
+    data: { project: project_key, name: name }
+  }).done((id) ->
+    task_id = id
+  )
+
+  add_task_html(task_id, name)
+
+add_task_html = (id, name) ->
+  # copy element
+  new_task = $('#task-template').clone()
+  new_task.attr('id', 'task_' + id)
+  new_task.data('id', id)
+  new_task.find('.name').text(name)
+  new_task.show()
+
+  enable_inplace_edit(new_task, '<%= url_for "/edit_task" %>', null, true)
+  enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>')
+
+  $("ul#tasks").append(new_task)
+  new_task

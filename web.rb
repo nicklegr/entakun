@@ -9,8 +9,8 @@ require './db'
 
 set :haml, :format => :html5
 
-get '/js/application.js' do
-  coffee erb(:"application.coffee")
+get '/js/:basename.js' do
+  CoffeeScript.compile erb(:"coffee/#{params[:basename]}.coffee"), { no_wrap: true }
 end
 
 get '/' do
