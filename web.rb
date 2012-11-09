@@ -61,8 +61,10 @@ get '/tasks' do
       -1
     elsif b.position
       1
-    else
+    elsif a.created_at && b.created_at
       a.created_at <=> b.created_at
+    else
+      0
     end
   }.to_json
 end
