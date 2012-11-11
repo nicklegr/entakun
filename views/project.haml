@@ -17,8 +17,8 @@
   .row
     .span5
       #incoming-tasks
-        %ul#tasks.sortable
-          %li#task-template.task.ui-state-default{ style: 'display: none;' }
+        #tasks.sortable
+          #task-template.task.ui-state-default{ style: 'display: none;' }
             .name (タスク内容)
             .edit{ style: "display: none;" }
               %img.edit_button{ src: url_for('/img/pencil.png') }
@@ -35,7 +35,7 @@
                 %img.edit_button{ src: url_for('/img/pencil.png') }
               .delete{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/cancel.png') }
-            %ul.assigned-task.sortable
+            .assigned-task.sortable
 
         .add-staff
           %a#add-staff
@@ -49,8 +49,8 @@
               .name (スタッフ名)
               .delete{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/cancel.png') }
-            %ul.followee-task
-              %li.task.ui-state-default
+            .followee-task
+              .task.ui-state-default
                 .name (タスク内容)
 
         .add-followee

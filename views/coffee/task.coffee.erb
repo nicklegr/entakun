@@ -1,6 +1,6 @@
 setup_task_list = () ->
   $("#tasks").sortable({
-    connectWith: "ul.assigned-task",
+    connectWith: ".assigned-task",
     cancel: ".ui-state-disabled", # disable sorting completed tasks
 
     receive: (event, ui) ->
@@ -84,6 +84,6 @@ add_task_html = (id, name) ->
   if completes.length > 0
     completes.first().before(new_task)
   else
-    $("ul#tasks").append(new_task)
+    $("#tasks").append(new_task)
 
   new_task

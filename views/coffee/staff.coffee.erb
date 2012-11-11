@@ -49,7 +49,7 @@ add_staff_html = (id, name) ->
 
   # assigned tasks
   new_staff.find(".assigned-task").sortable({
-    connectWith: "ul#tasks,ul.assigned-task",
+    connectWith: "#tasks,.assigned-task",
 
     receive: (event, ui) ->
       if $(this).find('li').length >= 2

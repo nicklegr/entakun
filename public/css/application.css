@@ -208,7 +208,7 @@ div#undo {
   タスク割り当て済みのSortableにドロップしようとしたとき、
   リストの既存アイテムが動かないようにする
 */
-ul.assigned-task > .ui-sortable-placeholder {
+.assigned-task > .ui-sortable-placeholder {
   display: none;
 }
 
