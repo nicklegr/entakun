@@ -59,8 +59,12 @@ div#incoming-tasks {
 }
 
 .task > .name {
-  width: 87.5%;
+  width: 93%;
   float: left;
+}
+
+.task .comment {
+  width: 315px;
 }
 
 .task .editing {
@@ -75,11 +79,6 @@ div#incoming-tasks {
 
 .task > .edit {
   width: 7%;
-  float: left;
-}
-
-.task > .delete {
-  width: 5.5%;
   float: left;
 }
 
@@ -192,7 +191,7 @@ div#undo {
   margin-bottom: 3px;
   padding: 0.4em;
   font-size: 1.0em;
-  height: 18px;
+  min-height: 18px;
 }
 
 .task span {

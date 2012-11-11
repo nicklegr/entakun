@@ -20,10 +20,12 @@
         #tasks.sortable
           #task-template.task.ui-state-default{ style: 'display: none;' }
             .name (タスク内容)
+            .edit-box{ style: 'display: none;' }
+              %textarea.comment{ rows: 4 }
+              %button.btn.cancel キャンセル
+              %button.btn.ok OK
             .edit{ style: "display: none;" }
               %img.edit_button{ src: url_for('/img/pencil.png') }
-            .delete{ style: "display: none;" }
-              %img.edit_button{ src: url_for('/img/cancel.png') }
 
     .span5
       #staff-container
