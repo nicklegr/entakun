@@ -109,7 +109,7 @@ begin_edit_task = (elem) ->
 
   elem.find('.name').hide()
   elem.find('.edit-box').show()
-  elem.find('.comment').val(elem.data('name'))
+  elem.find('.comment').val(elem.data('name')).select()
 
   elem.find('.btn.cancel').unbind('click').click(() ->
     end_edit_task(elem)
