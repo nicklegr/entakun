@@ -111,10 +111,14 @@ begin_edit_task = (elem) ->
   elem.find('.edit-box').show()
   elem.find('.comment').val(elem.data('name')).select()
 
-  # Ctrl+Enter, Cmd+Enter means OK
   elem.find('.comment').unbind('keydown').keydown((e) ->
+    # Ctrl+Enter, Cmd+Enter means OK
     if (e.ctrlKey || e.metaKey) && e.keyCode == 13
       elem.find('.btn.ok').click()
+
+    # ESC means Cancel
+    if e.keyCode == 27
+      elem.find('.btn.cancel').click()
   )
 
   elem.find('.btn.cancel').unbind('click').click(() ->
