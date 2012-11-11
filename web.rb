@@ -52,10 +52,14 @@ get '/tasks' do
   key = params[:project]
   project = Project.where(key: key).first
 
-  # order_by([[:position, :asc], [:created_at, :asc]])を意図
+  # order_by([[:complete, :asc], [:position, :asc], [:created_at, :asc]])を意図
   # なぜか複数のキーでorder_byできないので手動で
   project.tasks.sort{|a, b|
-    if a.position && b.position
+    if a.complete != b.complete
+      ca = a.complete ? 1 : 0
+      cb = b.complete ? 1 : 0
+      ca <=> cb
+    elsif a.position && b.position
       a.position <=> b.position
     elsif a.position
       -1

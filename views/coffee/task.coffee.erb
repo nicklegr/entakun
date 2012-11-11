@@ -1,6 +1,8 @@
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: "ul.assigned-task",
+    cancel: ".ui-state-disabled", # disable sorting completed tasks
+
     receive: (event, ui) ->
       $.ajax({
         async: true,
@@ -15,6 +17,12 @@ setup_task_list = () ->
       data = data.replace(/.*template&/, '') # remove template element
       data = "project=#{project_key}&" + data
       $.post("<%= url_for "/task_sorted" %>", data)
+
+    stop: (event, ui) ->
+      # if task was completed, move to last
+      # should be in trashbox's drop handler, but there is timing problem
+      if ui.item.hasClass('ui-state-disabled')
+        $('#tasks').append(ui.item)
   })
 
 setup_task_input = () ->
@@ -71,5 +79,11 @@ add_task_html = (id, name) ->
   enable_inplace_edit(new_task, '<%= url_for "/edit_task" %>', null, true)
   enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>')
 
-  $("ul#tasks").append(new_task)
+  # if there is completed task, insert before them
+  completes = $('#tasks').find('.ui-state-disabled')
+  if completes.length > 0
+    completes.first().before(new_task)
+  else
+    $("ul#tasks").append(new_task)
+
   new_task

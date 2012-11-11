@@ -73,7 +73,7 @@ add_staff_html = (id, name) ->
 
     stop: (event, ui) ->
       # if task was completed, move to incoming list
-      # should be in trashbox's drop handler, but it does not work
+      # should be in trashbox's drop handler, but there is timing problem
       if ui.item.hasClass('ui-state-disabled')
         $('#tasks').append(ui.item)
   })
