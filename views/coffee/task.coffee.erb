@@ -86,11 +86,6 @@ add_task_html = (id, name) ->
     begin_edit_task($(this).parent())
   )
 
-  # @todo
-  # onedit: disableSortable,
-  # onsubmit: enableSortable,
-  # onreset: enableSortable,
-
   # show edit icons when mouse hover
   enable_edit_hover(new_task)
 
@@ -121,15 +116,19 @@ begin_edit_task = (elem) ->
   )
   elem.find('.btn.ok').unbind('click').click(() ->
     end_edit_task(elem)
+
+    # update task title & internal data
+    org_name = elem.find('.comment').val()
+    elem.data('name', org_name)
+    elem.find('.name').text(limit_task_name_len(org_name))
+
+    # send to server
+    $.post('<%= url_for "/edit_task" %>',
+      { project: project_key, id: elem.data('id'), value: org_name }
+    )
   )
 
 end_edit_task = (elem) ->
-  org_name = elem.find('.comment').val()
-  elem.data('name', org_name)
-  elem.find('.name').text(limit_task_name_len(org_name))
-
-  # @todo send to server
-
   enableSortable()
   enable_edit_hover(elem)
 
