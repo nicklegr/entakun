@@ -59,7 +59,7 @@ div#incoming-tasks {
 }
 
 .task > .name {
-  width: 93%;
+  width: 310px;
   float: left;
 }
 
@@ -78,7 +78,7 @@ div#incoming-tasks {
 }
 
 .task > .edit {
-  width: 7%;
+  width: 20px;
   float: left;
 }
 

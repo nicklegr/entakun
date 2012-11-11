@@ -18,6 +18,7 @@
     .span5
       #incoming-tasks
         #tasks.sortable
+          %span#ruler{ style: 'visibility:hidden; position:absolute; white-space:nowrap;' }
           #task-template.task.ui-state-default{ style: 'display: none;' }
             .name (タスク内容)
             .edit-box{ style: 'display: none;' }

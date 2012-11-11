@@ -1,3 +1,5 @@
+task_name_max_width = 310
+
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
@@ -71,9 +73,12 @@ add_task = (name) ->
 add_task_html = (id, name) ->
   # copy element
   new_task = $('#task-template').clone()
-  new_task.attr('id', 'task_' + id)
+
   new_task.data('id', id)
-  new_task.find('.name').text(name)
+  new_task.data('name', name)
+
+  new_task.attr('id', 'task_' + id)
+  new_task.find('.name').text(limit_task_name_len(name))
   new_task.show()
 
   # click edit icon -> comment edit
@@ -98,12 +103,18 @@ add_task_html = (id, name) ->
 
   new_task
 
+limit_task_name_len = (name) ->
+  ret = name.replace(/\n.+$/, "") # get first line
+  ret = truncate_by_width(ret, task_name_max_width, $('#ruler'))
+  ret
+
 begin_edit_task = (elem) ->
   disableSortable()
   disable_edit_hover(elem)
 
   elem.find('.name').hide()
   elem.find('.edit-box').show()
+  elem.find('.comment').val(elem.data('name'))
 
   elem.find('.btn.cancel').unbind('click').click(() ->
     end_edit_task(elem)
@@ -113,6 +124,12 @@ begin_edit_task = (elem) ->
   )
 
 end_edit_task = (elem) ->
+  org_name = elem.find('.comment').val()
+  elem.data('name', org_name)
+  elem.find('.name').text(limit_task_name_len(org_name))
+
+  # @todo send to server
+
   enableSortable()
   enable_edit_hover(elem)
 
