@@ -54,7 +54,7 @@ div#incoming-tasks {
 
 .assigned-task, .followee-task {
   width: auto;
-  height: 30px;
+  min-height: 31px;
   padding: 1px;
 }
 
@@ -94,7 +94,6 @@ div#staffs {
 }
 
 div.staff {
-  height: 56px;
   border: 1px solid silver;
   margin-bottom: 5px;
 }
@@ -144,7 +143,6 @@ div#followee-container {
   width: 348px;
 }
 div.followee {
-  height: 56px;
   border: 1px solid silver;
   margin-bottom: 5px;
 }
@@ -192,10 +190,14 @@ div#undo {
 
 .task {
   margin: 0px;
-  margin-bottom: 3px;
   padding: 0.4em;
   font-size: 1.0em;
   min-height: 18px;
+}
+
+/* タスクリストの中のみ、隣のタスクとのマージンを空ける */
+#tasks .task {
+  margin-bottom: 3px;
 }
 
 .task span {
