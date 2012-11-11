@@ -83,11 +83,41 @@ add_task_html = (id, name) ->
 
   # click edit icon -> comment edit
   new_task.find('.edit').click(()->
+    new_task.find('.comment').val(new_task.data('name'))
     begin_edit_task($(this).parent())
   )
 
   # show edit icons when mouse hover
   enable_edit_hover(new_task)
+
+  # comment edit window
+  new_task.find('.btn.cancel').click(() ->
+    end_edit_task(new_task)
+  )
+  new_task.find('.btn.ok').click(() ->
+    end_edit_task(new_task)
+
+    # update task title & internal data
+    org_name = new_task.find('.comment').val()
+    new_task.data('name', org_name)
+    new_task.find('.name').text(limit_task_name_len(org_name))
+
+    # send to server
+    $.post('<%= url_for "/edit_task" %>',
+      { project: project_key, id: new_task.data('id'), value: org_name }
+    )
+  )
+
+  # keyboard shortcut
+  new_task.find('.comment').keydown((e) ->
+    # Ctrl+Enter, Cmd+Enter means OK
+    if (e.ctrlKey || e.metaKey) && e.keyCode == 13
+      new_task.find('.btn.ok').click()
+
+    # ESC means Cancel
+    if e.keyCode == 27
+      new_task.find('.btn.cancel').click()
+  )
 
   # if there is completed task, insert before them
   completes = $('#tasks').find('.ui-state-disabled')
@@ -109,34 +139,7 @@ begin_edit_task = (elem) ->
 
   elem.find('.name').hide()
   elem.find('.edit-box').show()
-  elem.find('.comment').val(elem.data('name')).select()
-
-  elem.find('.comment').unbind('keydown').keydown((e) ->
-    # Ctrl+Enter, Cmd+Enter means OK
-    if (e.ctrlKey || e.metaKey) && e.keyCode == 13
-      elem.find('.btn.ok').click()
-
-    # ESC means Cancel
-    if e.keyCode == 27
-      elem.find('.btn.cancel').click()
-  )
-
-  elem.find('.btn.cancel').unbind('click').click(() ->
-    end_edit_task(elem)
-  )
-  elem.find('.btn.ok').unbind('click').click(() ->
-    end_edit_task(elem)
-
-    # update task title & internal data
-    org_name = elem.find('.comment').val()
-    elem.data('name', org_name)
-    elem.find('.name').text(limit_task_name_len(org_name))
-
-    # send to server
-    $.post('<%= url_for "/edit_task" %>',
-      { project: project_key, id: elem.data('id'), value: org_name }
-    )
-  )
+  elem.find('.comment').select()
 
 end_edit_task = (elem) ->
   enableSortable()
