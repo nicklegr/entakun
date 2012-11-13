@@ -29,12 +29,12 @@ lookup_followees = () ->
 
   followees_data
 
-interval_reload_followees = () ->
+interval_update_followees = () ->
   $("body").everyTime(followee_update_interval, () ->
-    reload_followees()
+    update_followees()
   )
 
-update_followees = () ->
+setup_followees = () ->
   elems = $.grep($('#followees > .followee'), (e) ->
     $(e).attr('id') != 'followee-template'
   )
@@ -45,7 +45,7 @@ update_followees = () ->
     add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
   )
 
-reload_followees = () ->
+update_followees = () ->
   followees_data = lookup_followees()
   $.each(followees_data, (i) ->
     data = this
