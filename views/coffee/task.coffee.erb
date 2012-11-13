@@ -81,6 +81,10 @@ add_task_html = (id, name) ->
   new_task.find('.name').text(limit_task_name_len(name))
   new_task.show()
 
+  # delete button
+  enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>') # reuse code
+  new_task.unbind('hover') # but not hover
+
   # click edit icon -> comment edit
   new_task.find('.edit').click(()->
     new_task.find('.comment').val(new_task.data('name'))

@@ -64,7 +64,14 @@ div#incoming-tasks {
 }
 
 .task .edit-box {
+  position: relative;
   text-align: right;
+}
+
+.task .delete {
+  position: absolute;
+  left: -18px;
+  top: 5px;
 }
 
 .task .comment {

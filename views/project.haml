@@ -22,6 +22,7 @@
           #task-template.task.ui-state-default{ style: 'display: none;' }
             .name (タスク内容)
             .edit-box{ style: 'display: none;' }
+              %img.delete{ src: url_for('/img/cancel.png') }
               %textarea.comment{ rows: 4 }
               %button.btn.cancel キャンセル
               %button.btn.btn-primary.ok OK
