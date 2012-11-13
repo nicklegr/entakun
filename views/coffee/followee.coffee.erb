@@ -1,3 +1,6 @@
+# in ms
+followee_update_interval = 5 * 60 * 1000
+
 load_followees = () ->
   followees = $.cookie("entakun-followees")
 
@@ -9,29 +12,60 @@ load_followees = () ->
 save_followees = (list) ->
   $.cookie("entakun-followees", list)
 
-update_followees = () ->
-  elems = $.grep($('#followees > .followee'), (e) ->
-    $(e).attr('id') != 'followee-template'
-  )
-  $(elems).remove()
+lookup_followees = () ->
+  followees_data = []
 
   followees = load_followees()
-
   if followees.length > 0
-    followees_data = null
     $.ajax({
       async: false,
       type: "GET",
-      url: "<%= url_for "/lookup_followees" %>",
+      url: '<%= url_for "/lookup_followees" %>',
       data: { followees: followees },
       dataType: 'json',
     }).done((data) ->
       followees_data = data
     )
 
-    $.each(followees_data, (i) ->
-      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+  followees_data
+
+interval_reload_followees = () ->
+  $("body").everyTime(followee_update_interval, () ->
+    reload_followees()
+  )
+
+update_followees = () ->
+  elems = $.grep($('#followees > .followee'), (e) ->
+    $(e).attr('id') != 'followee-template'
+  )
+  $(elems).remove()
+
+  followees_data = lookup_followees()
+  $.each(followees_data, (i) ->
+    add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+  )
+
+reload_followees = () ->
+  followees_data = lookup_followees()
+  $.each(followees_data, (i) ->
+    data = this
+
+    followee = $.grep($("#followees > .followee"), (e) ->
+      if $(e).attr('id') == 'followee-template'
+        false
+      else
+        $(e).data('followee')['project'] == data.project &&
+        $(e).data('followee')['staff'] == data.staff
     )
+
+    $(followee).find('.followee-name > .name').text(data.staff_name)
+
+    if data.task_name != ''
+      $(followee).find('.task').show()
+      $(followee).find('.task > .name').text(data.task_name)
+    else
+      $(followee).find('.task').hide()
+  )
 
 add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   # copy element
