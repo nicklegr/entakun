@@ -28,9 +28,9 @@ class Staff
 end
 
 Mongoid.configure do |config|
-  if ENV.key?('MONGOHQ_URL')
+  if ENV.key?('MONGOLAB_URI')
     # for heroku
-    config.sessions = { default: { uri: ENV['MONGOHQ_URL'] }}
+    config.sessions = { default: { uri: ENV['MONGOLAB_URI'] }}
   else
     config.sessions = { default: { database: 'entakun', hosts: [ 'localhost:27017' ] }}
   end
