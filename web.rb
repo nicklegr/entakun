@@ -250,6 +250,7 @@ get '/lookup_followees' do
 
     staff_name = nil
     task_name = nil
+    assigned_at = nil
 
     # staffは削除されてるかもしれない
     staff = project.staffs.where(id: e['staff']).first
@@ -258,11 +259,13 @@ get '/lookup_followees' do
 
       if staff.task_id
         # taskは確実にあるはず
-        task_name = project.tasks.find(staff.task_id).name
+        task = project.tasks.find(staff.task_id)
+        task_name = task.name
+        assigned_at = task.assigned_at
       end
     end
 
-    result << e.update({ staff_name: staff_name, task_name: task_name })
+    result << e.update({ staff_name: staff_name, task_name: task_name, assigned_at: assigned_at })
   end
 
   result.to_json

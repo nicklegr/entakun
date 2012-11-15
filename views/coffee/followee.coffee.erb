@@ -50,7 +50,7 @@ setup_followees = () ->
   followees_data = lookup_followees()
   $.each(followees_data, (i) ->
     if this.staff_name
-      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+      add_followee_html(this.project, this.staff, this.staff_name, this.task_name, this.assigned_at)
     else
       # staff deleted. remove from cookie
       remove_followee(this.project, this.staff)
@@ -84,7 +84,7 @@ update_followees = () ->
       remove_followee(data.project, data.staff)
   )
 
-add_followee_html = (project_key, staff_id, staff_name, task_name) ->
+add_followee_html = (project_key, staff_id, staff_name, task_name, assigned_at) ->
   # copy element
   new_followee = $('#followee-template').clone()
   new_followee.removeAttr('id') # don't set. to avoid dup id with staff
@@ -97,6 +97,16 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
     new_followee.find('.task > .name').text(task_name)
   else
     new_followee.find('.task').hide()
+
+  # recent indicator
+  if assigned_at
+    assigned_time = Date.parse(assigned_at)
+    now = new Date()
+
+    if now - assigned_time < 60 * 60 * 1000
+      new_followee.find('.recent-indicator-strong').show()
+    else if now - assigned_time < 24 * 60 * 60 * 1000
+      new_followee.find('.recent-indicator-weak').show()
 
   # in-place delete
   name = new_followee.find('.followee-name')

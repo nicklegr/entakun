@@ -56,6 +56,8 @@
             .followee-task
               .task.ui-state-default
                 .name (タスク内容)
+            %img.recent-indicator-strong{ src: url_for('/img/Recent_Strong.png'), style: 'display: none;' }
+            %img.recent-indicator-weak{ src: url_for('/img/Recent_Weak.png'), style: 'display: none;' }
 
         .add-followee
           %a{ 'href' => '#add-followee', 'data-toggle' => 'modal' }

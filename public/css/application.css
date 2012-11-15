@@ -149,7 +149,9 @@ div#followee-container {
   border-top: 1px dashed silver;
   width: 348px;
 }
+
 div.followee {
+  position: relative;
   border: 1px solid silver;
   margin-bottom: 5px;
 }
@@ -169,6 +171,12 @@ div.followee-name {
   width: 7%;
   margin-top: 2px;
   float: left;
+}
+
+[class*="recent-indicator"] {
+  position: absolute;
+  left: -20px;
+  top: 21px;
 }
 
 div.add-followee {
