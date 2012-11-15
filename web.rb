@@ -149,6 +149,7 @@ post '/task_sorted' do
 
   project = Project.where(key: key).first
   order.each_with_index do |task_id, i|
+    next if task_id == 'template'
     project.tasks.find(task_id).position = i
   end
 

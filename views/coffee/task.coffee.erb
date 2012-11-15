@@ -15,10 +15,11 @@ setup_task_list = () ->
       })
 
     update: (event, ui) ->
-      data = $("#tasks").sortable('serialize')
-      data = data.replace(/.*template&/, '') # remove template element
-      data = "project=#{project_key}&" + data
-      $.post("<%= url_for "/task_sorted" %>", data)
+      # task count without template element
+      if $("#tasks > .task").length - 1 >= 2
+        data = $("#tasks").sortable('serialize')
+        data = "project=#{project_key}&" + data
+        $.post("<%= url_for "/task_sorted" %>", data)
 
     stop: (event, ui) ->
       # if task was completed, move to last
