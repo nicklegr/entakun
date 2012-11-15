@@ -12,6 +12,13 @@ load_followees = () ->
 save_followees = (list) ->
   $.cookie("entakun-followees", list)
 
+remove_followee = (project, staff) ->
+  followees = load_followees()
+  followees = $.grep(followees, (e) ->
+    !(e['project'] == project && e['staff'] == staff)
+  )
+  save_followees(followees)
+
 lookup_followees = () ->
   followees_data = []
 
@@ -44,8 +51,9 @@ setup_followees = () ->
   $.each(followees_data, (i) ->
     if this.staff_name
       add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
-    # else
-      # @todo if staff deleted, remove from cookie
+    else
+      # staff deleted. remove from cookie
+      remove_followee(this.project, this.staff)
   )
 
 update_followees = () ->
@@ -73,6 +81,7 @@ update_followees = () ->
     else
       # staff deleted
       $(followee).remove()
+      remove_followee(data.project, data.staff)
   )
 
 add_followee_html = (project_key, staff_id, staff_name, task_name) ->
@@ -94,11 +103,7 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
   name.find('.delete').click(()->
     # remove cookie
     data = new_followee.data('followee')
-    followees = load_followees()
-    followees = $.grep(followees, (e) ->
-      return !(e['project'] == data['project'] && e['staff'] == data['staff'])
-    )
-    save_followees(followees)
+    remove_followee(data['project'], data['staff'])
 
     # fade out
     $(this).parents('.followee').effect('fade', {}, 300, () ->
