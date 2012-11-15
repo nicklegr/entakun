@@ -1,5 +1,13 @@
 # in ms
-followee_update_interval = 5 * 60 * 1000
+if true
+  followee_update_interval = 5 * 60 * 1000
+  recent_strong_time = 60 * 60 * 1000
+  recent_weak_time = 24 * 60 * 60 * 1000
+else
+  # for debug
+  followee_update_interval = 5 * 1000
+  recent_strong_time = 10 * 1000
+  recent_weak_time = 20 * 1000
 
 load_followees = () ->
   followees = $.cookie("entakun-followees")
@@ -49,11 +57,8 @@ setup_followees = () ->
 
   followees_data = lookup_followees()
   $.each(followees_data, (i) ->
-    if this.staff_name
-      add_followee_html(this.project, this.staff, this.staff_name, this.task_name, this.assigned_at)
-    else
-      # staff deleted. remove from cookie
-      remove_followee(this.project, this.staff)
+    elem = add_followee_html_bare(this.project, this.staff)
+    update_followee(elem, this)
   )
 
 update_followees = () ->
@@ -69,44 +74,16 @@ update_followees = () ->
         $(e).data('followee')['staff'] == data.staff
     )
 
-    if data.staff_name
-      $(followee).find('.followee-name > .name').text(data.staff_name)
-
-      if data.task_name
-        $(followee).find('.task').show()
-        $(followee).find('.task > .name').text(data.task_name)
-      else
-        # task deleted or unassigned
-        $(followee).find('.task').hide()
-    else
-      # staff deleted
-      $(followee).remove()
-      remove_followee(data.project, data.staff)
+    update_followee($(followee), data)
   )
 
-add_followee_html = (project_key, staff_id, staff_name, task_name, assigned_at) ->
+add_followee_html_bare = (project_key, staff_id) ->
   # copy element
   new_followee = $('#followee-template').clone()
   new_followee.removeAttr('id') # don't set. to avoid dup id with staff
-  new_followee.find('.followee-name > .name').text(staff_name)
   new_followee.show()
 
   new_followee.data('followee', { project: project_key, staff: staff_id })
-
-  if task_name
-    new_followee.find('.task > .name').text(task_name)
-  else
-    new_followee.find('.task').hide()
-
-  # recent indicator
-  if assigned_at
-    assigned_time = Date.parse(assigned_at)
-    now = new Date()
-
-    if now - assigned_time < 60 * 60 * 1000
-      new_followee.find('.recent-indicator-strong').show()
-    else if now - assigned_time < 24 * 60 * 60 * 1000
-      new_followee.find('.recent-indicator-weak').show()
 
   # in-place delete
   name = new_followee.find('.followee-name')
@@ -132,3 +109,30 @@ add_followee_html = (project_key, staff_id, staff_name, task_name, assigned_at) 
 
   $("#followees").append(new_followee)
   new_followee
+
+update_followee = (elem, data) ->
+  elem.find('[class*="recent-indicator"]').hide()
+
+  if data.staff_name
+    elem.find('.followee-name > .name').text(data.staff_name)
+
+    if data.task_name
+      elem.find('.task').show()
+      elem.find('.task > .name').text(data.task_name)
+
+      # recent indicator
+      if data.assigned_at
+        assigned_time = Date.parse(data.assigned_at)
+        now = new Date()
+
+        if now - assigned_time < recent_strong_time
+          elem.find('.recent-indicator-strong').show()
+        else if now - assigned_time < recent_weak_time
+          elem.find('.recent-indicator-weak').show()
+    else
+      # task deleted or unassigned
+      elem.find('.task').hide()
+  else
+    # staff deleted
+    elem.remove()
+    remove_followee(data.project, data.staff)
