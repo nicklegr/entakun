@@ -85,6 +85,7 @@ add_task_html = (id, name) ->
   # delete button
   enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>') # reuse code
   new_task.unbind('hover') # but not hover
+  new_task.find('.delete').click(() -> enableSortable()) # and extra handler
 
   # click edit icon -> comment edit
   new_task.find('.edit').click(()->
