@@ -16,6 +16,8 @@ class Task
   field :name, type: String
   field :complete, type: Boolean
   field :position, type: Integer
+  field :assigned_at, type: Time
+  field :completed_at, type: Time
   embedded_in :project
 end
 

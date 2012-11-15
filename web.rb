@@ -132,6 +132,7 @@ post '/complete_task' do
   project = Project.where(key: key).first
   task = project.tasks.find(id)
   task.complete = true
+  task.completed_at = Time.now
 
   assigned_staff = project.staffs.where(task_id: id).first
   if assigned_staff
@@ -216,6 +217,8 @@ post '/assign_task' do
     staff = project.staffs.find(staff_id)
     staff.task_id = task_id
 
+    task.assigned_at = Time.now
+
     # 以上をアトミックに保存する
     project.save!
   end
@@ -230,7 +233,10 @@ post '/deassign_task' do
   project = Project.where(key: key).first
   staff = project.staffs.where(task_id: task_id).first
   staff.unset(:task_id)
-  staff.save!
+
+  project.tasks.find(task_id).remove_attribute(:assigned_at)
+
+  project.save!
 
   'OK'.to_json
 end
