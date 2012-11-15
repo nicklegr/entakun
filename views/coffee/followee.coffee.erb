@@ -42,7 +42,10 @@ setup_followees = () ->
 
   followees_data = lookup_followees()
   $.each(followees_data, (i) ->
-    add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+    if this.staff_name
+      add_followee_html(this.project, this.staff, this.staff_name, this.task_name)
+    # else
+      # @todo if staff deleted, remove from cookie
   )
 
 update_followees = () ->
@@ -58,13 +61,18 @@ update_followees = () ->
         $(e).data('followee')['staff'] == data.staff
     )
 
-    $(followee).find('.followee-name > .name').text(data.staff_name)
+    if data.staff_name
+      $(followee).find('.followee-name > .name').text(data.staff_name)
 
-    if data.task_name != ''
-      $(followee).find('.task').show()
-      $(followee).find('.task > .name').text(data.task_name)
+      if data.task_name
+        $(followee).find('.task').show()
+        $(followee).find('.task > .name').text(data.task_name)
+      else
+        # task deleted or unassigned
+        $(followee).find('.task').hide()
     else
-      $(followee).find('.task').hide()
+      # staff deleted
+      $(followee).remove()
   )
 
 add_followee_html = (project_key, staff_id, staff_name, task_name) ->
@@ -76,7 +84,7 @@ add_followee_html = (project_key, staff_id, staff_name, task_name) ->
 
   new_followee.data('followee', { project: project_key, staff: staff_id })
 
-  if task_name != ''
+  if task_name
     new_followee.find('.task > .name').text(task_name)
   else
     new_followee.find('.task').hide()

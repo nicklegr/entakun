@@ -240,16 +240,20 @@ get '/lookup_followees' do
 
   followees.each do |dummy, e|
     project = Project.where(key: e['project']).first
-    staff = project.staffs.find(e['staff'])
 
-    staff_name = staff.name
+    staff_name = nil
+    task_name = nil
 
-    task_name =
+    # staffは削除されてるかもしれない
+    staff = project.staffs.where(id: e['staff']).first
+    if staff
+      staff_name = staff.name
+
       if staff.task_id
-        project.tasks.find(staff.task_id).name
-      else
-        ''
+        # taskは確実にあるはず
+        task_name = project.tasks.find(staff.task_id).name
       end
+    end
 
     result << e.update({ staff_name: staff_name, task_name: task_name })
   end
