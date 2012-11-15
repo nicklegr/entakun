@@ -108,7 +108,21 @@ post '/delete_task' do
   id = params[:id]
 
   project = Project.where(key: key).first
-  project.tasks.find(id).destroy
+  staff = project.staffs.where(task_id: id).first
+
+  if staff
+    # 割り当て済みなら割り当て解除
+    Project.collection.find({ '_id' => project._id, 'staffs._id' => staff._id }).update(
+      {
+        "$pull"=>{"tasks"=>{ '_id' => Moped::BSON::ObjectId(id) } },
+        "$unset"=>{"staffs.$.task_id"=>1},
+      }
+    )
+  else
+    project.tasks.find(id).destroy
+  end
+
+  'OK'.to_json
 end
 
 post '/complete_task' do
