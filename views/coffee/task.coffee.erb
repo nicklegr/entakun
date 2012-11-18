@@ -135,7 +135,7 @@ add_task_html = (id, name) ->
   new_task
 
 limit_task_name_len = (name) ->
-  ret = name.replace(/\n.+$/, "") # get first line
+  ret = name.replace(/\n[\s\S]*$/, "") # get first line
   ret = truncate_by_width(ret, task_name_max_width, $('#ruler'))
   ret
 
