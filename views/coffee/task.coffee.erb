@@ -82,6 +82,8 @@ add_task_html = (id, name) ->
   new_task.find('.name').text(limit_task_name_len(name))
   new_task.show()
 
+  setup_open_marker(new_task)
+
   # delete button
   enable_inplace_delete(new_task, '<%= url_for "/delete_task" %>') # reuse code
   new_task.unbind('hover') # but not hover
@@ -108,6 +110,8 @@ add_task_html = (id, name) ->
     new_task.data('name', org_name)
     new_task.find('.name').text(limit_task_name_len(org_name))
 
+    update_open_marker(new_task)
+
     # send to server
     $.post('<%= url_for "/edit_task" %>',
       { project: project_key, id: new_task.data('id'), value: org_name }
@@ -133,6 +137,39 @@ add_task_html = (id, name) ->
     $("#tasks").append(new_task)
 
   new_task
+
+setup_open_marker = (elem) ->
+  update_open_marker(elem)
+
+  elem.find('.name').click(() ->
+    task = $(this).closest('.task')
+
+    if task.find('.marker').is(":visible")
+      if task.find('.task_open').is(":visible")
+        task.find('.name').text(task.data('name'))
+        task.find('.task_open').hide()
+        task.find('.task_close').show()
+      else
+        task.find('.name').text(limit_task_name_len(task.data('name')))
+        task.find('.task_open').show()
+        task.find('.task_close').hide()
+  )
+
+update_open_marker = (elem) ->
+  init_open_marker(elem)
+
+  if is_trancated(elem.data('name'))
+    elem.find('.marker').show()
+  else
+    elem.find('.marker').hide()
+
+init_open_marker = (elem) ->
+  elem.find('.marker').hide()
+  elem.find('.task_open').show()
+  elem.find('.task_close').hide()
+
+is_trancated = (name) ->
+  name != limit_task_name_len(name)
 
 limit_task_name_len = (name) ->
   ret = name.replace(/\n[\s\S]*$/, "") # get first line
