@@ -4,7 +4,7 @@ setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
     cancel: ".ui-state-disabled", # disable sorting completed tasks
-    helper : 'clone', # prevent firing click event on dragging
+    helper: "clone", # prevent firing click event on dragging
 
     receive: (event, ui) ->
       $.ajax({
@@ -23,9 +23,12 @@ setup_task_list = () ->
         $.post("<%= url_for "/task_sorted" %>", data)
 
     stop: (event, ui) ->
-      # if task was completed, move to last
+      # if task was completed, hide and move to last
       # should be in trashbox's drop handler, but there is timing problem
       if ui.item.hasClass('ui-state-disabled')
+        if !$('#show_trashes_check').attr('checked')
+          ui.item.hide()
+
         $('#tasks').append(ui.item)
   })
 

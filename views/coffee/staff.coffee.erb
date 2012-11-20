@@ -50,7 +50,7 @@ add_staff_html = (id, name) ->
   # assigned tasks
   new_staff.find(".assigned-task").sortable({
     connectWith: "#tasks,.assigned-task",
-    helper : 'clone', # prevent firing click event on dragging
+    helper: "clone", # prevent firing click event on dragging
 
     receive: (event, ui) ->
       if $(this).find('li').length >= 2
@@ -73,9 +73,12 @@ add_staff_html = (id, name) ->
         })
 
     stop: (event, ui) ->
-      # if task was completed, move to incoming list
+      # if task was completed, hide and move to incoming list
       # should be in trashbox's drop handler, but there is timing problem
       if ui.item.hasClass('ui-state-disabled')
+        if !$('#show_trashes_check').attr('checked')
+          ui.item.hide()
+
         $('#tasks').append(ui.item)
   })
 
