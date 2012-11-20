@@ -100,7 +100,7 @@ add_task_html = (id, name) ->
     begin_edit_task($(this).parent())
   )
 
-  # show edit icons when mouse hover
+  # show edit icon when mouse hover
   enable_edit_hover(new_task)
 
   # comment edit window
@@ -113,7 +113,14 @@ add_task_html = (id, name) ->
     # update task title & internal data
     org_name = new_task.find('.comment').val()
     new_task.data('name', org_name)
-    new_task.find('.name').text(limit_task_name_len(org_name))
+
+    if is_task_opened(new_task)
+      new_task.find('.name').text(org_name)
+    else
+      new_task.find('.name').text(limit_task_name_len(org_name))
+
+    if !is_trancated(org_name)
+      init_open_marker(new_task)
 
     update_open_marker(new_task)
 
@@ -144,25 +151,24 @@ add_task_html = (id, name) ->
   new_task
 
 setup_open_marker = (elem) ->
+  init_open_marker(elem)
   update_open_marker(elem)
 
   elem.find('.name').click(() ->
     task = $(this).closest('.task')
 
     if task.find('.marker').is(":visible")
-      if task.find('.task_open').is(":visible")
-        task.find('.name').text(task.data('name'))
-        task.find('.task_open').hide()
-        task.find('.task_close').show()
-      else
+      if is_task_opened(task)
         task.find('.name').text(limit_task_name_len(task.data('name')))
         task.find('.task_open').show()
         task.find('.task_close').hide()
+      else
+        task.find('.name').text(task.data('name'))
+        task.find('.task_open').hide()
+        task.find('.task_close').show()
   )
 
 update_open_marker = (elem) ->
-  init_open_marker(elem)
-
   if is_trancated(elem.data('name'))
     elem.find('.marker').show()
   else
