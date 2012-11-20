@@ -101,13 +101,9 @@ div#incoming-tasks {
 }
 
 .task .marker {
-  position: relative;
-}
-
-.task_open, .task_close {
   position: absolute;
-  left: 327px;
-  top: 17px;
+  right: 2px;
+  bottom: -2px;
 }
 
 div#staff-container {
@@ -221,6 +217,7 @@ div#undo {
 }
 
 .task {
+  position: relative;
   margin: 0px;
   padding: 0.4em;
   font-size: 1.0em;
