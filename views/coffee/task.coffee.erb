@@ -4,6 +4,7 @@ setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
     cancel: ".ui-state-disabled", # disable sorting completed tasks
+    helper : 'clone', # prevent firing click event on dragging
 
     receive: (event, ui) ->
       $.ajax({
