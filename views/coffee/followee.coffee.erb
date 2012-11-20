@@ -84,6 +84,7 @@ add_followee_html_bare = (project_key, staff_id) ->
   new_followee.show()
 
   new_followee.data('followee', { project: project_key, staff: staff_id })
+  new_followee.find('.task').data('name', '') # needed by setup_open_marker()
 
   # in-place delete
   name = new_followee.find('.followee-name')
@@ -107,6 +108,8 @@ add_followee_html_bare = (project_key, staff_id) ->
       $(this).find('.delete').hide()
   )
 
+  setup_open_marker(new_followee.find('.task'))
+
   $("#followees").append(new_followee)
   new_followee
 
@@ -116,9 +119,20 @@ update_followee = (elem, data) ->
   if data.staff_name
     elem.find('.followee-name > .name').text(data.staff_name)
 
+    task = elem.find('.task')
     if data.task_name
-      elem.find('.task').show()
-      elem.find('.task > .name').text(data.task_name)
+      task.show()
+
+      if data.task_name != task.data('name')
+        # task name changed
+        task.data('name', data.task_name)
+
+        if is_task_opened(task)
+          task.find('.name').text(data.task_name)
+        else
+          task.find('.name').text(limit_task_name_len(data.task_name))
+
+        update_open_marker(task)
 
       # recent indicator
       if data.assigned_at
@@ -131,7 +145,7 @@ update_followee = (elem, data) ->
           elem.find('.recent-indicator-weak').show()
     else
       # task deleted or unassigned
-      elem.find('.task').hide()
+      task.hide()
   else
     # staff deleted
     elem.remove()

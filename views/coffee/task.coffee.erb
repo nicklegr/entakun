@@ -173,6 +173,9 @@ init_open_marker = (elem) ->
   elem.find('.task_open').show()
   elem.find('.task_close').hide()
 
+is_task_opened = (elem) ->
+  elem.find('.task_close').is(":visible")
+
 is_trancated = (name) ->
   name != limit_task_name_len(name)
 

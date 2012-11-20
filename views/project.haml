@@ -60,6 +60,10 @@
             .followee-task
               .task.ui-state-default
                 .name (タスク内容)
+                .marker
+                  %img.task_open{ src: url_for('/img/Task_Open.png') }
+                  %img.task_close{ src: url_for('/img/Task_Close.png') }
+                .clear
             %img.recent-indicator-strong{ src: url_for('/img/Recent_Strong.png'), style: 'display: none;' }
             %img.recent-indicator-weak{ src: url_for('/img/Recent_Weak.png'), style: 'display: none;' }
 
