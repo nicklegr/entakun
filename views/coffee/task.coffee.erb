@@ -38,6 +38,10 @@ setup_task_input = () ->
       $("input#task").val('')
   )
 
+  # focus on page load
+  # must be after .keypress()
+  $("input#task").focus()
+
 load_tasks = () ->
   tasks = null
   $.ajax({
