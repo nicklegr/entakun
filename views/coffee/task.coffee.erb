@@ -195,6 +195,7 @@ begin_edit_task = (elem) ->
   disable_edit_hover(elem)
 
   elem.find('.name').hide()
+  elem.find('.marker').css("opacity", 0);
   elem.find('.edit-box').show()
   elem.find('.comment').select()
 
@@ -203,6 +204,7 @@ end_edit_task = (elem) ->
   enable_edit_hover(elem)
 
   elem.find('.name').show()
+  elem.find('.marker').css("opacity", 1);
   elem.find('.edit-box').hide()
 
 enable_edit_hover = (elem) ->
