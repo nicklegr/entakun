@@ -45,6 +45,17 @@ end
 
 get '/projects/:key' do
   @project_key = params[:key]
+
+  @colors = [
+    { name: 'orange', value: '#FFBE49' }, # (255, 190, 73)
+    { name: 'yellow', value: '#FFF45F' }, # (255, 244, 95)
+    { name: 'green', value: '#C6DF7C' }, # (198, 223, 124)
+    { name: 'blue', value: '#ADFFD8' }, # (173, 255, 216)
+    { name: 'purple', value: '#BABAFF' }, # (186, 186, 255)
+    { name: 'pink', value: '#F8C7E0' }, # (248, 199, 224)
+    { name: 'brown', value: '#E1C795' }, # (225, 199, 149)
+  ]
+
   haml :project
 end
 

@@ -30,6 +30,28 @@ img.edit_button {
   margin-top: 5px;
 }
 
+.colors {
+  width: 30px;
+  padding-left: 15px;
+}
+
+.color-box {
+  width: 14px;
+  height: 14px;
+  margin-bottom: 18px;
+  padding: 1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.color-box-inner {
+  width: 14px;
+  height: 14px;
+}
+
+#add-task {
+  padding-left: 65px;
+}
+
 input#task {
   width: 338px;
 }

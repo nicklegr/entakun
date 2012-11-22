@@ -15,6 +15,11 @@
     %input#task{ type: 'text', placeholder: 'タスクを追加' }
 
   .row
+    .colors.span1
+      - @colors.each do |color|
+        .color-box{ id: color[:name] }
+          .color-box-inner{ style: "background-color: #{color[:value]}" }
+
     .span5
       #incoming-tasks
         #tasks.sortable
