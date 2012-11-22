@@ -48,8 +48,9 @@ div#incoming-tasks {
 
 #tasks {
   padding: 3px;
+  padding-bottom: 0;
   width: auto;
-  min-height: 440px;
+  min-height: 431px;
 }
 
 .assigned-task, .followee-task {
