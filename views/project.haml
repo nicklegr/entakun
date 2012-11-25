@@ -15,10 +15,12 @@
     %input#task{ type: 'text', placeholder: 'タスクを追加' }
 
   .row
-    .colors.span1
+    .palette.span1
       - @colors.each do |color|
-        .color-box{ id: color[:name] }
-          .color-box-inner{ style: "background-color: #{color[:value]}" }
+        .color-box{ :"data-color-name" => color[:name] }
+          .color-box-inner{ class: "color-#{color[:name]}" }
+      #color-cancel{ style: 'display: none;' }
+        %img{ src: url_for('/img/cancel.png') }
 
     .span5
       #incoming-tasks

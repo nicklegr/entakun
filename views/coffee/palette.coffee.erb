@@ -1,0 +1,22 @@
+setup_palette = () ->
+  $('.color-box').click(() ->
+    $('.color-box').removeClass('color-focus')
+    $(this).addClass('color-focus')
+
+    $('#color-cancel').show()
+
+    # click on task -> change color
+    $('#tasks > .task').unbind('click')
+    $('#tasks > .task').bind('click', () ->
+      if $('.color-focus').length == 1
+        $(this).removeClass('color-orange color-yellow color-green color-blue color-purple color-pink color-brown')
+
+        color_name = $('.color-focus').data('color-name')
+        $(this).addClass('color-' + color_name)
+    )
+  )
+
+  $('#color-cancel').click(() ->
+    $('.color-box').removeClass('color-focus')
+    $('#color-cancel').hide()
+  )
