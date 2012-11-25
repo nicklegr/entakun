@@ -196,6 +196,8 @@ limit_task_name_len = (name) ->
   ret
 
 begin_edit_task = (elem) ->
+  end_paint() # if in paint mode, cancel it
+
   disableSortable()
   disable_edit_hover(elem)
 
