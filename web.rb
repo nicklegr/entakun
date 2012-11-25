@@ -29,7 +29,9 @@ def next_color(staffs)
   end
 
   staffs.each do |e|
-    color_count[e.color] += 1
+    if e.color # @todo for compatibility. remove in the future
+      color_count[e.color] += 1
+    end
   end
 
   colors = []

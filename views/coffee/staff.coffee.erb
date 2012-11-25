@@ -11,7 +11,10 @@ load_staffs = () ->
   )
 
   $.each(staffs, (i) ->
-    staff = add_staff_html(this._id, this.name, this.color)
+    # @todo for compatibility. remove in the future
+    color = this.color || 'orange'
+
+    staff = add_staff_html(this._id, this.name, color)
 
     if this.task_id
       staff.find('.assigned-task').append($('#task_' + this.task_id))
