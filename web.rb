@@ -53,7 +53,7 @@ get '/projects/:key' do
     { name: 'blue' },
     { name: 'purple' },
     { name: 'pink' },
-    { name: 'brown' },
+    { name: 'gray' },
   ]
 
   haml :project

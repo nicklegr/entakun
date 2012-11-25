@@ -11,7 +11,7 @@ setup_palette = () ->
     $('#tasks > .task').unbind('click')
     $('#tasks > .task').bind('click', () ->
       if $('.color-focus').length == 1
-        $(this).removeClass('color-orange color-yellow color-green color-blue color-purple color-pink color-brown')
+        $(this).removeClass('color-orange color-yellow color-green color-blue color-purple color-pink color-gray')
 
         color_name = $('.color-focus').data('color-name')
         $(this).addClass('color-' + color_name)
