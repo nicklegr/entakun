@@ -28,10 +28,13 @@ setup_palette = () ->
           { project: project_key, id: $(this).data('id'), color: color_name }
         )
     )
+
+    $('#task').attr('disabled', 'disabled');
   )
 
   $('#color-cancel').click(() ->
     $('.color-box').removeClass('color-focus')
     $('#color-cancel').hide()
     reset_mouse_cursor()
+    $('#task').removeAttr('disabled')
   )
