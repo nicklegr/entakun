@@ -96,7 +96,7 @@ post '/new_task' do
   name = params[:name]
 
   project = Project.where(key: key).first
-  task = project.tasks.create(name: name, complete: false)
+  task = project.tasks.create(name: name, complete: false, color: 'gray')
 
   "#{task._id}"
 end
@@ -112,6 +112,19 @@ post '/edit_task' do
   task.save!
 
   name
+end
+
+post '/color_task' do
+  key = params[:project]
+  id = params[:id]
+  color = params[:color]
+
+  project = Project.where(key: key).first
+  task = project.tasks.find(id)
+  task.color = color
+  task.save!
+
+  'OK'.to_json
 end
 
 post '/delete_task' do

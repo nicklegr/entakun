@@ -58,7 +58,7 @@ load_tasks = () ->
   )
 
   $.each(tasks, (i) ->
-    task = add_task_html(this._id, this.name)
+    task = add_task_html(this._id, this.name, this.color)
     if this.complete
       task.addClass('ui-state-disabled')
       if !$('#show_trashes_check').attr('checked')
@@ -77,16 +77,18 @@ add_task = (name) ->
     task_id = id
   )
 
-  add_task_html(task_id, name)
+  add_task_html(task_id, name, default_color)
 
-add_task_html = (id, name) ->
+add_task_html = (id, name, color) ->
   # copy element
   new_task = $('#task-template').clone()
 
   new_task.data('id', id)
   new_task.data('name', name)
+  new_task.data('color-name', color)
 
   new_task.attr('id', 'task_' + id)
+  new_task.addClass('color-' + color)
   new_task.find('.name').text(limit_task_name_len(name))
   new_task.show()
 

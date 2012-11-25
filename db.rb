@@ -14,6 +14,7 @@ class Task
   include Mongoid::Document
   include Mongoid::Timestamps
   field :name, type: String
+  field :color, type: String
   field :complete, type: Boolean
   field :position, type: Integer
   field :assigned_at, type: Time

@@ -1,3 +1,5 @@
+default_color = 'gray'
+
 setup_palette = () ->
   $('.color-box').click(() ->
     $('.color-box').removeClass('color-focus')
@@ -13,6 +15,10 @@ setup_palette = () ->
 
         color_name = $('.color-focus').data('color-name')
         $(this).addClass('color-' + color_name)
+
+        $.post('<%= url_for "/color_task" %>',
+          { project: project_key, id: $(this).data('id'), color: color_name }
+        )
     )
   )
 
