@@ -50,8 +50,8 @@ get '/projects/:key' do
     { name: 'orange' },
     { name: 'yellow' },
     { name: 'green' },
+    { name: 'cyan' },
     { name: 'blue' },
-    { name: 'purple' },
     { name: 'pink' },
     { name: 'gray' },
   ]
