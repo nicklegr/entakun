@@ -312,6 +312,34 @@ div#undo {
   background-color: rgb(230, 230, 230);
 }
 
+.brush-orange {
+  cursor: url(../img/brush/orange.png), default;
+}
+
+.brush-yellow {
+  cursor: url(../img/brush/yellow.png), default;
+}
+
+.brush-green {
+  cursor: url(../img/brush/green.png), default;
+}
+
+.brush-cyan {
+  cursor: url(../img/brush/cyan.png), default;
+}
+
+.brush-blue {
+  cursor: url(../img/brush/blue.png), default;
+}
+
+.brush-pink {
+  cursor: url(../img/brush/pink.png), default;
+}
+
+.brush-gray {
+  cursor: url(../img/brush/gray.png), default;
+}
+
 footer {
   text-align: center;
 }

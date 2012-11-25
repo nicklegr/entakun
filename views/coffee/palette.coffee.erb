@@ -1,11 +1,19 @@
 default_color = 'gray'
 
+reset_mouse_cursor = () ->
+  $('body').removeClass('brush-orange brush-yellow brush-green brush-cyan brush-blue brush-pink brush-gray')
+
 setup_palette = () ->
   $('.color-box').click(() ->
     $('.color-box').removeClass('color-focus')
     $(this).addClass('color-focus')
 
     $('#color-cancel').show()
+
+    # change mouse cursor
+    reset_mouse_cursor()
+    color_name = $(this).data('color-name')
+    $('body').addClass('brush-' + color_name)
 
     # click on task -> change color
     $('#tasks > .task').unbind('click')
@@ -25,4 +33,5 @@ setup_palette = () ->
   $('#color-cancel').click(() ->
     $('.color-box').removeClass('color-focus')
     $('#color-cancel').hide()
+    reset_mouse_cursor()
   )
