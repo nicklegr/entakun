@@ -37,13 +37,23 @@ start_paint = (elem) ->
   tasks.unbind('click')
   tasks.bind('click', (event) ->
     if $('.color-focus').length == 1
-      $(this).removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
-
-      color_name = $('.color-focus').data('color-name')
-      $(this).addClass('color-' + color_name)
+      color = set_color($(this))
 
       $.post('<%= url_for "/color_task" %>',
-        { project: project_key, id: $(this).data('id'), color: color_name }
+        { project: project_key, id: $(this).data('id'), color: color }
+      )
+
+      event.stopPropagation() # prevent firing $('body') click event
+  )
+
+  # click on staff -> change color
+  $('.staff-name').unbind('click')
+  $('.staff-name').bind('click', (event) ->
+    if $('.color-focus').length == 1
+      color = set_color($(this))
+
+      $.post('<%= url_for "/color_staff" %>',
+        { project: project_key, id: $(this).closest('.staff').data('id'), color: color }
       )
 
       event.stopPropagation() # prevent firing $('body') click event
@@ -53,6 +63,14 @@ end_paint = () ->
   $('.color-box').removeClass('color-focus')
   $('#color-cancel').hide()
   reset_mouse_cursor()
+
+set_color = (elem) ->
+  elem.removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
+
+  color_name = $('.color-focus').data('color-name')
+  elem.addClass('color-' + color_name)
+
+  color_name
 
 reset_mouse_cursor = () ->
   $('body').removeClass('brush-orange brush-yellow brush-green brush-cyan brush-blue brush-pink brush-gray')

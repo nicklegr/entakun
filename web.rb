@@ -195,7 +195,7 @@ post '/new_staff' do
   name = params[:name]
 
   project = Project.where(key: key).first
-  staff = project.staffs.create(name: name)
+  staff = project.staffs.create(name: name, color: 'orange') # @todo color rotation
 
   "#{staff._id}"
 end
@@ -211,6 +211,19 @@ post '/edit_staff' do
   staff.save!
 
   name
+end
+
+post '/color_staff' do
+  key = params[:project]
+  id = params[:id]
+  color = params[:color]
+
+  project = Project.where(key: key).first
+  staff = project.staffs.find(id)
+  staff.color = color
+  staff.save!
+
+  'OK'.to_json
 end
 
 post '/delete_staff' do

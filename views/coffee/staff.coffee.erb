@@ -11,7 +11,7 @@ load_staffs = () ->
   )
 
   $.each(staffs, (i) ->
-    staff = add_staff_html(this._id, this.name)
+    staff = add_staff_html(this._id, this.name, this.color)
 
     if this.task_id
       staff.find('.assigned-task').append($('#task_' + this.task_id))
@@ -37,14 +37,18 @@ add_staff = (name) ->
     staff_id = id
   )
 
-  add_staff_html(staff_id, name)
+  # @todo color rotation
+  add_staff_html(staff_id, name, 'orange')
 
-add_staff_html = (id, name) ->
+add_staff_html = (id, name, color) ->
   # copy element
   new_staff = $('#staff-template').clone()
   new_staff.attr('id', 'staff_' + id)
   new_staff.data('id', id)
+
+  new_staff.find('.staff-name').addClass('color-' + color)
   new_staff.find('.name').text(name)
+
   new_staff.show()
 
   # assigned tasks

@@ -26,6 +26,7 @@ class Staff
   include Mongoid::Document
   include Mongoid::Timestamps
   field :name, type: String
+  field :color, type: String
   field :task_id, type: Moped::BSON::ObjectId # embedded docはhas_oneできないので
   embedded_in :project
 end
