@@ -1,9 +1,13 @@
 default_color = 'gray'
 
 setup_palette = () ->
-  $('.color-box').click(() -> start_paint($(this)))
+  $('.color-box').click((event) ->
+    start_paint($(this))
+    event.stopPropagation() # prevent firing $('body') click event
+  )
 
-  $('#color-cancel').click(() -> end_paint())
+  $('#color-cancel').click(end_paint)
+  $('body').click(end_paint)
 
 start_paint = (elem) ->
   color = elem.data('color-name')
@@ -21,7 +25,7 @@ start_paint = (elem) ->
 
   # click on task -> change color
   $('#tasks > .task').unbind('click')
-  $('#tasks > .task').bind('click', () ->
+  $('#tasks > .task').bind('click', (event) ->
     if $('.color-focus').length == 1
       $(this).removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
 
@@ -31,6 +35,8 @@ start_paint = (elem) ->
       $.post('<%= url_for "/color_task" %>',
         { project: project_key, id: $(this).data('id'), color: color_name }
       )
+
+      event.stopPropagation() # prevent firing $('body') click event
   )
 
   $('#task').attr('disabled', 'disabled');
