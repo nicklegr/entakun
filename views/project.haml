@@ -17,8 +17,8 @@
   .row
     .palette.span1
       - @colors.each do |color|
-        .color-box{ :"data-color-name" => color[:name] }
-          .color-box-inner{ class: "color-#{color[:name]}" }
+        .color-box{ :"data-color-name" => color }
+          .color-box-inner{ class: "color-#{color}" }
       #color-cancel{ style: 'display: none;' }
         %img{ src: url_for('/img/cancel.png') }
 

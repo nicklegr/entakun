@@ -28,17 +28,19 @@ add_staff_event = () ->
 add_staff = (name) ->
   # send to server
   staff_id = null
+  color = null
   $.ajax({
     async: false,
     type: "POST",
     url: "<%= url_for "/new_staff" %>",
-    data: { project: project_key, name: name }
-  }).done((id) ->
-    staff_id = id
+    data: { project: project_key, name: name },
+    dataType: 'json',
+  }).done((data) ->
+    staff_id = data['id']
+    color = data['color']
   )
 
-  # @todo color rotation
-  add_staff_html(staff_id, name, 'orange')
+  add_staff_html(staff_id, name, color)
 
 add_staff_html = (id, name, color) ->
   # copy element

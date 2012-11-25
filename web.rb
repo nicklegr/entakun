@@ -7,7 +7,46 @@ require 'haml'
 require 'coffee-script'
 require './db'
 
+# タスク・スタッフの色
+COLORS = [
+  'orange',
+  'yellow',
+  'green',
+  'cyan',
+  'blue',
+  'pink',
+  'gray',
+]
+
 set :haml, :format => :html5
+
+def next_color(staffs)
+  # 次のスタッフの色を決定する
+  # 最も使用回数が少ない色を選択。同数ならCOLORSの順で選ぶ
+  color_count = {}
+  COLORS.each do |e|
+    color_count[e] = 0
+  end
+
+  staffs.each do |e|
+    color_count[e.color] += 1
+  end
+
+  colors = []
+  color_count.each do |k, v|
+    colors << [k, v]
+  end
+
+  colors.sort! do |a, b|
+    if a[1] == b[1]
+      COLORS.index(a[0]) <=> COLORS.index(b[0])
+    else
+      a[1] <=> b[1]
+    end
+  end
+
+  colors[0][0]
+end
 
 get '/js/:basename.js' do
   CoffeeScript.compile erb(:"coffee/#{params[:basename]}.coffee"), { no_wrap: true }
@@ -20,7 +59,7 @@ end
 get '/new_project' do
   project_key = SecureRandom.urlsafe_base64
   project = Project.create({ key: project_key, name: '新規プロジェクト' })
-  project.staffs.create(name: '担当者1')
+  project.staffs.create(name: '担当者1', color: COLORS.first)
 
   redirect url_for("/projects/#{project_key}")
 end
@@ -45,16 +84,7 @@ end
 
 get '/projects/:key' do
   @project_key = params[:key]
-
-  @colors = [
-    { name: 'orange' },
-    { name: 'yellow' },
-    { name: 'green' },
-    { name: 'cyan' },
-    { name: 'blue' },
-    { name: 'pink' },
-    { name: 'gray' },
-  ]
+  @colors = COLORS
 
   haml :project
 end
@@ -195,9 +225,9 @@ post '/new_staff' do
   name = params[:name]
 
   project = Project.where(key: key).first
-  staff = project.staffs.create(name: name, color: 'orange') # @todo color rotation
+  staff = project.staffs.create(name: name, color: next_color(project.staffs))
 
-  "#{staff._id}"
+  { id: staff._id, color: staff.color }.to_json
 end
 
 post '/edit_staff' do
