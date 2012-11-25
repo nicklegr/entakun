@@ -33,8 +33,9 @@ start_paint = (elem) ->
   $('body').addClass('brush-' + color)
 
   # click on task -> change color
-  $('#tasks > .task').unbind('click')
-  $('#tasks > .task').bind('click', (event) ->
+  tasks = $('#tasks > .task, .assigned-task > .task')
+  tasks.unbind('click')
+  tasks.bind('click', (event) ->
     if $('.color-focus').length == 1
       $(this).removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
 
