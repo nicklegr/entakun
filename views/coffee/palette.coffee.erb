@@ -1,40 +1,45 @@
 default_color = 'gray'
 
+setup_palette = () ->
+  $('.color-box').click(() -> start_paint($(this)))
+
+  $('#color-cancel').click(() -> end_paint())
+
+start_paint = (elem) ->
+  color = elem.data('color-name')
+
+  # highlight current color
+  $('.color-box').removeClass('color-focus')
+  elem.addClass('color-focus')
+
+  # cancel button
+  $('#color-cancel').show()
+
+  # change mouse cursor
+  reset_mouse_cursor()
+  $('body').addClass('brush-' + color)
+
+  # click on task -> change color
+  $('#tasks > .task').unbind('click')
+  $('#tasks > .task').bind('click', () ->
+    if $('.color-focus').length == 1
+      $(this).removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
+
+      color_name = $('.color-focus').data('color-name')
+      $(this).addClass('color-' + color_name)
+
+      $.post('<%= url_for "/color_task" %>',
+        { project: project_key, id: $(this).data('id'), color: color_name }
+      )
+  )
+
+  $('#task').attr('disabled', 'disabled');
+
+end_paint = () ->
+  $('.color-box').removeClass('color-focus')
+  $('#color-cancel').hide()
+  reset_mouse_cursor()
+  $('#task').removeAttr('disabled')
+
 reset_mouse_cursor = () ->
   $('body').removeClass('brush-orange brush-yellow brush-green brush-cyan brush-blue brush-pink brush-gray')
-
-setup_palette = () ->
-  $('.color-box').click(() ->
-    $('.color-box').removeClass('color-focus')
-    $(this).addClass('color-focus')
-
-    $('#color-cancel').show()
-
-    # change mouse cursor
-    reset_mouse_cursor()
-    color_name = $(this).data('color-name')
-    $('body').addClass('brush-' + color_name)
-
-    # click on task -> change color
-    $('#tasks > .task').unbind('click')
-    $('#tasks > .task').bind('click', () ->
-      if $('.color-focus').length == 1
-        $(this).removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
-
-        color_name = $('.color-focus').data('color-name')
-        $(this).addClass('color-' + color_name)
-
-        $.post('<%= url_for "/color_task" %>',
-          { project: project_key, id: $(this).data('id'), color: color_name }
-        )
-    )
-
-    $('#task').attr('disabled', 'disabled');
-  )
-
-  $('#color-cancel').click(() ->
-    $('.color-box').removeClass('color-focus')
-    $('#color-cancel').hide()
-    reset_mouse_cursor()
-    $('#task').removeAttr('disabled')
-  )
