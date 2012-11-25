@@ -6,8 +6,17 @@ setup_palette = () ->
     event.stopPropagation() # prevent firing $('body') click event
   )
 
+  # cancel button
   $('#color-cancel').click(end_paint)
+
+  # click outside task -> cancel
   $('body').click(end_paint)
+
+  # ESC to cancel
+  $('body').keypress((event) ->
+    if event.keyCode == 27
+      end_paint()
+  )
 
 start_paint = (elem) ->
   color = elem.data('color-name')
