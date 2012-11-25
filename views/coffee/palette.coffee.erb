@@ -48,13 +48,10 @@ start_paint = (elem) ->
       event.stopPropagation() # prevent firing $('body') click event
   )
 
-  $('#task').attr('disabled', 'disabled');
-
 end_paint = () ->
   $('.color-box').removeClass('color-focus')
   $('#color-cancel').hide()
   reset_mouse_cursor()
-  $('#task').removeAttr('disabled')
 
 reset_mouse_cursor = () ->
   $('body').removeClass('brush-orange brush-yellow brush-green brush-cyan brush-blue brush-pink brush-gray')
