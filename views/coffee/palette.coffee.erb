@@ -64,6 +64,9 @@ end_paint = () ->
   $('#color-cancel').hide()
   reset_mouse_cursor()
 
+is_painting = () ->
+  $('.color-focus').length == 1
+
 set_color = (elem) ->
   elem.removeClass('color-orange color-yellow color-green color-cyan color-blue color-pink color-gray')
 

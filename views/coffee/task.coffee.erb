@@ -159,6 +159,9 @@ setup_open_marker = (elem) ->
   update_open_marker(elem)
 
   elem.find('.name').click(() ->
+    if is_painting()
+      return
+
     task = $(this).closest('.task')
 
     if task.find('.marker').is(":visible")
