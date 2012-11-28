@@ -60,6 +60,7 @@ add_staff_html = (id, name, color) ->
   new_staff.find(".assigned-task").sortable({
     connectWith: "#tasks,.assigned-task",
     helper: "clone", # prevent firing click event on dragging
+    distance: 7,
 
     receive: (event, ui) ->
       if $(this).find('li').length >= 2
