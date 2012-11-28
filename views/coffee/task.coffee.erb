@@ -159,7 +159,7 @@ setup_open_marker = (elem) ->
   init_open_marker(elem)
   update_open_marker(elem)
 
-  elem.find('.name').click(() ->
+  elem.find('.name, .marker').click(() ->
     if is_painting()
       return
 
