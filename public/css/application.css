@@ -60,6 +60,10 @@ img.edit_button {
   height: 14px;
 }
 
+#color-cancel {
+  cursor: pointer;
+}
+
 #add-task {
   padding-left: 65px;
 }
