@@ -6,10 +6,6 @@
         .edit{ style: "display: none;" }
           %img.edit_button{ src: url_for('/img/pencil.png') }
 
-      %form#show_trashes.navbar-form.pull-right
-        %label.checkbox
-          %input#show_trashes_check{ type: "checkbox" } 完了を表示
-
 .container
   .row
     .span1.input-eyecatch
@@ -26,7 +22,10 @@
         %a#add-staff
           %img.edit_button{ src: url_for('/img/add.png') }
           メンバー
-    .span1
+    .span1.show_trashes
+      %form#show_trashes
+        %label.checkbox
+          %input#show_trashes_check{ type: "checkbox" } 完了を表示
 
   .row
     .palette.span1
