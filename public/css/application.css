@@ -288,7 +288,7 @@ input.follow-project {
 
 div#trashbox {
   width: 100px;
-  margin-top: 170px;
+  margin-top: -15px;
 }
 
 div#undo {
