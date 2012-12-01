@@ -64,8 +64,10 @@ img.edit_button {
   cursor: pointer;
 }
 
-#add-task {
-  padding-left: 65px;
+.input-eyecatch {
+  width: 32px;
+  padding-left: 13px;
+  padding-top: 3px;
 }
 
 input#task {

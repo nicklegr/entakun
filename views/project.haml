@@ -11,8 +11,14 @@
           %input#show_trashes_check{ type: "checkbox" } 完了を表示
 
 .container
-  #add-task
-    %input#task{ type: 'text', placeholder: 'タスクを追加' }
+  .row
+    .span1.input-eyecatch
+      %img{ src: url_for('/img/Input.png') }
+    .span5
+      #add-task
+        %input#task{ type: 'text', placeholder: 'タスクを追加' }
+    .span5
+    .span1
 
   .row
     .palette.span1
