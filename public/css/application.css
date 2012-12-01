@@ -192,7 +192,8 @@ div.staff-name {
 }
 
 div.add-staff {
-  clear: both;
+  float: right;
+  margin-right: 25px;
   text-align: right;
 }
 
@@ -233,7 +234,8 @@ div.followee-name {
 }
 
 div.add-followee {
-  clear: both;
+  float: right;
+  margin-right: 32px;
   text-align: right;
 }
 

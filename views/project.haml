@@ -18,6 +18,14 @@
       #add-task
         %input#task{ type: 'text', placeholder: 'タスクを追加' }
     .span5
+      .add-followee
+        %a{ 'href' => '#add-followee', 'data-toggle' => 'modal' }
+          %img.edit_button{ src: url_for('/img/add.png') }
+          フォロー
+      .add-staff
+        %a#add-staff
+          %img.edit_button{ src: url_for('/img/add.png') }
+          メンバー
     .span1
 
   .row
@@ -58,11 +66,6 @@
                 %img.edit_button{ src: url_for('/img/cancel.png') }
             .assigned-task.sortable
 
-        .add-staff
-          %a#add-staff
-            %img.edit_button{ src: url_for('/img/add.png') }
-            追加
-
       #followee-container
         #followees
           .followee#followee-template{ style: 'display: none;' }
@@ -79,11 +82,6 @@
                 .clear
             %img.recent-indicator-strong{ src: url_for('/img/Recent_Strong.png'), style: 'display: none;' }
             %img.recent-indicator-weak{ src: url_for('/img/Recent_Weak.png'), style: 'display: none;' }
-
-        .add-followee
-          %a{ 'href' => '#add-followee', 'data-toggle' => 'modal' }
-            %img.edit_button{ src: url_for('/img/add.png') }
-            フォローを追加
 
     .span1
       #trashbox
