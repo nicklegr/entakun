@@ -67,6 +67,7 @@ img.edit_button {
 
 .show_trashes_label {
   color: #999;
+  white-space: nowrap;
 }
 
 .palette {
