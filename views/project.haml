@@ -1,10 +1,17 @@
-.navbar.navbar-inverse.navbar-fixed-top
-  .navbar-inner
+.navbar.navbar-fixed-top
+  .titlebar
     .container
+      .logo
+        %a{ href: url_for('/') }
+          %img{ src: url_for('/img/Entaku.png') }
+
       #project-name
-        .name.brand entakun
+        .name entakun
         .edit{ style: "display: none;" }
           %img.edit_button{ src: url_for('/img/pencil.png') }
+
+      .tutorial-button
+        %img{ src: url_for('/img/Hatena.png') }
 
 .container
   .row
