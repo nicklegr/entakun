@@ -252,7 +252,7 @@ div.followee {
 div.followee-name {
   height: 23px;
   padding-left: 5px;
-  background-color: gray;
+  background-color: rgb(188, 188, 188);
 }
 
 .followee-name > .name {
