@@ -35,6 +35,10 @@ img.edit_button {
   margin-left: 10px;
 }
 
+label.checkbox {
+  color: #999;
+}
+
 .palette {
   width: 30px;
   padding-left: 15px;
