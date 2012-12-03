@@ -16,7 +16,7 @@ img.edit_button {
   float: left;
   padding-left: 13px;
   padding-top: 8px;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .tutorial-button {
@@ -56,9 +56,40 @@ img.edit_button {
   margin-top: 12px;
 }
 
+[class*="column-"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 20px;
+}
+
+.column-tasks {
+  width: 351px;
+  margin-left: 10px;
+  padding-right: 20px;
+}
+
+.column-tasks-bottom {
+  border-right: 1px dashed #d8d8d8;
+}
+
+.column-staffs {
+  width: 347px;
+  padding-right: 20px;
+}
+
+.column-staffs-bottom {
+  min-height: 439px;
+  border-right: 1px dashed #d8d8d8;
+}
+
+.column-trash {
+  width: 80px;
+}
+
 .show_trashes {
+  margin-left: 25px;
+  padding-top: 10px;
   width: 95px;
-  margin: 0;
 }
 
 #show_trashes {
@@ -106,6 +137,7 @@ img.edit_button {
 
 .input-eyecatch {
   width: 32px;
+  height: 46px;
   padding-left: 13px;
   padding-top: 3px;
 }
@@ -117,7 +149,6 @@ input#task {
 div#incoming-tasks {
   float: left;
   width: 350px;
-  margin-right: 20px;
   border: 1px solid silver;
 }
 
@@ -234,12 +265,13 @@ div.staff-name {
 div.add-staff {
   float: right;
   margin-right: 25px;
+  padding-top: 10px;
   text-align: right;
 }
 
 div#followee-container {
-  margin-top: 30px;
-  padding-top: 20px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px dashed silver;
   width: 348px;
 }
@@ -275,7 +307,7 @@ div.followee-name {
 
 div.add-followee {
   float: right;
-  margin-right: 32px;
+  padding-top: 10px;
   text-align: right;
 }
 
@@ -290,6 +322,7 @@ input.follow-project {
 div#trashbox {
   width: 100px;
   margin-top: -15px;
+  margin-left: 25px;
 }
 
 div#undo {
