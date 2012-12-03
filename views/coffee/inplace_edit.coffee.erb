@@ -10,7 +10,7 @@ enable_inplace_edit = (elem, edit_url, callback, disable_sortable) ->
     cssclass: 'editing',
     select: true,
     callback: callback,
-    # onblur: 'ignore'
+    onblur: 'submit', # 'ignore'
   }
 
   # http://stackoverflow.com/questions/9610041/can-the-onblur-event-be-used-with-jeditable-and-jquery-ui-sortable
