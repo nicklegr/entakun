@@ -63,7 +63,7 @@ add_staff_html = (id, name, color) ->
     distance: 7,
 
     receive: (event, ui) ->
-      if $(this).find('li').length >= 2
+      if $(this).find('.task').length >= 2
         # Don't assign multiple tasks to one person
         $(ui.sender).sortable('cancel')
       else if ui.item.hasClass('ui-state-disabled')
