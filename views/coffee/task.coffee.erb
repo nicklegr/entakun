@@ -5,6 +5,7 @@ setup_task_list = () ->
     connectWith: ".assigned-task",
     cancel: ".ui-state-disabled", # disable sorting completed tasks
     helper: "clone", # prevent firing click event on dragging
+    cursor: 'url(../img/Hand_on.png), default',
     distance: 7,
 
     receive: (event, ui) ->
