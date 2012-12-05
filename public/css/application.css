@@ -290,20 +290,19 @@ div.followee-name {
 }
 
 .followee-name > .name {
-  width: 93%;
+  width: 81%;
+  float: left;
+}
+
+[class*="recent-indicator"] {
+  width: 12%;
   float: left;
 }
 
 .followee-name > .delete {
   width: 7%;
   margin-top: 2px;
-  float: left;
-}
-
-[class*="recent-indicator"] {
-  position: absolute;
-  left: -20px;
-  top: 21px;
+  float: right;
 }
 
 div.add-followee {
