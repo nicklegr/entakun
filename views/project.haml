@@ -64,12 +64,11 @@
       #staff-container
         #staffs
           .staff#staff-template{ style: 'display: none;' }
+            %img.delete{ src: url_for('/img/cancel.png'), style: 'display: none;' }
             .staff-name
               .name (スタッフ名)
               .edit{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/pencil.png') }
-              .delete{ style: "display: none;" }
-                %img.edit_button{ src: url_for('/img/cancel.png') }
             .assigned-task.sortable
 
       #followee-container

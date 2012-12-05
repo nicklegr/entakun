@@ -92,8 +92,50 @@ add_staff_html = (id, name, color) ->
         $('#tasks').append(ui.item)
   })
 
-  enable_inplace_edit(new_staff.find('.staff-name'), '<%= url_for "/edit_staff" %>')
-  enable_inplace_delete(new_staff.find('.staff-name'), '<%= url_for "/delete_staff" %>')
+  staff_name = new_staff.find('.staff-name')
+
+  staff_name.find('.name').editable(
+    (value, settings) ->
+      top_elem = find_object_top($(this))
+
+      if !top_elem.data('deleted')
+        data = {
+          project: project_key,
+          id: top_elem.data('id'),
+          value: value,
+        }
+
+        $.post('<%= url_for "/edit_staff" %>', data)
+
+      value
+    ,
+    {
+      event: 'edit_event',
+      cssclass: 'editing',
+      select: true,
+      onblur: 'submit', # 'ignore'
+      onedit: () -> find_object_top($(this)).find('.delete').show(),
+      onsubmit: () -> find_object_top($(this)).find('.delete').hide(),
+      onreset: () -> find_object_top($(this)).find('.delete').hide(),
+    }
+  )
+
+  staff_name.find('.edit').click(()->
+    $(this).prev().trigger('edit_event')
+  )
+
+  # show edit icons when mouse hover
+  staff_name.hover(
+    () ->
+      $(this).find('.edit').show()
+    ,
+    () ->
+      $(this).find('.edit').hide()
+  )
+
+  enable_inplace_delete(new_staff, '<%= url_for "/delete_staff" %>') # reuse code
+  new_staff.unbind('hover') # but not hover
+  new_staff.find('.delete').click(() -> find_object_top($(this)).data('deleted', true) )
 
   $("#staffs").append(new_staff)
   new_staff

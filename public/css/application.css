@@ -226,8 +226,15 @@ div#staffs {
 }
 
 div.staff {
+  position: relative;
   border: 1px solid silver;
   margin-bottom: 5px;
+}
+
+.staff .delete {
+  position: absolute;
+  left: -19px;
+  top: 3px;
 }
 
 div.staff-name {
@@ -236,7 +243,7 @@ div.staff-name {
 }
 
 .staff-name > .name {
-  width: 86%;
+  width: 93%;
   float: left;
 }
 
@@ -247,16 +254,10 @@ div.staff-name {
 }
 
 .staff-name input {
-  width: 280px;
+  width: 305px;
 }
 
 .staff-name > .edit {
-  width: 7%;
-  margin-top: 2px;
-  float: left;
-}
-
-.staff-name > .delete {
   width: 7%;
   margin-top: 2px;
   float: left;
