@@ -188,6 +188,11 @@ div#incoming-tasks {
   padding: 1px;
 }
 
+.followee-task > .task {
+  opacity: .80;
+  filter: Alpha(Opacity=80);
+}
+
 .task > .name {
   width: 310px;
   float: left;
@@ -309,6 +314,7 @@ div.followee-name {
 .followee-name > .name {
   width: 81%;
   float: left;
+  color: white;
 }
 
 [class*="recent-indicator"] {
