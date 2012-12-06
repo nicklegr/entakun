@@ -139,11 +139,28 @@ img.edit_button {
   width: 32px;
   height: 46px;
   padding-left: 13px;
-  padding-top: 3px;
+  padding-top: 5px;
 }
 
 input#task {
-  width: 338px;
+  width: 352px;
+  height: 33px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input::-webkit-input-placeholder {
+  padding-left: 3px;
+  padding-top: 1px;
+}
+
+input:-moz-placeholder {
+  padding-left: 8px;
+  padding-top: 4px;
 }
 
 div#incoming-tasks {
