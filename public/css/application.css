@@ -209,10 +209,10 @@ div#incoming-tasks {
   text-align: right;
 }
 
-.task .delete {
+.edit-box .delete {
   position: absolute;
-  left: -18px;
-  top: 5px;
+  left: -15px;
+  top: -9px;
 }
 
 .task .comment {
@@ -255,7 +255,7 @@ div.staff {
   margin-bottom: 5px;
 }
 
-.staff .delete {
+.staff > .delete {
   position: absolute;
   left: -19px;
   top: 3px;
