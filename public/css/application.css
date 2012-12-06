@@ -102,8 +102,9 @@ img.edit_button {
 }
 
 .palette {
-  width: 30px;
-  padding-left: 15px;
+  width: 29px;
+  padding-left: 16px;
+  padding-top: 1px;
 }
 
 .color-box {
@@ -237,6 +238,7 @@ div#incoming-tasks {
 
 div#staff-container {
   width: 348px;
+  padding-top: 1px;
 }
 
 div#staffs {
@@ -338,7 +340,7 @@ input.follow-project {
 
 div#trashbox {
   width: 100px;
-  margin-top: -15px;
+  margin-top: -19px;
   margin-left: 25px;
 }
 
