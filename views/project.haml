@@ -46,7 +46,7 @@
       #incoming-tasks
         #tasks.sortable
           %span#ruler{ style: 'visibility:hidden; position:absolute; white-space:nowrap;' }
-          #task-template.task.ui-state-default{ style: 'display: none;' }
+          #task-template.task{ style: 'display: none;' }
             .name-box
               .name (タスク内容)
               .edit{ style: "display: none;" }
@@ -84,7 +84,7 @@
               .delete{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/cancel.png') }
             .followee-task
-              .task.ui-state-default
+              .task
                 .name-box
                   .name (タスク内容)
                   .marker

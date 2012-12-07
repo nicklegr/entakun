@@ -369,6 +369,9 @@ div#undo {
   font-size: 1.0em;
   min-height: 18px;
   background: #E6E6E6;
+  border: 1px solid lightGray;
+  font-weight: normal;
+  color: #555;
 }
 
 .task .name-box {
