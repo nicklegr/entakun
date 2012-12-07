@@ -103,7 +103,7 @@ add_task_html = (id, name, color) ->
   # click edit icon -> comment edit
   new_task.find('.edit').click(()->
     new_task.find('.comment').val(new_task.data('name'))
-    begin_edit_task($(this).parent())
+    begin_edit_task($(this).closest('.task'))
   )
 
   # show edit icon when mouse hover
@@ -205,8 +205,7 @@ begin_edit_task = (elem) ->
   disableSortable()
   disable_edit_hover(elem)
 
-  elem.find('.name').hide()
-  elem.find('.marker').css("opacity", 0);
+  elem.find('.name-box').hide()
   elem.find('.edit-box').show()
   elem.find('.comment').select()
 
@@ -214,8 +213,7 @@ end_edit_task = (elem) ->
   enableSortable()
   enable_edit_hover(elem)
 
-  elem.find('.name').show()
-  elem.find('.marker').css("opacity", 1);
+  elem.find('.name-box').show()
   elem.find('.edit-box').hide()
 
 enable_edit_hover = (elem) ->

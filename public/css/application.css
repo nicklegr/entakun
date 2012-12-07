@@ -193,7 +193,7 @@ div#incoming-tasks {
   filter: Alpha(Opacity=80);
 }
 
-.task > .name {
+.task .name {
   width: 310px;
   float: left;
 
@@ -230,7 +230,7 @@ div#incoming-tasks {
   width: 280px;
 }
 
-.task > .edit {
+.task .edit {
   width: 20px;
   float: left;
 }
@@ -357,10 +357,13 @@ div#undo {
 .task {
   position: relative;
   margin: 0px;
-  padding: 0.4em;
   font-size: 1.0em;
   min-height: 18px;
   background: #E6E6E6;
+}
+
+.task .name-box {
+  padding: 0.4em;
 }
 
 /* タスクリストの中のみ、隣のタスクとのマージンを空ける */

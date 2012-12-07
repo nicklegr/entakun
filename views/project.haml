@@ -47,18 +47,19 @@
         #tasks.sortable
           %span#ruler{ style: 'visibility:hidden; position:absolute; white-space:nowrap;' }
           #task-template.task.ui-state-default{ style: 'display: none;' }
-            .name (タスク内容)
+            .name-box
+              .name (タスク内容)
+              .edit{ style: "display: none;" }
+                %img.edit_button{ src: url_for('/img/pencil.png') }
+              .marker
+                %img.task_open{ src: url_for('/img/Task_Open.png') }
+                %img.task_close{ src: url_for('/img/Task_Close.png') }
+              .clear
             .edit-box{ style: 'display: none;' }
               %img.delete{ src: url_for('/img/cancel.png') }
               %textarea.comment{ rows: 4 }
               %button.btn.cancel キャンセル
               %button.btn.btn-primary.ok OK
-            .edit{ style: "display: none;" }
-              %img.edit_button{ src: url_for('/img/pencil.png') }
-            .marker
-              %img.task_open{ src: url_for('/img/Task_Open.png') }
-              %img.task_close{ src: url_for('/img/Task_Close.png') }
-            .clear
 
     .column-staffs.column-staffs-bottom
       #staff-container
@@ -84,11 +85,12 @@
                 %img.edit_button{ src: url_for('/img/cancel.png') }
             .followee-task
               .task.ui-state-default
-                .name (タスク内容)
-                .marker
-                  %img.task_open{ src: url_for('/img/Task_Open.png') }
-                  %img.task_close{ src: url_for('/img/Task_Close.png') }
-                .clear
+                .name-box
+                  .name (タスク内容)
+                  .marker
+                    %img.task_open{ src: url_for('/img/Task_Open.png') }
+                    %img.task_close{ src: url_for('/img/Task_Close.png') }
+                  .clear
 
     .column-trash
       #trashbox
