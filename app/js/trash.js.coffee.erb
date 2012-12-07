@@ -3,16 +3,16 @@ setup_trashbox = () ->
     tolerance: 'touch',
 
     activate: (event, ui) ->
-      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Opened.png" %>')
+      $('#trashbox-img').attr('src', ImageURL.trashbox_opened)
 
     deactivate: (event, ui) ->
-      $('#trashbox-img').attr('src', '<%= url_for "/img/TrashBox_Closed.png" %>')
+      $('#trashbox-img').attr('src', ImageURL.trashbox_closed)
 
     drop: (event, ui) ->
       $.ajax({
         async: true,
         type: "POST",
-        url: "<%= url_for "/complete_task" %>",
+        url: URL.complete_task,
         data: { project: project_key, task_id: ui.draggable.data('id') },
         dataType: 'json',
       })

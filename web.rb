@@ -50,8 +50,8 @@ def next_color(staffs)
   colors[0][0]
 end
 
-get '/js/:basename.js' do
-  CoffeeScript.compile erb(:"coffee/#{params[:basename]}.coffee"), { no_wrap: true }
+get '/js/:filename' do
+  CoffeeScript.compile erb(:"#{params[:filename]}.coffee"), { no_wrap: true }
 end
 
 get '/' do

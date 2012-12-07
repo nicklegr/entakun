@@ -3,7 +3,7 @@ load_staffs = () ->
   $.ajax({
     async: false,
     type: "GET",
-    url: "<%= url_for "/staffs" %>",
+    url: URL.staffs,
     data: { project: project_key },
     dataType: 'json',
   }).done((data) ->
@@ -35,7 +35,7 @@ add_staff = (name) ->
   $.ajax({
     async: false,
     type: "POST",
-    url: "<%= url_for "/new_staff" %>",
+    url: URL.new_staff,
     data: { project: project_key, name: name },
     dataType: 'json',
   }).done((data) ->
@@ -74,7 +74,7 @@ add_staff_html = (id, name, color) ->
         $.ajax({
           async: true,
           type: "POST",
-          url: "<%= url_for "/assign_task" %>",
+          url: URL.assign_task,
           data: {
             project: project_key,
             task_id: ui.item.data('id'),
@@ -106,7 +106,7 @@ add_staff_html = (id, name, color) ->
           value: value,
         }
 
-        $.post('<%= url_for "/edit_staff" %>', data)
+        $.post(URL.edit_staff, data)
 
       value
     ,
@@ -134,7 +134,7 @@ add_staff_html = (id, name, color) ->
       $(this).find('.edit').hide()
   )
 
-  enable_inplace_delete(new_staff, '<%= url_for "/delete_staff" %>') # reuse code
+  enable_inplace_delete(new_staff, URL.delete_staff) # reuse code
   new_staff.unbind('hover') # but not hover
   new_staff.find('.delete').click(() -> find_object_top($(this)).data('deleted', true) )
 

@@ -39,7 +39,7 @@ start_paint = (elem) ->
     if $('.color-focus').length == 1
       color = set_color($(this))
 
-      $.post('<%= url_for "/color_task" %>',
+      $.post(URL.color_task,
         { project: project_key, id: $(this).data('id'), color: color }
       )
 
@@ -52,7 +52,7 @@ start_paint = (elem) ->
     if $('.color-focus').length == 1
       color = set_color($(this))
 
-      $.post('<%= url_for "/color_staff" %>',
+      $.post(URL.color_staff,
         { project: project_key, id: $(this).closest('.staff').data('id'), color: color }
       )
 

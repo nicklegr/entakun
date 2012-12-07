@@ -1,0 +1,27 @@
+# place URLs in one file,
+# because sprockets can't handle url_for
+class URL
+  @root = '<%= url_for "/" %>'
+  @new_project = '<%= url_for "/new_project" %>'
+  @project_name = '<%= url_for "/project_name" %>'
+  @edit_project = '<%= url_for "/edit_project" %>'
+  @tasks = '<%= url_for "/tasks" %>'
+  @incoming_tasks = '<%= url_for "/incoming_tasks" %>'
+  @new_task = '<%= url_for "/new_task" %>'
+  @edit_task = '<%= url_for "/edit_task" %>'
+  @color_task = '<%= url_for "/color_task" %>'
+  @delete_task = '<%= url_for "/delete_task" %>'
+  @complete_task = '<%= url_for "/complete_task" %>'
+  @task_sorted = '<%= url_for "/task_sorted" %>'
+  @staffs = '<%= url_for "/staffs" %>'
+  @new_staff = '<%= url_for "/new_staff" %>'
+  @edit_staff = '<%= url_for "/edit_staff" %>'
+  @color_staff = '<%= url_for "/color_staff" %>'
+  @delete_staff = '<%= url_for "/delete_staff" %>'
+  @assign_task = '<%= url_for "/assign_task" %>'
+  @deassign_task = '<%= url_for "/deassign_task" %>'
+  @lookup_followees = '<%= url_for "/lookup_followees" %>'
+
+class ImageURL
+  @trashbox_opened = '<%= url_for "/img/TrashBox_Opened.png" %>'
+  @trashbox_closed = '<%= url_for "/img/TrashBox_Closed.png" %>'

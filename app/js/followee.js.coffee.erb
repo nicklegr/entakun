@@ -1,5 +1,5 @@
 # in ms
-if false
+if true
   followee_update_interval = 5 * 60 * 1000
   recent_strong_time = 60 * 60 * 1000
   recent_weak_time = 24 * 60 * 60 * 1000
@@ -35,7 +35,7 @@ lookup_followees = () ->
     $.ajax({
       async: false,
       type: "GET",
-      url: '<%= url_for "/lookup_followees" %>',
+      url: URL.lookup_followees,
       data: { followees: followees },
       dataType: 'json',
     }).done((data) ->

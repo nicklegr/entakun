@@ -1,6 +1,6 @@
 setup_titlebar = () ->
   update_project_title()
-  enable_inplace_edit($('#project-name'), '<%= url_for "/edit_project" %>', (value, settings) ->
+  enable_inplace_edit($('#project-name'), URL.edit_project, (value, settings) ->
     update_title(value)
   )
 
@@ -9,7 +9,7 @@ update_project_title = () ->
   $.ajax({
     async: false,
     type: "GET",
-    url: "<%= url_for "/project_name" %>",
+    url: URL.project_name,
     data: { project: project_key }
   }).done((data) ->
     title = data

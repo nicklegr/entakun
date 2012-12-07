@@ -6,6 +6,8 @@ Bundler.require
 path = File.dirname(__FILE__)
 require path + "/web.rb"
 
+Tilt::CoffeeScriptTemplate.default_bare = true
+
 set :root, path
 set :views, path + '/views'
 set :public_folder, path + '/public'
