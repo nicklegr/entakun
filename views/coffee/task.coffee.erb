@@ -147,12 +147,7 @@ add_task_html = (id, name, color) ->
       new_task.find('.btn.cancel').click()
   )
 
-  # if there is completed task, insert before them
-  completes = $('#tasks').find('.completed')
-  if completes.length > 0
-    completes.first().before(new_task)
-  else
-    $("#tasks").append(new_task)
+  $("#tasks").append(new_task)
 
   new_task
 
