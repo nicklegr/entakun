@@ -18,6 +18,10 @@ COLORS = [
   'gray',
 ]
 
+configure do
+  mime_type :js, 'application/javascript'
+end
+
 set :haml, :format => :html5
 
 def next_color(staffs)
@@ -51,6 +55,7 @@ def next_color(staffs)
 end
 
 get '/js/:filename' do
+  content_type :js
   CoffeeScript.compile erb(:"#{params[:filename]}.coffee"), { no_wrap: true }
 end
 
