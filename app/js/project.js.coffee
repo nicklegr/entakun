@@ -1,3 +1,9 @@
+#= require vender/jquery-ui-1.8.24.custom.min
+#= require vender/jquery.ah-placeholder
+#= require vender/jquery.cookie
+#= require vender/jquery.jeditable
+#= require vender/jquery.timers
+
 #= require project/ajax
 #= require project/follow_modal
 #= require project/followee

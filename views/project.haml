@@ -130,5 +130,10 @@
       %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} キャンセル
       %button#follow-members-submit.btn.btn-primary フォローする
 
-  :javascript
-    var project_key = "#{@project_key}";
+:javascript
+  var project_key = "#{@project_key}";
+
+/ Placed at the end of the document so the pages load faster
+%script{ src: url_for('/assets/application.js'), type: 'text/javascript' }
+%script{ src: url_for('/assets/project.js'), type: 'text/javascript' }
+%script{ src: url_for('/js/url.js'), type: 'text/javascript' }
