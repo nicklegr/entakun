@@ -1,13 +1,13 @@
-#= require ajax
-#= require follow_modal
-#= require followee
-#= require inplace_edit
-#= require palette
-#= require staff
-#= require task
-#= require trash
-#= require titlebar
-#= require util
+#= require project/ajax
+#= require project/follow_modal
+#= require project/followee
+#= require project/inplace_edit
+#= require project/palette
+#= require project/staff
+#= require project/task
+#= require project/trash
+#= require project/titlebar
+#= require project/util
 
 $ ->
   # prevent XHR response caching by IE
