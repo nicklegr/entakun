@@ -375,8 +375,8 @@ div#undo {
 }
 
 .task.completed {
-  opacity: .35;
-  filter: Alpha(Opacity=35);
+  opacity: .80;
+  filter: Alpha(Opacity=80);
 }
 
 .task .name-box {
