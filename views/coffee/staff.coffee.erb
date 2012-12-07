@@ -67,7 +67,7 @@ add_staff_html = (id, name, color) ->
       if $(this).find('.task').length >= 2
         # Don't assign multiple tasks to one person
         $(ui.sender).sortable('cancel')
-      else if ui.item.hasClass('ui-state-disabled')
+      else if ui.item.hasClass('completed')
         # avoid completed task assign
         $(ui.sender).sortable('cancel')
       else
@@ -86,7 +86,7 @@ add_staff_html = (id, name, color) ->
     stop: (event, ui) ->
       # if task was completed, hide and move to incoming list
       # should be in trashbox's drop handler, but there is timing problem
-      if ui.item.hasClass('ui-state-disabled')
+      if ui.item.hasClass('completed')
         if !$('#show_trashes_check').attr('checked')
           ui.item.hide()
 

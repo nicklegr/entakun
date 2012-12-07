@@ -374,6 +374,11 @@ div#undo {
   color: #555;
 }
 
+.task.completed {
+  opacity: .35;
+  filter: Alpha(Opacity=35);
+}
+
 .task .name-box {
   padding: 0.4em;
 }

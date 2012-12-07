@@ -3,7 +3,7 @@ task_name_max_width = 310
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
-    cancel: ".ui-state-disabled", # disable sorting completed tasks
+    cancel: ".completed", # disable sorting completed tasks
     helper: "clone", # prevent firing click event on dragging
     cursor: 'url(../img/Hand_on.png), default',
     distance: 7,
@@ -27,7 +27,7 @@ setup_task_list = () ->
     stop: (event, ui) ->
       # if task was completed, hide and move to last
       # should be in trashbox's drop handler, but there is timing problem
-      if ui.item.hasClass('ui-state-disabled')
+      if ui.item.hasClass('completed')
         if !$('#show_trashes_check').attr('checked')
           ui.item.hide()
 
@@ -62,7 +62,7 @@ load_tasks = () ->
   $.each(tasks, (i) ->
     task = add_task_html(this._id, this.name, this.color)
     if this.complete
-      task.addClass('ui-state-disabled')
+      task.addClass('completed')
       if !$('#show_trashes_check').attr('checked')
         task.hide()
   )
@@ -148,7 +148,7 @@ add_task_html = (id, name, color) ->
   )
 
   # if there is completed task, insert before them
-  completes = $('#tasks').find('.ui-state-disabled')
+  completes = $('#tasks').find('.completed')
   if completes.length > 0
     completes.first().before(new_task)
   else
