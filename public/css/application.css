@@ -206,18 +206,26 @@ div#incoming-tasks {
 
 .task .edit-box {
   position: relative;
+  padding-right: 0.4em;
+  padding-top: 4px;
+  padding-bottom: 4px;
   text-align: right;
+}
+
+.edit-box .btn + .btn {
+  margin-left: 5px;
 }
 
 .edit-box .delete {
   position: absolute;
-  left: -15px;
-  top: -9px;
+  left: -9px;
+  top: -4px;
 }
 
 .task .comment {
-  width: 315px;
+  width: 316px;
   resize: vertical;
+  margin-bottom: 4px;
 }
 
 .task .editing {
