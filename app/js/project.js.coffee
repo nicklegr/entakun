@@ -28,7 +28,7 @@ $ ->
     likeApple        : true
   })
 
-  check_tutorial()
+  check_welcome_sequence()
 
   setup_ajax_error_handler()
 

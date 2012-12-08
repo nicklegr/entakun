@@ -1,4 +1,4 @@
-check_tutorial = () ->
+check_welcome_sequence = () ->
   if need_welcome_modal()
     show_welcome_modal()
     $.cookie('entakun-welcome-watched', true)
@@ -17,6 +17,8 @@ show_welcome_modal = () ->
   $('#welcome').on('shown', () ->
     $('#project-url').select()
   )
+
+  $('#welcome').on('hidden', show_turorial)
 
   $('#welcome').modal({
     backdrop: 'static',
