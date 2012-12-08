@@ -1,6 +1,5 @@
 #= require vender/jquery-ui-1.8.24.custom.min
 #= require vender/jquery.ah-placeholder
-#= require vender/jquery.cookie
 #= require vender/jquery.jeditable
 #= require vender/jquery.timers
 
@@ -29,7 +28,7 @@ $ ->
     likeApple        : true
   })
 
-  # show_welcome_modal()
+  check_tutorial()
 
   setup_ajax_error_handler()
 

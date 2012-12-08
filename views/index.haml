@@ -15,7 +15,7 @@
       %br
       少人数のプロジェクトには、限界までシンプルなツールをどうぞ。
     %p
-      %a.btn.btn-primary.btn-large{ href: url_for('/new_project') }
+      %a.btn.btn-primary.btn-large{ href: url_for('/new_project'), onclick: '$.cookie("entakun-project-created", true, { path: "/projects" });' }
         プロジェクトをはじめる
 
   .row
