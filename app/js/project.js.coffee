@@ -20,6 +20,7 @@ $ ->
   $.ajaxSetup({ cache: false })
 
   $.cookie.defaults['expires'] = 365 # @todo unlimited?
+  $.cookie.defaults['path'] = '/'
   $.cookie.json = true
 
   $('[placeholder]').ahPlaceholder({
