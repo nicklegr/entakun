@@ -16,6 +16,7 @@ set :run, false # this line tells mongrel not to run and to let passenger handle
 map '/assets' do
   environment = Sprockets::Environment.new
   environment.append_path 'app/js'
+  environment.append_path 'app/css'
 
   if ENV['RACK_ENV'] == 'production'
     environment.js_compressor  = YUI::JavaScriptCompressor.new(munge: true)
