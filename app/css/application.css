@@ -8,6 +8,7 @@ img.edit_button {
 }
 
 .titlebar {
+  background-color: rgb(255, 120, 35);
   background-image: url(../img/Banner.png);
   background-repeat: repeat-x;
 }
