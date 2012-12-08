@@ -423,7 +423,7 @@ div#undo {
 }
 
 #tutorial {
-  position: absolute;
+  position: relative;
   z-index: 3000;
 }
 
