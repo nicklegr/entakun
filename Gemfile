@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'sinatra-reloader'
 gem 'thin'
 gem 'sprockets', '~> 2.0'
+gem 'yui-compressor'
 gem 'haml'
 gem 'therubyracer', :platforms => :ruby
 gem 'coffee-script'
