@@ -11,8 +11,9 @@
 #= require project/palette
 #= require project/staff
 #= require project/task
-#= require project/trash
 #= require project/titlebar
+#= require project/trash
+#= require project/tutorial
 #= require project/util
 
 $ ->
@@ -27,6 +28,8 @@ $ ->
     placeholderAttr  : 'placeholder',
     likeApple        : true
   })
+
+  # show_welcome_modal()
 
   setup_ajax_error_handler()
 

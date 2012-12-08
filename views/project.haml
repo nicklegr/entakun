@@ -130,6 +130,30 @@
       %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} キャンセル
       %button#follow-members-submit.btn.btn-primary フォローする
 
+  #welcome.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "welcomeModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-header
+      %h3#welcomeModalLabel ブックマークをしよう！
+    .modal-body
+      %p
+        entakunへようこそ！新しいページが作られました。
+      %p
+        このページは、どこからもリンクされていません。
+        %br
+        ブックマークするかURLをメモしておかないと、
+        %br
+        せっかく入力した内容にアクセスできなくなってしまいます！
+      %hr
+
+      %form.form-inline{ onsubmit: 'return false;' }
+        %fieldset
+          %input#project-url{ type: 'text' }
+
+      %hr
+        このURLをチームメンバーに伝えると、共同作業ができます。
+
+    .modal-footer
+      %button.btn.btn-primary{ :'data-dismiss' => "modal" } OK
+
 :javascript
   var project_key = "#{@project_key}";
 

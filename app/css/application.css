@@ -406,6 +406,10 @@ div#undo {
   display: none;
 }
 
+#project-url {
+  width: 516px;
+}
+
 /*
   タスクの標準設定を上書きするので最後に
 */
