@@ -23,6 +23,7 @@ img.edit_button {
 .tutorial-button {
   float: right;
   padding-top: 8px;
+  cursor: pointer;
 }
 
 #project-name {
@@ -61,6 +62,10 @@ img.edit_button {
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.container {
+  position: relative;
 }
 
 [class*="column-"] {
@@ -414,6 +419,86 @@ div#undo {
 
 #project-url {
   width: 516px;
+}
+
+#tutorial {
+  position: absolute;
+  z-index: 3000;
+}
+
+.fade-plane {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+}
+
+.start-here {
+  position: absolute;
+  left: -39px;
+  top: 329px;
+}
+
+.new-task {
+  position: absolute;
+  left: 61px;
+  top: 4px;
+}
+
+.created-tasks {
+  position: absolute;
+  left: 59px;
+  top: 56px;
+}
+
+.move-by-drag {
+  position: absolute;
+  left: 167px;
+  top: 150px;
+}
+
+.assign-to-staff {
+  position: absolute;
+  left: 497px;
+  top: 81px;
+}
+
+.to-trash {
+  position: absolute;
+  left: 587px;
+  top: 177px;
+}
+
+.replay {
+  position: absolute;
+  left: 630px;
+  top: 428px;
+}
+
+.arrow-left {
+  position: absolute;
+  left: -38px;
+  top: 20px;
+}
+
+.arrow-next-1 {
+  position: absolute;
+  left: 352px;
+  top: 87px;
+}
+
+.arrow-next-2 {
+  position: absolute;
+  left: 758px;
+  top: 111px;
+}
+
+.arrow-right {
+  position: absolute;
+  left: 939px;
+  top: -40px;
 }
 
 /*

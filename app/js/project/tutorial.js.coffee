@@ -33,3 +33,9 @@ show_bookmark_reminder = () ->
       )
     )
   )
+
+show_turorial = () ->
+  $('#tutorial, .fade-plane').show('fade', 500)
+  $('#tutorial, .fade-plane').one('click', () ->
+    $('#tutorial, .fade-plane').hide('fade', 500)
+  )
