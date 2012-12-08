@@ -22,6 +22,7 @@ img.edit_button {
 
 .tutorial-button {
   float: right;
+  padding-right: 13px;
   padding-top: 8px;
   cursor: pointer;
 }
@@ -473,7 +474,7 @@ div#undo {
 
 .replay {
   position: absolute;
-  left: 630px;
+  left: 617px;
   top: 428px;
 }
 
@@ -497,7 +498,7 @@ div#undo {
 
 .arrow-right {
   position: absolute;
-  left: 939px;
+  left: 926px;
   top: -40px;
 }
 
