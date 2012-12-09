@@ -8,6 +8,7 @@
 #= require project/followee
 #= require project/inplace_edit
 #= require project/palette
+#= require project/recent
 #= require project/staff
 #= require project/task
 #= require project/titlebar
@@ -28,6 +29,8 @@ $ ->
     placeholderAttr  : 'placeholder',
     likeApple        : true
   })
+
+  add_recent_project(project_key)
 
   check_welcome_sequence()
 
