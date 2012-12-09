@@ -7,7 +7,6 @@ setup_task_list = () ->
     helper: "clone", # prevent firing click event on dragging
     cursor: 'url(../img/Hand_on.png), default',
     distance: 7,
-    containment: '.draggable-range',
 
     receive: (event, ui) ->
       $.ajax({
