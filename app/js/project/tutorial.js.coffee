@@ -38,13 +38,29 @@ show_bookmark_reminder = () ->
 
 show_turorial = () ->
   $('#tutorial, .fade-plane').show('fade', 500)
-  $('.task').not('#task-template').not('.followee-task .task').hide('fade', 500)
+
+  # hide elements for simple view
+  if showing_trashes()
+    $('#tasks .task.completed').hide('fade', 500)
+  else
+    $('#tasks .task').not('#task-template, .completed').hide('fade', 500)
+
   $('.staff:gt(1)').hide('fade', 500) # don't hide first staff, for explain
+  $('.assigned-task .task').hide('fade', 500) # hide first staff's task, for help message space
+
   $('.followee').not('#followee-template').hide('fade', 500)
 
+  # click to close tutorial
   $('#tutorial, .fade-plane').one('click', () ->
     $('#tutorial, .fade-plane').hide('fade', 500)
-    $('.task').not('#task-template').not('.followee-task .task').show('fade', 500)
+
+    if showing_trashes()
+      $('#tasks .task.completed').show('fade', 500)
+    else
+      $('#tasks .task').not('#task-template, .completed').show('fade', 500)
+
     $('.staff:gt(1)').show('fade', 500)
+    $('.assigned-task .task').show('fade', 500)
+
     $('.followee').not('#followee-template').show('fade', 500)
   )

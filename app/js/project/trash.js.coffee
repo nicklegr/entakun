@@ -24,7 +24,7 @@ setup_trashbox = () ->
 
 setup_trash_toggle = () ->
   $('#show_trashes_check').change(() ->
-      if $(this).attr("checked")
+      if showing_trashes()
         $('#tasks .task').not('#task-template').hide()
         $('.completed').show()
 
@@ -38,3 +38,6 @@ setup_trash_toggle = () ->
         $('#task').attr('placeholder', 'タスクを追加')
         $('#task').removeAttr('disabled')
   )
+
+showing_trashes = () ->
+  $('#show_trashes_check').attr("checked")
