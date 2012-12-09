@@ -75,6 +75,7 @@ img.edit_button {
   top: -20px;
   width: 1340px;
   height: 110%;
+  z-index: -1;
 }
 
 [class*="column-"] {
