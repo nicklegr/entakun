@@ -197,7 +197,7 @@ div#incoming-tasks {
 
 .assigned-task, .followee-task {
   width: auto;
-  min-height: 31px;
+  min-height: 33px;
   padding: 1px;
 }
 
