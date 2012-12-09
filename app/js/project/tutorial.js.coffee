@@ -38,13 +38,13 @@ show_bookmark_reminder = () ->
 
 show_turorial = () ->
   $('#tutorial, .fade-plane').show('fade', 500)
-  $('.task').not('#task-template').hide('fade', 500)
+  $('.task').not('#task-template').not('.followee-task .task').hide('fade', 500)
   $('.staff:gt(1)').hide('fade', 500) # don't hide first staff, for explain
   $('.followee').not('#followee-template').hide('fade', 500)
 
   $('#tutorial, .fade-plane').one('click', () ->
     $('#tutorial, .fade-plane').hide('fade', 500)
-    $('.task').not('#task-template').show('fade', 500)
+    $('.task').not('#task-template').not('.followee-task .task').show('fade', 500)
     $('.staff:gt(1)').show('fade', 500)
     $('.followee').not('#followee-template').show('fade', 500)
   )
