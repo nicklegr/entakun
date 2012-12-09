@@ -28,11 +28,13 @@ setup_trash_toggle = () ->
         $('#tasks .task').not('#task-template').hide()
         $('.completed').show()
 
+        $('#task').attr('placeholder', '完了タスクを表示中')
         $('#task').attr('disabled', 'disabled')
 
       else
         $('#tasks .task').not('#task-template').show()
         $('.completed').hide()
 
+        $('#task').attr('placeholder', 'タスクを追加')
         $('#task').removeAttr('disabled')
   )
