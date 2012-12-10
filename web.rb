@@ -64,7 +64,7 @@ get '/' do
 end
 
 get '/new_project' do
-  project_key = SecureRandom.urlsafe_base64
+  project_key = SecureRandom.hex(8)
   project = Project.create({ key: project_key, name: '新規プロジェクト' })
   project.staffs.create(name: '担当者1', color: COLORS.first)
 
