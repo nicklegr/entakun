@@ -114,8 +114,6 @@ add_task_html = (id, name, color) ->
     end_edit_task(new_task)
   )
   new_task.find('.btn.ok').click(() ->
-    end_edit_task(new_task)
-
     # update task title & internal data
     org_name = new_task.find('.comment').val()
     new_task.data('name', org_name)
@@ -129,6 +127,8 @@ add_task_html = (id, name, color) ->
       init_open_marker(new_task)
 
     update_open_marker(new_task)
+
+    end_edit_task(new_task) # after marker update
 
     # send to server
     $.post(URL.edit_task,
@@ -151,6 +151,12 @@ add_task_html = (id, name, color) ->
 
   new_task
 
+listed_tasks = () ->
+  if showing_trashes()
+    $('#tasks .task.completed')
+  else
+    $('#tasks .task').not('#task-template, .completed')
+
 setup_open_marker = (elem) ->
   init_open_marker(elem)
   update_open_marker(elem)
@@ -161,7 +167,7 @@ setup_open_marker = (elem) ->
 
     task = $(this).closest('.task')
 
-    if task.find('.marker').is(":visible")
+    if can_open_task(task)
       if is_task_opened(task)
         close_task(task)
       else
@@ -180,14 +186,25 @@ init_open_marker = (elem) ->
   elem.find('.task_close').hide()
 
 open_task = (task) ->
+  if !can_open_task(task)
+    throw new Error("Can't open task #{task.data('id')}: content is single line")
+
   task.find('.name').text(task.data('name'))
   task.find('.task_open').hide()
   task.find('.task_close').show()
+  update_open_all_button()
 
 close_task = (task) ->
+  if !can_open_task(task)
+    throw new Error("Can't close task #{task.data('id')}: content is single line")
+
   task.find('.name').text(limit_task_name_len(task.data('name')))
   task.find('.task_open').show()
   task.find('.task_close').hide()
+  update_open_all_button()
+
+can_open_task = (elem) ->
+  elem.find('.marker').is(":visible")
 
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
@@ -216,6 +233,10 @@ end_edit_task = (elem) ->
 
   elem.find('.name-box').show()
   elem.find('.edit-box').hide()
+
+  # if openable task appeared/disappeared, show/hide button
+  # must be after showing .name-box
+  update_open_all_button()
 
 enable_edit_hover = (elem) ->
   elem.hover(

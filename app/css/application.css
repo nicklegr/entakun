@@ -116,7 +116,9 @@ img.edit_button {
 }
 
 .palette {
+  position: relative;
   width: 29px;
+  height: 439px;
   padding-left: 16px;
   padding-top: 1px;
 }
@@ -147,6 +149,13 @@ img.edit_button {
 }
 
 #color-cancel {
+  cursor: pointer;
+}
+
+#toggle-tasks {
+  position: absolute;
+  left: 11px;
+  bottom: 6px;
   cursor: pointer;
 }
 

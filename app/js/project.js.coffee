@@ -7,6 +7,7 @@
 #= require project/follow_modal
 #= require project/followee
 #= require project/inplace_edit
+#= require project/open_all
 #= require project/palette
 #= require project/recent
 #= require project/staff
@@ -44,6 +45,7 @@ $ ->
   setup_add_staff_link()
 
   setup_palette() # after load_tasks()
+  setup_open_all_button() # after load_tasks()
 
   setup_followees()
   interval_update_followees()
