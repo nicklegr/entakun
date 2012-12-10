@@ -163,13 +163,9 @@ setup_open_marker = (elem) ->
 
     if task.find('.marker').is(":visible")
       if is_task_opened(task)
-        task.find('.name').text(limit_task_name_len(task.data('name')))
-        task.find('.task_open').show()
-        task.find('.task_close').hide()
+        close_task(task)
       else
-        task.find('.name').text(task.data('name'))
-        task.find('.task_open').hide()
-        task.find('.task_close').show()
+        open_task(task)
   )
 
 update_open_marker = (elem) ->
@@ -182,6 +178,16 @@ init_open_marker = (elem) ->
   elem.find('.marker').hide()
   elem.find('.task_open').show()
   elem.find('.task_close').hide()
+
+open_task = (task) ->
+  task.find('.name').text(task.data('name'))
+  task.find('.task_open').hide()
+  task.find('.task_close').show()
+
+close_task = (task) ->
+  task.find('.name').text(limit_task_name_len(task.data('name')))
+  task.find('.task_open').show()
+  task.find('.task_close').hide()
 
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
