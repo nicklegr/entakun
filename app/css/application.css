@@ -102,7 +102,7 @@ img.edit_button {
   min-height: 439px;
 
   border: 1px dashed white;
-  border-radius: 10px;
+  border-radius: 5px;
 
   -webkit-transition: border linear 0.2s;
   -moz-transition: border linear 0.2s;
