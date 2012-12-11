@@ -97,7 +97,18 @@ img.edit_button {
 }
 
 .column-trash {
-  width: 80px;
+  margin-left: 32px;
+  width: 90px;
+  min-height: 439px;
+
+  border: 1px dashed white;
+  border-radius: 10px;
+
+  -webkit-transition: border linear 0.2s;
+  -moz-transition: border linear 0.2s;
+  -ms-transition: border linear 0.2s;
+  -o-transition: border linear 0.2s;
+  transition: border linear 0.2s;
 }
 
 .show_trashes {
@@ -377,7 +388,11 @@ input.follow-project {
 div#trashbox {
   width: 100px;
   margin-top: -19px;
-  margin-left: 25px;
+  margin-left: 12px;
+}
+
+.drop-here {
+  border-color: rgb(255, 190, 73);
 }
 
 div#undo {

@@ -1,6 +1,7 @@
 setup_trashbox = () ->
-  $("#trashbox").droppable({
+  $(".column-trash").droppable({
     tolerance: 'touch',
+    activeClass: 'drop-here',
 
     activate: (event, ui) ->
       $('#trashbox-img').attr('src', ImageURL.trashbox_opened)
@@ -19,7 +20,19 @@ setup_trashbox = () ->
 
       ui.draggable.addClass('completed')
 
-      $('#trashbox-img').effect('bounce', {}, 150)
+      # move to trashbox, and hide
+      helper_clone = ui.helper.clone()
+      helper_clone.appendTo(ui.helper.parent())
+
+      helper_clone.position(
+        of: '#trashbox-img',
+        using: (coord, feedback) ->
+          coord.opacity = 0.3
+          helper_clone.animate(coord, 300, () ->
+            $(this).remove()
+            $('#trashbox-img').effect('bounce', {}, 150)
+          )
+      )
   })
 
 setup_trash_toggle = () ->
