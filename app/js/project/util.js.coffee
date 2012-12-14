@@ -32,3 +32,21 @@ is_intersect = (elem1, elem2) ->
 
   x1[0] < x2[1] && x1[1] > x2[0] &&
   y1[0] < y2[1] && y1[1] > y2[0]
+
+setup_resize_handler = () ->
+  resize_timer = null
+  $(window).resize(() ->
+    clearTimeout(resize_timer)
+    resize_timer = setTimeout(on_resize, 100)
+  )
+
+on_resize = () ->
+  min_height = $(window).height() - $('.column-staffs-bottom').offset().top - 40
+
+  $('.column-tasks-bottom').css('min-height', 0)
+  task_height = $('.column-tasks-bottom').height()
+
+  height = if task_height > min_height then task_height else min_height
+
+  $('.column-tasks-bottom').css('min-height', height + 'px')
+  $('.column-staffs-bottom').css('min-height', height + 'px')

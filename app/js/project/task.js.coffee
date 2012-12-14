@@ -81,6 +81,9 @@ add_task = (name) ->
 
   add_task_html(task_id, name, default_color)
 
+  # adjust border length
+  on_resize()
+
 add_task_html = (id, name, color) ->
   # copy element
   new_task = $('#task-template').clone()

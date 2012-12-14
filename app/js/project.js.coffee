@@ -56,3 +56,6 @@ $ ->
   setup_titlebar()
 
   setup_add_follow_modal()
+
+  setup_resize_handler()
+  on_resize() # after load_tasks()
