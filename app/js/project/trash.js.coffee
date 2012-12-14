@@ -20,19 +20,23 @@ setup_trashbox = () ->
 
       ui.draggable.addClass('completed')
 
-      # move to trashbox, and hide
-      helper_clone = ui.helper.clone()
-      helper_clone.appendTo(ui.helper.parent())
+      if is_intersect($('#trashbox-img'), ui.helper)
+        # hide immediately
+        $('#trashbox-img').effect('bounce', {}, 150)
+      else
+        # move to trashbox, and hide
+        helper_clone = ui.helper.clone()
+        helper_clone.appendTo(ui.helper.parent())
 
-      helper_clone.position(
-        of: '#trashbox-img',
-        using: (coord, feedback) ->
-          coord.opacity = 0.3
-          helper_clone.animate(coord, 300, () ->
-            $(this).remove()
-            $('#trashbox-img').effect('bounce', {}, 150)
-          )
-      )
+        helper_clone.position(
+          of: '#trashbox-img',
+          using: (coord, feedback) ->
+            coord.opacity = 0.3
+            helper_clone.animate(coord, 300, () ->
+              $(this).remove()
+              $('#trashbox-img').effect('bounce', {}, 150)
+            )
+        )
   })
 
 setup_trash_toggle = () ->

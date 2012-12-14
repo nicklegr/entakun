@@ -23,3 +23,12 @@ truncate_by_width = (str, max_width, ruler) ->
     i++
 
   return ''
+
+is_intersect = (elem1, elem2) ->
+  x1 = [elem1.offset().left, elem1.offset().left + elem1.outerWidth()]
+  x2 = [elem2.offset().left, elem2.offset().left + elem2.outerWidth()]
+  y1 = [elem1.offset().top, elem1.offset().top + elem1.outerHeight()]
+  y2 = [elem2.offset().top, elem2.offset().top + elem2.outerHeight()]
+
+  x1[0] < x2[1] && x1[1] > x2[0] &&
+  y1[0] < y2[1] && y1[1] > y2[0]
