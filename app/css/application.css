@@ -100,15 +100,6 @@ img.edit_button {
   margin-left: 32px;
   width: 90px;
   min-height: 439px;
-
-  border: 1px dashed white;
-  border-radius: 5px;
-
-  -webkit-transition: border linear 0.2s;
-  -moz-transition: border linear 0.2s;
-  -ms-transition: border linear 0.2s;
-  -o-transition: border linear 0.2s;
-  transition: border linear 0.2s;
 }
 
 .show_trashes {
@@ -385,8 +376,22 @@ input.follow-project {
   width: 160px;
 }
 
-div#trashbox {
-  width: 100px;
+.trashbox {
+  position: fixed;
+  width: 90px;
+  top: 111px;
+  bottom: 40px;
+  border: 1px dashed white;
+  border-radius: 5px;
+
+  -webkit-transition: border linear 0.2s;
+  -moz-transition: border linear 0.2s;
+  -ms-transition: border linear 0.2s;
+  -o-transition: border linear 0.2s;
+  transition: border linear 0.2s;
+}
+
+#trashbox-img {
   margin-top: -19px;
   margin-left: 12px;
 }

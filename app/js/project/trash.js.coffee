@@ -1,5 +1,5 @@
 setup_trashbox = () ->
-  $(".column-trash").droppable({
+  $(".trashbox").droppable({
     tolerance: 'touch',
     activeClass: 'drop-here',
 
