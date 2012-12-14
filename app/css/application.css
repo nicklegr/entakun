@@ -114,6 +114,7 @@ img.edit_button {
 .show_trashes_label {
   color: #999;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .palette {
@@ -325,6 +326,10 @@ div.add-staff {
   margin-right: 25px;
   padding-top: 10px;
   text-align: right;
+}
+
+#add-staff {
+  cursor: pointer;
 }
 
 div#followee-container {
