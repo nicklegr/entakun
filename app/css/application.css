@@ -156,9 +156,16 @@ img.edit_button {
 
 #toggle-tasks {
   position: absolute;
-  left: 11px;
-  bottom: 6px;
+  left: 7px;
+  bottom: 0px;
   cursor: pointer;
+}
+
+#open-all, #close-all {
+  text-align: center;
+  color: #08C;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .input-eyecatch {

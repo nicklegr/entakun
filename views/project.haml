@@ -65,8 +65,14 @@
         %img{ src: url_for('/img/cancel.png') }
 
       #toggle-tasks
-        %img#open-all{ src: url_for('/img/OpenAll.png') }
-        %img#close-all{ src: url_for('/img/CloseAll.png'), style: 'display: none;' }
+        #open-all<
+          ひらく
+          %br>
+          %img{ src: url_for('/img/OpenAll.png') }
+        #close-all{ style: 'display: none;' }<
+          とじる
+          %br>
+          %img{ src: url_for('/img/CloseAll.png') }
 
     .column-tasks.column-tasks-bottom
       #incoming-tasks
