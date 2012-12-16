@@ -10,15 +10,12 @@ setup_trashbox = () ->
       $('#trashbox-img').attr('src', ImageURL.trashbox_closed)
 
     drop: (event, ui) ->
-      $.ajax({
-        async: true,
-        type: "POST",
-        url: URL.complete_task,
-        data: { project: project_key, task_id: ui.draggable.data('id') },
-        dataType: 'json',
-      })
-
-      ui.draggable.addClass('completed')
+      if showing_trashes()
+        $.post(URL.recycle_task, { project: project_key, task_id: ui.draggable.data('id') })
+        ui.draggable.removeClass('completed')
+      else
+        $.post(URL.complete_task, { project: project_key, task_id: ui.draggable.data('id') })
+        ui.draggable.addClass('completed')
 
       if is_intersect($('#trashbox-img'), ui.helper)
         # hide immediately
@@ -45,12 +42,16 @@ setup_trash_toggle = () ->
         $('#tasks .task').not('#task-template').hide()
         $('.completed').show()
 
+        $('.task').draggable('disable')
+        $('.completed').draggable('enable')
+
         $('#task').attr('placeholder', '完了タスクを表示中')
         $('#task').attr('disabled', 'disabled')
-
       else
         $('#tasks .task').not('#task-template').show()
         $('.completed').hide()
+
+        $('.task').draggable('disable')
 
         $('#task').attr('placeholder', 'タスクを追加')
         $('#task').removeAttr('disabled')

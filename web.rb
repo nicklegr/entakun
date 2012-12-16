@@ -212,6 +212,20 @@ class App < Sinatra::Base
     'OK'.to_json
   end
 
+  post '/recycle_task' do
+    key = params[:project]
+    id = params[:task_id]
+
+    project = Project.where(key: key).first
+    task = project.tasks.find(id)
+    task.complete = false
+    task.remove_attribute(:completed_at)
+
+    project.save!
+
+    'OK'.to_json
+  end
+
   post '/task_sorted' do
     key = params[:project]
     order = params['task']

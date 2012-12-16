@@ -150,6 +150,25 @@ add_task_html = (id, name, color) ->
       new_task.find('.btn.cancel').click()
   )
 
+  # for recycle drag
+  new_task.draggable({
+    revert: 'invalid',
+    revertDuration: 0,
+    helper: 'clone',
+    cursor: 'url(../img/Hand_on.png), default',
+    distance: 7,
+    start: (event, ui) -> $(this).css('visibility', 'hidden')
+    stop: (event, ui) ->
+      if $(this).hasClass('completed')
+        # restore
+        $(this).css('visibility', 'visible')
+      else
+        # hide if recycled
+        $(this).css('visibility', 'visible')
+        $(this).hide()
+  })
+  new_task.draggable('disable')
+
   $("#tasks").append(new_task)
 
   new_task
