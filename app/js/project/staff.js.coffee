@@ -140,3 +140,9 @@ add_staff_html = (id, name, color) ->
 
   $("#staffs").append(new_staff)
   new_staff
+
+disable_staffs = () ->
+  $('.staff-disabler').show('fade', 150)
+
+enable_staffs = () ->
+  $('.staff-disabler').hide('fade', 150)

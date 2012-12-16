@@ -56,6 +56,8 @@ setup_trash_toggle = () ->
 
         $('#trashbox-img .trash').hide()
         $('#trashbox-img .recycle').show()
+
+        disable_staffs()
       else
         $('#tasks .task').not('#task-template').show()
         $('.completed').hide()
@@ -67,6 +69,8 @@ setup_trash_toggle = () ->
 
         $('#trashbox-img .trash').show()
         $('#trashbox-img .recycle').hide()
+
+        enable_staffs()
   )
 
 showing_trashes = () ->
