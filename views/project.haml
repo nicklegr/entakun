@@ -126,7 +126,13 @@
 
     .column-trash
       .trashbox
-        %img#trashbox-img{ src: url_for('/img/TrashBox_Closed.png') }
+        #trashbox-img
+          .trash
+            %img.trash-close{ src: url_for('/img/TrashBox_Closed.png') }
+            %img.trash-open{ src: url_for('/img/TrashBox_Opened.png'), style: 'display: none' }
+          .recycle{ style: 'display: none' }
+            %img.recycle-off{ src: url_for('/img/Recycle_Off.png') }
+            %img.recycle-on{ src: url_for('/img/Recycle_On.png'), style: 'display: none' }
 
   #add-followee.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-header

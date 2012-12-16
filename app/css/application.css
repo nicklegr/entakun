@@ -403,8 +403,19 @@ input.follow-project {
 }
 
 #trashbox-img {
+  width: 100%;
+}
+
+.trash {
+  width: 100%;
   margin-top: -19px;
   margin-left: 12px;
+}
+
+.recycle {
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .drop-here {

@@ -4,10 +4,16 @@ setup_trashbox = () ->
     activeClass: 'drop-here',
 
     activate: (event, ui) ->
-      $('#trashbox-img').attr('src', ImageURL.trashbox_opened)
+      $('.trash-close').hide()
+      $('.trash-open').show()
+      $('.recycle-off').hide()
+      $('.recycle-on').show()
 
     deactivate: (event, ui) ->
-      $('#trashbox-img').attr('src', ImageURL.trashbox_closed)
+      $('.trash-close').show()
+      $('.trash-open').hide()
+      $('.recycle-off').show()
+      $('.recycle-on').hide()
 
     drop: (event, ui) ->
       if showing_trashes()
@@ -47,6 +53,9 @@ setup_trash_toggle = () ->
 
         $('#task').attr('placeholder', '完了タスクを表示中')
         $('#task').attr('disabled', 'disabled')
+
+        $('#trashbox-img .trash').hide()
+        $('#trashbox-img .recycle').show()
       else
         $('#tasks .task').not('#task-template').show()
         $('.completed').hide()
@@ -55,6 +64,9 @@ setup_trash_toggle = () ->
 
         $('#task').attr('placeholder', 'タスクを追加')
         $('#task').removeAttr('disabled')
+
+        $('#trashbox-img .trash').show()
+        $('#trashbox-img .recycle').hide()
   )
 
 showing_trashes = () ->
