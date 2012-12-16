@@ -157,6 +157,7 @@ add_task_html = (id, name, color) ->
     helper: 'clone',
     cursor: 'url(../img/Hand_on.png), default',
     distance: 7,
+    zIndex: 100,
     start: (event, ui) -> $(this).css('visibility', 'hidden')
     stop: (event, ui) ->
       if $(this).hasClass('completed')
