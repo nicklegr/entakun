@@ -238,7 +238,7 @@ div#incoming-tasks {
 
 .task .edit-box {
   position: relative;
-  padding-right: 0.4em;
+  padding-right: 5px;
   padding-top: 4px;
   padding-bottom: 4px;
   text-align: right;
@@ -445,7 +445,8 @@ div#undo {
 }
 
 .task .name-box {
-  padding: 0.4em;
+  padding: 5px;
+  width: 332px;
 }
 
 /* タスクリストの中のみ、隣のタスクとのマージンを空ける */
