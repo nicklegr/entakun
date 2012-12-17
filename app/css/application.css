@@ -27,6 +27,11 @@ img.edit_button {
   cursor: pointer;
 }
 
+.tutorial-button.disabled {
+  opacity: .20;
+  filter: Alpha(Opacity=20);
+}
+
 #project-name {
   float: left;
 }

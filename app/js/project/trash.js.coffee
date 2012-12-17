@@ -54,6 +54,8 @@ setup_trash_toggle = () ->
         $('#task').attr('placeholder', '完了タスクを表示中')
         $('#task').attr('disabled', 'disabled')
 
+        $('.tutorial-button').addClass('disabled')
+
         $('#trashbox-img .trash').hide()
         $('#trashbox-img .recycle').show()
 
@@ -66,6 +68,8 @@ setup_trash_toggle = () ->
 
         $('#task').attr('placeholder', 'タスクを追加')
         $('#task').removeAttr('disabled')
+
+        $('.tutorial-button').removeClass('disabled')
 
         $('#trashbox-img .trash').show()
         $('#trashbox-img .recycle').hide()

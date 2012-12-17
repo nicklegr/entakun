@@ -3,7 +3,10 @@ setup_titlebar = () ->
   enable_inplace_edit($('#project-name'), URL.edit_project, (value, settings) ->
     update_title(value)
   )
-  $('.tutorial-button').click(show_turorial)
+  $('.tutorial-button').click(() ->
+    unless $(this).hasClass('disabled')
+      show_turorial()
+  )
 
 update_project_title = () ->
   title = null
