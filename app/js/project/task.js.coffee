@@ -60,7 +60,7 @@ load_tasks = () ->
   )
 
   $.each(tasks, (i) ->
-    task = add_task_html(this._id, this.name, this.color)
+    task = add_task_html(this._id, this.name, this.color, this.assigned_at)
     if this.complete
       task.addClass('completed')
       if !$('#show_trashes_check').attr('checked')
@@ -79,17 +79,18 @@ add_task = (name) ->
     task_id = id
   )
 
-  add_task_html(task_id, name, default_color)
+  add_task_html(task_id, name, default_color, null)
 
   # adjust border length
   on_resize()
 
-add_task_html = (id, name, color) ->
+add_task_html = (id, name, color, assigned_at) ->
   # copy element
   new_task = $('#task-template').clone()
 
   new_task.data('id', id)
   new_task.data('name', name)
+  new_task.data('assigned_at', assigned_at)
 
   new_task.attr('id', 'task_' + id)
   new_task.addClass('color-' + color)

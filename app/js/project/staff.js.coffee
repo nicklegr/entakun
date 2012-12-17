@@ -17,7 +17,17 @@ load_staffs = () ->
     staff = add_staff_html(this._id, this.name, color)
 
     if this.task_id
-      staff.find('.assigned-task').append($('#task_' + this.task_id))
+      task = $('#task_' + this.task_id)
+      staff.find('.assigned-task').append(task)
+
+      if task.data('assigned_at')
+        assigned_time = Date.parse(task.data('assigned_at'))
+        now = new Date()
+
+        if now - assigned_time < recent_strong_time
+          set_staff_newest(staff)
+        else if now - assigned_time < recent_weak_time
+          set_staff_newer(staff)
   )
 
 setup_add_staff_link = () ->
@@ -78,10 +88,12 @@ add_staff_html = (id, name, color) ->
           data: {
             project: project_key,
             task_id: ui.item.data('id'),
-            staff_id: $(this).parent().data('id'),
+            staff_id: $(this).closest('.staff').data('id'),
           },
           dataType: 'json',
         })
+
+        set_staff_newest($(this).closest('.staff'))
 
     stop: (event, ui) ->
       # if task was completed, hide and move to incoming list
@@ -91,6 +103,9 @@ add_staff_html = (id, name, color) ->
           ui.item.hide()
 
         $('#tasks').append(ui.item)
+
+    remove: (event, ui) ->
+      unset_staff_new($(this).closest('.staff'))
   })
 
   staff_name = new_staff.find('.staff-name')
@@ -122,7 +137,7 @@ add_staff_html = (id, name, color) ->
   )
 
   staff_name.find('.edit').click(()->
-    $(this).prev().trigger('edit_event')
+    $(this).parent().find('.name').trigger('edit_event')
   )
 
   # show edit icons when mouse hover
@@ -138,6 +153,8 @@ add_staff_html = (id, name, color) ->
   new_staff.unbind('hover') # but not hover
   new_staff.find('.delete').click(() -> find_object_top($(this)).data('deleted', true) )
 
+  unset_staff_new(new_staff)
+
   $("#staffs").append(new_staff)
   new_staff
 
@@ -146,3 +163,14 @@ disable_staffs = () ->
 
 enable_staffs = () ->
   $('.staff-disabler').hide('fade', 150)
+
+set_staff_newest = (elem) ->
+  unset_staff_new(elem)
+  elem.find('.recent-indicator-strong').show()
+
+set_staff_newer = (elem) ->
+  unset_staff_new(elem)
+  elem.find('.recent-indicator-weak').show()
+
+unset_staff_new = (elem) ->
+  elem.find('[class*="recent-indicator"]').hide()

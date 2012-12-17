@@ -101,6 +101,10 @@
             %img.delete{ src: url_for('/img/cancel.png'), style: 'display: none;' }
             .staff-name
               .name (スタッフ名)
+              .recent-indicator-strong
+                %img{ src: url_for('/img/NewStrong.png') }
+              .recent-indicator-weak
+                %img{ src: url_for('/img/NewWeak.png') }
               .edit{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/pencil.png') }
             .assigned-task.sortable

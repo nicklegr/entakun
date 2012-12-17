@@ -323,7 +323,7 @@ div.staff-name {
 }
 
 .staff-name > .name {
-  width: 93%;
+  width: 81%;
   float: left;
   color: #555;
 }
@@ -335,13 +335,13 @@ div.staff-name {
 }
 
 .staff-name input {
-  width: 305px;
+  width: 265px;
 }
 
 .staff-name > .edit {
   width: 7%;
   margin-top: 2px;
-  float: left;
+  float: right;
 }
 
 div.add-staff {
