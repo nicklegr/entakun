@@ -101,10 +101,10 @@
             %img.delete{ src: url_for('/img/cancel.png'), style: 'display: none;' }
             .staff-name
               .name (スタッフ名)
-              .recent-indicator-strong
-                %img{ src: url_for('/img/NewStrong.png') }
-              .recent-indicator-weak
-                %img{ src: url_for('/img/NewWeak.png') }
+              .newest
+                %img{ src: url_for('/img/Newest.png') }
+              .newer
+                %img{ src: url_for('/img/Newer.png') }
               .edit{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/pencil.png') }
             .assigned-task.sortable
@@ -114,10 +114,10 @@
           .followee#followee-template{ style: 'display: none;' }
             .followee-name
               .name (スタッフ名)
-              .recent-indicator-strong
-                %img{ src: url_for('/img/NewStrong.png') }
-              .recent-indicator-weak
-                %img{ src: url_for('/img/NewWeak.png') }
+              .newest
+                %img{ src: url_for('/img/Newest.png') }
+              .newer
+                %img{ src: url_for('/img/Newer.png') }
               .delete{ style: "display: none;" }
                 %img.edit_button{ src: url_for('/img/cancel.png') }
             .followee-task

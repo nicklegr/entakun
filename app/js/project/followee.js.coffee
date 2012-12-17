@@ -1,13 +1,13 @@
 # in ms
 if true
   followee_update_interval = 5 * 60 * 1000
-  recent_strong_time = 60 * 60 * 1000
-  recent_weak_time = 24 * 60 * 60 * 1000
+  newest_time = 60 * 60 * 1000
+  newer_time = 24 * 60 * 60 * 1000
 else
   # for debug
   followee_update_interval = 5 * 1000
-  recent_strong_time = 10 * 1000
-  recent_weak_time = 20 * 1000
+  newest_time = 10 * 1000
+  newer_time = 20 * 1000
 
 load_followees = () ->
   followees = $.cookie("entakun-followees")
@@ -142,9 +142,9 @@ update_followee = (elem, data) ->
         assigned_time = Date.parse(data.assigned_at)
         now = new Date()
 
-        if now - assigned_time < recent_strong_time
+        if now - assigned_time < newest_time
           set_followee_newest(elem)
-        else if now - assigned_time < recent_weak_time
+        else if now - assigned_time < newer_time
           set_followee_newer(elem)
     else
       # task deleted or unassigned
@@ -156,11 +156,11 @@ update_followee = (elem, data) ->
 
 set_followee_newest = (elem) ->
   unset_followee_new(elem)
-  elem.find('.recent-indicator-strong').show()
+  elem.find('.newest').show()
 
 set_followee_newer = (elem) ->
   unset_followee_new(elem)
-  elem.find('.recent-indicator-weak').show()
+  elem.find('.newer').show()
 
 unset_followee_new = (elem) ->
-  elem.find('[class*="recent-indicator"]').hide()
+  elem.find('.newest, .newer').hide()

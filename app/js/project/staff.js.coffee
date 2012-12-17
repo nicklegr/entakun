@@ -24,9 +24,9 @@ load_staffs = () ->
         assigned_time = Date.parse(task.data('assigned_at'))
         now = new Date()
 
-        if now - assigned_time < recent_strong_time
+        if now - assigned_time < newest_time
           set_staff_newest(staff)
-        else if now - assigned_time < recent_weak_time
+        else if now - assigned_time < newer_time
           set_staff_newer(staff)
   )
 
@@ -166,11 +166,11 @@ enable_staffs = () ->
 
 set_staff_newest = (elem) ->
   unset_staff_new(elem)
-  elem.find('.recent-indicator-strong').show()
+  elem.find('.newest').show()
 
 set_staff_newer = (elem) ->
   unset_staff_new(elem)
-  elem.find('.recent-indicator-weak').show()
+  elem.find('.newer').show()
 
 unset_staff_new = (elem) ->
-  elem.find('[class*="recent-indicator"]').hide()
+  elem.find('.newest, .newer').hide()

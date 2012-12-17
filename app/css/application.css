@@ -378,7 +378,7 @@ div.followee-name {
   color: white;
 }
 
-[class*="recent-indicator"] {
+.newest, .newer {
   width: 12%;
   float: left;
 }
