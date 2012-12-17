@@ -6,6 +6,7 @@ setup_task_list = () ->
     cancel: ".completed", # disable sorting completed tasks
     helper: "clone", # prevent firing click event on dragging
     cursor: 'url(../img/Hand_on.png), default',
+    containment: 'document',
     distance: 7,
 
     receive: (event, ui) ->
@@ -156,6 +157,7 @@ add_task_html = (id, name, color) ->
     revertDuration: 0,
     helper: 'clone',
     cursor: 'url(../img/Hand_on.png), default',
+    containment: 'document',
     distance: 7,
     zIndex: 100,
     start: (event, ui) -> $(this).css('visibility', 'hidden')

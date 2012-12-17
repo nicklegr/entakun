@@ -61,6 +61,7 @@ add_staff_html = (id, name, color) ->
     connectWith: "#tasks,.assigned-task",
     helper: "clone", # prevent firing click event on dragging
     cursor: 'url(../img/Hand_on.png), default',
+    containment: 'document',
     distance: 7,
 
     receive: (event, ui) ->
