@@ -114,7 +114,7 @@ add_followee_html_bare = (project_key, staff_id) ->
   new_followee
 
 update_followee = (elem, data) ->
-  elem.find('[class*="recent-indicator"]').hide()
+  unset_followee_new(elem)
 
   if data.staff_name
     elem.find('.followee-name > .name').text(data.staff_name)
@@ -143,9 +143,9 @@ update_followee = (elem, data) ->
         now = new Date()
 
         if now - assigned_time < recent_strong_time
-          elem.find('.recent-indicator-strong').show()
+          set_followee_newest(elem)
         else if now - assigned_time < recent_weak_time
-          elem.find('.recent-indicator-weak').show()
+          set_followee_newer(elem)
     else
       # task deleted or unassigned
       task.hide()
@@ -153,3 +153,14 @@ update_followee = (elem, data) ->
     # staff deleted
     elem.remove()
     remove_followee(data.project, data.staff)
+
+set_followee_newest = (elem) ->
+  unset_followee_new(elem)
+  elem.find('.recent-indicator-strong').show()
+
+set_followee_newer = (elem) ->
+  unset_followee_new(elem)
+  elem.find('.recent-indicator-weak').show()
+
+unset_followee_new = (elem) ->
+  elem.find('[class*="recent-indicator"]').hide()
