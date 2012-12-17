@@ -17,11 +17,15 @@ setup_trashbox = () ->
 
     drop: (event, ui) ->
       if showing_trashes()
-        $.post(URL.recycle_task, { project: project_key, task_id: ui.draggable.data('id') })
         ui.draggable.removeClass('completed')
+        $('#tasks').append(ui.draggable) # move to last
+        $.post(URL.recycle_task, { project: project_key, task_id: ui.draggable.data('id') }, () ->
+          # update position of recycled task
+          task_sorted()
+        )
       else
-        $.post(URL.complete_task, { project: project_key, task_id: ui.draggable.data('id') })
         ui.draggable.addClass('completed')
+        $.post(URL.complete_task, { project: project_key, task_id: ui.draggable.data('id') })
 
       if is_intersect($('#trashbox-img'), ui.helper)
         # hide immediately

@@ -21,9 +21,7 @@ setup_task_list = () ->
     update: (event, ui) ->
       # task count without template element
       if $("#tasks > .task").length - 1 >= 2
-        data = $("#tasks").sortable('serialize')
-        data = "project=#{project_key}&" + data
-        $.post(URL.task_sorted, data)
+        task_sorted()
 
     stop: (event, ui) ->
       # if task was completed, hide and move to last
@@ -176,6 +174,11 @@ add_task_html = (id, name, color, assigned_at) ->
   $("#tasks").append(new_task)
 
   new_task
+
+task_sorted = () ->
+  data = $("#tasks").sortable('serialize')
+  data = "project=#{project_key}&" + data
+  $.post(URL.task_sorted, data)
 
 listed_tasks = () ->
   if showing_trashes()
