@@ -448,6 +448,11 @@ div#undo {
   border: 1px solid lightGray;
   font-weight: normal;
   color: #555;
+  cursor: pointer;
+}
+
+.task.ui-sortable-helper, .task.ui-draggable-dragging {
+  cursor: url(../img/Hand_on.png), default;
 }
 
 .task.completed {
