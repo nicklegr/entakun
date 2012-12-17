@@ -293,8 +293,8 @@ div#staff-container {
   height: 100%;
   z-index: 100;
   background-color: white;
-  opacity: .50;
-  filter: Alpha(Opacity=50);
+  opacity: .80;
+  filter: Alpha(Opacity=80);
 }
 
 div#staffs {
