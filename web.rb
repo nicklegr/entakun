@@ -3,12 +3,14 @@
 require 'sinatra/base'
 require 'sinatra/url_for'
 require 'sinatra/reloader' if development?
+require 'sinatra/content_for'
 require 'haml'
 require 'coffee-script'
 require './db'
 
 class App < Sinatra::Base
   helpers Sinatra::UrlForHelper
+  register Sinatra::Contrib
 
   configure do
     mime_type :js, 'application/javascript'

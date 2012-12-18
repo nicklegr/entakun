@@ -1,3 +1,6 @@
+- content_for :css do
+  %link{:href => url_for('/assets/index.css'), :rel => "stylesheet"}
+
 .navbar.navbar-fixed-top
   .titlebar
     .container
@@ -10,7 +13,7 @@
 
 .container
   .row
-    .span12.logo
+    .span12.title
       %img{ src: 'http://placehold.it/470x35' }
       %img{ src: 'http://placehold.it/650x80' }
       
