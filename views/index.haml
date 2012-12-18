@@ -1,33 +1,45 @@
-.navbar.navbar-inverse.navbar-fixed-top
-  .navbar-inner
+.navbar.navbar-fixed-top
+  .titlebar
     .container
-      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.brand{:href => "#"} entakun
+      .logo
+        %a{ href: url_for('/'), target: '_blank' }
+          %img{ src: url_for('/img/Entaku.png') }
+
+      #project-name
+        .name entakun
 
 .container
-  .hero-unit
-    %h1 entakun
-    %p
-      重厚長大なタスク管理ツールに疲れていませんか？
-      %br
-      少人数のプロジェクトには、限界までシンプルなツールをどうぞ。
-    %p
-      %a.btn.btn-primary.btn-large{ href: url_for('/new_project'), onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
-        プロジェクトをはじめる
-
   .row
-    .span4
-      %h2 ログイン不要
-      %p 1クリックでプロジェクト作成。メンバーにURLを伝えるだけで、共同作業をスタートできます。
-    .span4
-      %h2 すばやくタスクを追加
-      %p 見出しを入力してEnterキーを押すだけ。会議中でも、その場でサクサク追加できます。
-    .span4
-      %h2 マウスで直感操作
-      %p 担当者の割り当て、タスクの完了はドラッグ&ドロップで。画面切り替えは一切ありません。
+    .span12.logo
+      %img{ src: 'http://placehold.it/470x35' }
+      %img{ src: 'http://placehold.it/650x80' }
+      
+  .row.center
+    .span5.left-block
+      %h1 デジタル付箋を使ったタスク管理
+      %p.description
+        付箋にタスクを書き込むようなお手軽さ。
+        %br
+        担当者の割り当て、タスクの完了はドラッグ&ドロップで行えます。
+
+      %h1 面倒なログインいらず
+      %p.description
+        1クリックでプロジェクト作成。
+        %br
+        メンバーに URL を伝えるだけで、共同作業をスタートできます。
+
+      %h1 高速タスク入力
+      %p.description
+        見出しを入力して Enter キーを押すだけ。
+        %br
+        会議中でも、その場でサクサク新しいタスクを追加できます。
+
+    .span6.offset1.right-block
+      %p
+        %img{ src: 'http://placehold.it/350x320' }
+      %p
+        %a.btn.btn-primary.btn-large{ href: url_for('/new_project'), onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
+          新しくentakunを始める
 
 / Placed at the end of the document so the pages load faster
 %script{ src: url_for('/assets/application.js'), type: 'text/javascript' }
