@@ -1,3 +1,9 @@
+#preloaded-images {
+  width: 0;
+  height: 0;
+  background-image: url(../img/index/StartHover.png);
+}
+
 .title-logo {
   margin-left: 215px;
   margin-top: -5px;
