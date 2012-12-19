@@ -14,8 +14,7 @@
 .container
   .row
     .span12.title
-      %img{ src: 'http://placehold.it/470x35' }
-      %img{ src: 'http://placehold.it/650x80' }
+      %img{ src: url_for('/img/index/Title.png') }
       
   .row.center
     .span5.left-block
@@ -39,10 +38,9 @@
 
     .span6.offset1.right-block
       %p
-        %img{ src: 'http://placehold.it/350x320' }
-      %p
-        %a.btn.btn-primary.btn-large{ href: url_for('/new_project'), onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
-          新しくentakunを始める
+        %img{ src: url_for('/img/index/Entaku.png') }
+      %form{ action: url_for('/new_project'), method: 'POST', onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
+        %button.start-button{ type: 'submit' } 新しくentakunを始める
 
 / Placed at the end of the document so the pages load faster
 %script{ src: url_for('/assets/application.js'), type: 'text/javascript' }

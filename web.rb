@@ -72,7 +72,7 @@ class App < Sinatra::Base
     haml :index
   end
 
-  get '/new_project' do
+  post '/new_project' do
     project_key = SecureRandom.hex(8)
     project = Project.create({ key: project_key, name: '新規プロジェクト' })
     project.staffs.create(name: '担当者1', color: COLORS.first)

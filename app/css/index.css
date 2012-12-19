@@ -29,3 +29,17 @@ h1 {
   text-align: center;
   margin-bottom: 30px;
 }
+
+.start-button {
+  width: 216px;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: url(../img/index/Start.png) no-repeat left top;
+  color: white;
+  text-align: center;
+}
+
+.start-button:hover, .start-button:focus {
+  background-image: url(../img/index/StartHover.png);
+}
