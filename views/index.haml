@@ -14,7 +14,7 @@
 .container
   .row
     .span12.title
-      %img{ src: url_for('/img/index/Title.png') }
+      %img{ src: url_for('/img/index/Title.png'), alt: 'みんなでつかう デジタル付箋 entakun' }
       
   .row.center
     .span5.left-block
@@ -38,7 +38,7 @@
 
     .span6.offset1.right-block
       %p
-        %img{ src: url_for('/img/index/Entaku.png') }
+        %img{ src: url_for('/img/index/Entaku.png'), alt: '付箋が並んだ円卓を囲む人たち' }
       %form{ action: url_for('/new_project'), method: 'POST', onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
         %button.start-button{ type: 'submit' } 新しくentakunを始める
 
