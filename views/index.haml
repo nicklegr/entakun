@@ -10,34 +10,35 @@
 
 .container
   .row
-    .span12.title
-      %img{ src: url_for('/img/index/Title.png'), alt: 'みんなでつかう デジタル付箋 entakun' }
+    .span12
+      %img.title-logo{ src: url_for('/img/index/Title.png'), alt: 'みんなでつかう デジタル付箋 entakun' }
       
   .row.center
-    .span5.left-block
-      %h1 デジタル付箋を使ったタスク管理
-      %p.description
-        付箋にタスクを書き込むようなお手軽さ。
-        %br
-        担当者の割り当て、タスクの完了はドラッグ&ドロップで行えます。
+    .span6
+      .left-block
+        %h1 デジタル付箋を使ったタスク管理
+        %p.description
+          付箋にタスクを書き込むようなお手軽さ。
+          %br
+          担当者の割り当て、タスクの完了はドラッグ&ドロップで行えます。
 
-      %h1 面倒なログインいらず
-      %p.description
-        1クリックでプロジェクト作成。
-        %br
-        メンバーに URL を伝えるだけで、共同作業をスタートできます。
+        %h1 面倒なログインいらず
+        %p.description
+          1クリックでプロジェクト作成。
+          %br
+          メンバーに URL を伝えるだけで、共同作業をスタートできます。
 
-      %h1 高速タスク入力
-      %p.description
-        見出しを入力して Enter キーを押すだけ。
-        %br
-        会議中でも、その場でサクサク新しいタスクを追加できます。
+        %h1 高速タスク入力
+        %p.description
+          見出しを入力して Enter キーを押すだけ。
+          %br
+          会議中でも、その場でサクサク新しいタスクを追加できます。
 
-    .span6.offset1.right-block
-      %p
+    .span6
+      .right-block
         %img{ src: url_for('/img/index/Entaku.png'), alt: '付箋が並んだ円卓を囲む人たち' }
-      %form{ action: url_for('/new_project'), method: 'POST', onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
-        %button.start-button{ type: 'submit' } 新しくentakunを始める
+        %form{ action: url_for('/new_project'), method: 'POST', onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
+          %button.start-button{ type: 'submit' } 新しくentakunを始める
 
 / Placed at the end of the document so the pages load faster
 %script{ src: url_for('/assets/application.js'), type: 'text/javascript' }
