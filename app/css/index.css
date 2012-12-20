@@ -1,6 +1,6 @@
 .title-logo {
-  margin-left: 173px;
-  margin-top: -10px;
+  margin-left: 215px;
+  margin-top: -5px;
 }
 
 .row.center {
@@ -8,14 +8,18 @@
 }
 
 .left-block {
-  padding-left: 97px;
-  width: 330px;
+  padding-left: 80px;
+  width: 380px;
 }
 
 .right-block {
-  padding-left: 25px;
-  width: 267px;
+  padding-left: 40px;
+  width: 304px;
   text-align: center;
+}
+
+.key-visual {
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -30,9 +34,10 @@ h1 {
 }
 
 .description {
-  font-size: 10px;
-  text-align: center;
+  font-size: 12px;
+  white-space: nowrap;
   margin-bottom: 20px;
+  padding: 5px;
 }
 
 .start-button {

@@ -36,9 +36,9 @@
 
     .span6
       .right-block
-        %img{ src: url_for('/img/index/Entaku.png'), alt: '付箋が並んだ円卓を囲む人たち' }
+        %img.key-visual{ src: url_for('/img/index/Entaku.png'), alt: '付箋が並んだ円卓を囲む人たち' }
         %form{ action: url_for('/new_project'), method: 'POST', onclick: '$.cookie("entakun-project-created", true, { path: "/" });' }
-          %button.start-button{ type: 'submit' } 新しくentakunを始める
+          %button.start-button{ type: 'submit', alt: '新しくentakunを始める' }
 
 / Placed at the end of the document so the pages load faster
 %script{ src: url_for('/assets/application.js'), type: 'text/javascript' }
