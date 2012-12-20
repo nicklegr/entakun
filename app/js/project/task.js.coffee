@@ -5,7 +5,7 @@ setup_task_list = () ->
     connectWith: ".assigned-task",
     cancel: ".completed", # disable sorting completed tasks
     helper: "clone", # prevent firing click event on dragging
-    cursor: 'url(../img/Hand_on.png), default',
+    cursor: 'url(../img/Hand_on.cur), url(../img/Hand_on.png), default',
     containment: 'document',
     distance: 7,
 
@@ -155,7 +155,7 @@ add_task_html = (id, name, color, assigned_at) ->
     revert: 'invalid',
     revertDuration: 0,
     helper: 'clone',
-    cursor: 'url(../img/Hand_on.png), default',
+    cursor: 'url(../img/Hand_on.cur), url(../img/Hand_on.png), default',
     containment: 'document',
     distance: 7,
     zIndex: 100,
