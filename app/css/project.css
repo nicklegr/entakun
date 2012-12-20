@@ -573,31 +573,31 @@ div#undo {
 }
 
 .brush-orange {
-  cursor: url(../img/brush/orange.png), default;
+  cursor: url(../img/brush/orange.cur), url(../img/brush/orange.png), default;
 }
 
 .brush-yellow {
-  cursor: url(../img/brush/yellow.png), default;
+  cursor: url(../img/brush/yellow.cur), url(../img/brush/yellow.png), default;
 }
 
 .brush-green {
-  cursor: url(../img/brush/green.png), default;
+  cursor: url(../img/brush/green.cur), url(../img/brush/green.png), default;
 }
 
 .brush-cyan {
-  cursor: url(../img/brush/cyan.png), default;
+  cursor: url(../img/brush/cyan.cur), url(../img/brush/cyan.png), default;
 }
 
 .brush-blue {
-  cursor: url(../img/brush/blue.png), default;
+  cursor: url(../img/brush/blue.cur), url(../img/brush/blue.png), default;
 }
 
 .brush-pink {
-  cursor: url(../img/brush/pink.png), default;
+  cursor: url(../img/brush/pink.cur), url(../img/brush/pink.png), default;
 }
 
 .brush-gray {
-  cursor: url(../img/brush/gray.png), default;
+  cursor: url(../img/brush/gray.cur), url(../img/brush/gray.png), default;
 }
 
 footer {
