@@ -19,8 +19,8 @@
 }
 
 .right-block {
-  padding-left: 40px;
-  width: 304px;
+  padding-left: 80px;
+  width: 275px;
   text-align: center;
 }
 
@@ -47,8 +47,8 @@ h1 {
 }
 
 .start-button {
-  width: 200px;
-  height: 41px;
+  width: 240px;
+  height: 50px;
   padding: 0;
   border: 0;
   background: url(../img/index/Start.png) no-repeat left top;
