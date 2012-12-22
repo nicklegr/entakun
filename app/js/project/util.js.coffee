@@ -50,3 +50,12 @@ on_resize = () ->
 
   $('.column-tasks-bottom').css('min-height', height + 'px')
   $('.column-staffs-bottom').css('min-height', height + 'px')
+
+url_regex = () ->
+  /(http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/g
+
+html_escape = (str) ->
+  str = str.replace(/&/g, '&amp;')
+  str = str.replace(/>/g, '&gt;')
+  str = str.replace(/</g, '&lt;')
+  str

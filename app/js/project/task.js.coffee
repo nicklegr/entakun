@@ -93,7 +93,7 @@ add_task_html = (id, name, color, assigned_at) ->
 
   new_task.attr('id', 'task_' + id)
   new_task.addClass('color-' + color)
-  new_task.find('.name').text(limit_task_name_len(name))
+  new_task.find('.name').html(short_task_name(name))
   new_task.show()
 
   setup_open_marker(new_task)
@@ -122,9 +122,9 @@ add_task_html = (id, name, color, assigned_at) ->
     new_task.data('name', org_name)
 
     if is_task_opened(new_task)
-      new_task.find('.name').text(org_name)
+      new_task.find('.name').html(full_task_name(org_name))
     else
-      new_task.find('.name').text(limit_task_name_len(org_name))
+      new_task.find('.name').html(short_task_name(org_name))
 
     if !is_trancated(org_name)
       init_open_marker(new_task)
@@ -218,7 +218,7 @@ open_task = (task) ->
   if !can_open_task(task)
     throw new Error("Can't open task #{task.data('id')}: content is single line")
 
-  task.find('.name').text(task.data('name'))
+  task.find('.name').html(full_task_name(task.data('name')))
   task.find('.task_open').hide()
   task.find('.task_close').show()
   update_open_all_button()
@@ -227,7 +227,7 @@ close_task = (task) ->
   if !can_open_task(task)
     throw new Error("Can't close task #{task.data('id')}: content is single line")
 
-  task.find('.name').text(limit_task_name_len(task.data('name')))
+  task.find('.name').html(short_task_name(task.data('name')))
   task.find('.task_open').show()
   task.find('.task_close').hide()
   update_open_all_button()
@@ -241,10 +241,22 @@ is_task_opened = (elem) ->
 is_trancated = (name) ->
   name != limit_task_name_len(name)
 
+short_task_name = (name) ->
+  link_url(html_escape(limit_task_name_len(name))) # @todo avoid linking truncated url
+
+full_task_name = (name) ->
+  link_url(html_escape(name))
+
 limit_task_name_len = (name) ->
   ret = name.replace(/\n[\s\S]*$/, "") # get first line
   ret = truncate_by_width(ret, task_name_max_width, $('#ruler'))
   ret
+
+link_url = (name) ->
+  name.replace(url_regex(), '<a href="$&" target="_blank" onclick="avoid_open_task(arguments[0])">$&</a>')
+
+avoid_open_task = (event) ->
+  event.stopPropagation()
 
 begin_edit_task = (elem) ->
   end_paint() # if in paint mode, cancel it
