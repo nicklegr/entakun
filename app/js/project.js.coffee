@@ -37,6 +37,9 @@ $ ->
 
   setup_ajax_error_handler()
 
+  setup_trashbox()
+  setup_trash_toggle() # before load_tasks()
+
   setup_task_list()
   setup_task_input()
 
@@ -49,9 +52,6 @@ $ ->
 
   setup_followees()
   interval_update_followees()
-
-  setup_trashbox()
-  setup_trash_toggle()
 
   setup_titlebar()
 

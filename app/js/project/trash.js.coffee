@@ -47,6 +47,9 @@ setup_trashbox = () ->
   })
 
 setup_trash_toggle = () ->
+  $('#show_trashes_check').removeAttr('checked')
+  $('#task').removeAttr('disabled')
+
   $('#show_trashes_check').change(() ->
       if showing_trashes()
         $('#tasks .task').not('#task-template').hide()
