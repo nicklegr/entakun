@@ -1,0 +1,16 @@
+.navbar.navbar-fixed-top
+  .titlebar
+    .container
+      .logo
+        %a{ href: url_for('/'), target: '_blank' }
+          %img{ src: url_for('/img/Entaku.png') }
+
+.container
+  %h3 最近アクセスしたプロジェクト
+
+  %hr
+
+  %ul
+    - @projects.each do |e|
+      %li
+        %a{ href: url_for("/projects/#{e[:key]}") }= e[:name]

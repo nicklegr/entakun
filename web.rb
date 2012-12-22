@@ -367,4 +367,22 @@ class App < Sinatra::Base
 
     result.to_json
   end
+
+  get '/recent_projects' do
+    cookie = request.cookies['entakun-recent-project'] || '[]'
+    keys = JSON.parse(cookie)
+
+    @projects = keys.map do |e|
+      project = Project.where(key: e).first
+      if project
+        { key: e, name: project.name }
+      else
+        nil
+      end
+    end
+
+    @projects.compact!
+
+    haml :recent_projects
+  end
 end
