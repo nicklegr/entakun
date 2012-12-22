@@ -1,5 +1,8 @@
 require 'mongoid'
 
+# おすすめindex
+# db.projects.ensureIndex( { "key": 1 }, { unique: true } )
+
 class Project
   include Mongoid::Document
   include Mongoid::Timestamps
