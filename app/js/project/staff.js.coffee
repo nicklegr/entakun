@@ -105,6 +105,8 @@ add_staff_html = (id, name, color) ->
 
         $('#tasks').append(ui.item)
 
+        unset_staff_new($(this).closest('.staff'))
+
     remove: (event, ui) ->
       unset_staff_new($(this).closest('.staff'))
   })
