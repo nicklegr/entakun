@@ -47,6 +47,7 @@ setup_trashbox = () ->
   })
 
 setup_trash_toggle = () ->
+  # Firefox saves checkbox state, so reset it
   $('#show_trashes_check').removeAttr('checked')
   $('#task').removeAttr('disabled')
 
@@ -82,6 +83,8 @@ setup_trash_toggle = () ->
         $('#trashbox-img .recycle').hide()
 
         enable_staffs()
+
+      update_open_all_button()
   )
 
 showing_trashes = () ->
