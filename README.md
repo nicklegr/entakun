@@ -57,6 +57,9 @@ nginx + thin, Apache + Phusion Passengerでの動作を確認しています。
 - プログラム・マークアップ
   - にっくる ([@nicklegr](https://twitter.com/nicklegr))
 
+## 謝辞
+entakunは、[famfamfam.com](http://famfamfam.com/)の[Silk icon](http://www.famfamfam.com/archive/silk-icons-thats-your-lot/)を使用しています。
+
 ## ライセンス
 entakun本体は、MITライセンスを適用します。詳細はLICENSE.txtをご覧ください。
 
