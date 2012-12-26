@@ -19,6 +19,8 @@
     %link{ rel: "shortcut icon", href: url_for('/favicon.ico'), type: "image/x-icon" }
     %link{ rel: "icon", href: url_for('/favicon.ico'), type: "image/x-icon" }
 
+    = yield_content :head
+
     / Le HTML5 shim, for IE6-8 support of HTML5 elements
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
