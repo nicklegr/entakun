@@ -8,6 +8,8 @@ require 'haml'
 require 'coffee-script'
 require './db'
 
+Tilt::CoffeeScriptTemplate.default_bare = true
+
 class App < Sinatra::Base
   helpers Sinatra::UrlForHelper
   register Sinatra::Contrib
@@ -20,7 +22,22 @@ class App < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  set :root, File.dirname(__FILE__)
+  set :views, root + '/views'
+  set :public_folder, root + '/public'
+  set :run, false # this line tells mongrel not to run and to let passenger handle the application
+
   set :haml, :format => :html5
+
+  set :sprockets, Sprockets::Environment.new(root){ |environment|
+    environment.append_path 'app/js'
+    environment.append_path 'app/css'
+
+    if ENV['RACK_ENV'] == 'production'
+      environment.js_compressor  = YUI::JavaScriptCompressor.new(munge: true)
+      environment.css_compressor = YUI::CssCompressor.new
+    end
+  }
 
   # タスク・スタッフの色
   COLORS = [

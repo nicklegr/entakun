@@ -11,3 +11,8 @@ gem 'therubyracer', :platforms => :ruby
 gem 'coffee-script'
 gem 'mongoid'
 gem 'emk-sinatra-url-for'
+
+group :test do
+  gem 'rspec'
+  gem 'capybara'
+end
