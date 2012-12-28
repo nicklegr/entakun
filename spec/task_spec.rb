@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require File.dirname(__FILE__) + '/task_helper'
 
 feature 'Task', js: true do
   background do
@@ -12,36 +12,31 @@ feature 'Task', js: true do
 
   scenario 'Add task' do
     fill_in 'task', with: "task 1\n"
-    page.should have_css('.task .name', text: 'task 1')
+    Test::Task.at(page, 1).name.should == 'task 1'
   end
 
   scenario 'Edit task' do
-    task = page.first('.task.color-gray')
-    page.execute_script('$(".task.color-gray").trigger("mouseenter")')
-    task.find('.edit').click
-    task.find('textarea').should be_visible
+    task = Test::Task.first(page)
+    task.hover
+    task.start_edit
 
-    task.find('textarea').set 'edit test'
-    task.find('.ok').click
-
-    task.find('.name').should have_text 'edit test'
+    task.set_name 'edit test'
+    task.end_edit
+    task.name.should == 'edit test'
   end
 
   scenario 'Complete task' do
-    source = page.first('.task.color-gray')
-    target = page.find('.trashbox')
-    source.drag_to(target)
+    task = Test::Task.first(page)
+    task.complete
 
-    source.should_not be_visible
+    task.should_not be_visible
   end
 
   scenario 'Show complete task' do
-    source = page.first('.task.color-gray')
-    target = page.find('.trashbox')
-    source.drag_to(target)
+    task = Test::Task.first(page)
+    task.complete
+    Test::Project.new(page).show_trash
 
-    page.check('show_trashes_check')
-
-    source.should be_visible
+    task.should be_visible
   end
 end
