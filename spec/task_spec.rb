@@ -1,4 +1,7 @@
-require File.dirname(__FILE__) + '/task_helper'
+require File.dirname(__FILE__) + '/spec_helper'
+
+require 'project_helper'
+require 'task_helper'
 
 feature 'Task', js: true do
   background do
