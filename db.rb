@@ -1,4 +1,7 @@
+# coding: utf-8
+
 require 'mongoid'
+require './constant'
 
 # おすすめindex
 # db.projects.ensureIndex( { "key": 1 }, { unique: true } )
@@ -11,6 +14,16 @@ class Project
   embeds_many :tasks
   embeds_many :staffs
   validates_uniqueness_of :key
+
+  def self.new_project(key)
+    project = Project.create({ key: key, name: '新規プロジェクト' })
+    project.staffs.create(name: '担当者1', color: COLORS.first)
+    project
+  end
+
+  def new_task(name)
+    tasks.create(name: name, complete: false, color: 'gray')
+  end
 end
 
 class Task
