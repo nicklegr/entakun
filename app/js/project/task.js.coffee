@@ -117,6 +117,8 @@ add_task_html = (id, name, color, assigned_at) ->
     end_edit_task(new_task)
   )
   new_task.find('.btn.ok').click(() ->
+    end_edit_task(new_task)
+
     # update task title & internal data
     org_name = new_task.find('.comment').val()
     new_task.data('name', org_name)
@@ -131,7 +133,7 @@ add_task_html = (id, name, color, assigned_at) ->
 
     update_open_marker(new_task)
 
-    end_edit_task(new_task) # after marker update
+    update_open_all_button() # after marker update
 
     # send to server
     $.post(URL.edit_task,
