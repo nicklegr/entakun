@@ -2,7 +2,12 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 feature 'Task', js: true do
   background do
-    visit '/projects/59a596905494c60f' # @todo fixture
+    DatabaseCleaner.clean
+
+    project = Project.new_project('test_project')
+    project.new_task('test task')
+
+    visit '/projects/test_project'
   end
 
   scenario 'Add task' do
