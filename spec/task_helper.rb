@@ -7,12 +7,10 @@ module Test
     end
 
     def show_trash
-      @page.find('#show_trashes_check').checked?.should == false
       @page.check('show_trashes_check')
     end
 
     def hide_trash
-      @page.find('#show_trashes_check').checked?.should == true
       @page.uncheck('show_trashes_check')
     end
   end
@@ -38,7 +36,10 @@ module Test
 
     def start_edit
       @task.find('.edit').click
-      @task.find('textarea').visible?.should == true
+    end
+
+    def can_set_name?
+      @task.find('textarea').visible?
     end
 
     def set_name(name)
@@ -49,16 +50,7 @@ module Test
       @task.find('.ok').click
     end
 
-    def complete
-      @page.find('#show_trashes_check').checked?.should == false
-
-      target = @page.find('.trashbox')
-      @task.drag_to(target)
-    end
-
-    def recycle
-      @page.find('#show_trashes_check').checked?.should == true
-
+    def toggle_complete
       target = @page.find('.trashbox')
       @task.drag_to(target)
     end

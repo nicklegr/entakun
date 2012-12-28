@@ -20,5 +20,9 @@ Capybara.app = Rack::Builder.new do
 end
 
 RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   config.include Capybara::DSL
 end
