@@ -32,7 +32,6 @@ feature 'Task open/close', js: true do
 
     expect(task.can_open?).to be_true
     expect(task.close?).to be_true
-    expect(task.name).not_to eq(LONG_NAME)
     expect(task.truncated?).to be_true
   end
 
@@ -42,11 +41,10 @@ feature 'Task open/close', js: true do
 
     task.toggle_open
     expect(task.open?).to be_true
-    expect(task.name).to eq(LONG_NAME)
+    expect(task.truncated?).to be_false
 
     task.toggle_open
     expect(task.close?).to be_true
-    expect(task.name).not_to eq(LONG_NAME)
     expect(task.truncated?).to be_true
   end
 
@@ -66,7 +64,6 @@ feature 'Task open/close', js: true do
     task.edit(LONG_NAME)
     expect(task.can_open?).to be_true
     expect(task.close?).to be_true
-    expect(task.name).not_to eq(LONG_NAME)
     expect(task.truncated?).to be_true
   end
 
@@ -117,9 +114,7 @@ feature 'Task open/close', js: true do
     task = Test::Task.first(page)
     task.edit(LONG_URL)
 
-    link_text = task.name.gsub(/\.\.\.$/, '')
-
     expect(task.truncated?).to be_true
-    expect(task.elem).to have_link(link_text, href: LONG_URL)
+    expect(task.elem).to have_link(LONG_URL, href: LONG_URL)
   end
 end

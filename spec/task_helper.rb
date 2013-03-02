@@ -62,13 +62,14 @@ module Test
       @task.find('.task_open').visible? && !@task.find('.task_close').visible?
     end
 
-    # 現在の開閉状態で見えているタスク内容
+    # 開閉状態に関わらず、タスクの全文が返る
     def name
       @task.find('.name').text
     end
 
     def truncated?
-      name.match(/\.\.\.$/) != nil
+      id = @task[:id]
+      @page.evaluate_script(%!is_trancated($("##{id}"))!)
     end
 
     def visible?
