@@ -98,7 +98,6 @@ feature 'Task open/close', js: true do
 
     expect(task.can_open?).to be_true
     expect(task.close?).to be_true
-    expect(task.name).not_to eq(LONG_NAME)
     expect(task.truncated?).to be_true
   end
 

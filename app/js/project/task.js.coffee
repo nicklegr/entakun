@@ -124,10 +124,17 @@ add_task_html = (id, name, color, assigned_at) ->
     else
       new_task.find('.name').html(short_task_name(org_name))
 
+    # 切り詰められるか判定するために、一旦閉じた状態にする
+    new_task.find('.name').removeClass('opened')
+
     if !is_trancated(new_task)
       init_open_marker(new_task)
 
     update_open_marker(new_task)
+
+    # 状態を元に戻す
+    if is_task_opened(new_task)
+      new_task.find('.name').addClass('opened')
 
     update_open_all_button() # after marker update
 
