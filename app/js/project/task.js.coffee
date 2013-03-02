@@ -124,7 +124,7 @@ add_task_html = (id, name, color, assigned_at) ->
     else
       new_task.find('.name').html(short_task_name(org_name))
 
-    if !is_trancated(new_task)
+    if !is_long_name(new_task)
       init_open_marker(new_task)
 
     update_open_marker(new_task)
@@ -206,7 +206,7 @@ setup_open_marker = (elem) ->
   )
 
 update_open_marker = (elem) ->
-  if is_trancated(elem)
+  if is_long_name(elem)
     elem.find('.marker').show()
   else
     elem.find('.marker').hide()
@@ -242,11 +242,11 @@ can_open_task = (elem) ->
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
 
-# 現在のタスク内容で、切り捨てが発生しているか？
+# 現在のタスク内容は、切り捨てが発生するような長さか？
 # 判定結果は、タスクの開閉状態に依存しない
 #
 # elemが画面内に表示されている必要がある
-is_trancated = (elem) ->
+is_long_name = (elem) ->
   # 2行以上あれば必ず切り捨てられる
   name = elem.data('name')
   if limit_task_name_len(name) != name

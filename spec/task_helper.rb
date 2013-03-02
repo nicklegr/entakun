@@ -72,7 +72,7 @@ module Test
       # この実装だと、「開いているけど切り捨てられている」という状況を検知できないけど、
       # その判定は難しいので保留する
       id = @task[:id]
-      @page.evaluate_script(%!is_trancated($("##{id}"))!) && close?
+      @page.evaluate_script(%!is_long_name($("##{id}"))!) && close?
     end
 
     def visible?
