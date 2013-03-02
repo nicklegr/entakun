@@ -124,17 +124,10 @@ add_task_html = (id, name, color, assigned_at) ->
     else
       new_task.find('.name').html(short_task_name(org_name))
 
-    # 切り詰められるか判定するために、一旦閉じた状態にする
-    new_task.find('.name').removeClass('opened')
-
     if !is_trancated(new_task)
       init_open_marker(new_task)
 
     update_open_marker(new_task)
-
-    # 状態を元に戻す
-    if is_task_opened(new_task)
-      new_task.find('.name').addClass('opened')
 
     update_open_all_button() # after marker update
 
@@ -249,13 +242,30 @@ can_open_task = (elem) ->
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
 
+# 現在のタスク内容で、切り捨てが発生しているか？
+# 判定結果は、タスクの開閉状態に依存しない
+#
+# elemが画面内に表示されている必要がある
 is_trancated = (elem) ->
+  # 2行以上あれば必ず切り捨てられる
   name = elem.data('name')
   if limit_task_name_len(name) != name
     return true
 
-  name_elem = elem.find('.name')[0]
-  return name_elem.offsetWidth < name_elem.scrollWidth
+  # 1行の場合、切り詰められるか判定するために、一旦閉じた状態にする
+  name_elem = elem.find('.name')
+  opened = name_elem.hasClass('opened')
+
+  if opened
+    name_elem.removeClass('opened')
+
+  name_elem_raw = elem.find('.name')[0]
+  result = name_elem_raw.offsetWidth < name_elem_raw.scrollWidth
+
+  if opened
+    name_elem.addClass('opened')
+
+  result
 
 short_task_name = (name) ->
   link_url(html_escape(limit_task_name_len(name)))
