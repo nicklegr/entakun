@@ -1,5 +1,3 @@
-task_name_max_width = 310
-
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
@@ -96,8 +94,6 @@ add_task_html = (id, name, color, assigned_at) ->
   new_task.find('.name').html(short_task_name(name))
   new_task.show()
 
-  setup_open_marker(new_task)
-
   # delete button
   enable_inplace_delete(new_task, URL.delete_task) # reuse code
   new_task.unbind('hover') # but not hover
@@ -128,10 +124,17 @@ add_task_html = (id, name, color, assigned_at) ->
     else
       new_task.find('.name').html(short_task_name(org_name))
 
-    if !is_trancated(org_name)
+    # 切り詰められるか判定するために、一旦閉じた状態にする
+    new_task.find('.name').removeClass('opened')
+
+    if !is_trancated(new_task)
       init_open_marker(new_task)
 
     update_open_marker(new_task)
+
+    # 状態を元に戻す
+    if is_task_opened(new_task)
+      new_task.find('.name').addClass('opened')
 
     update_open_all_button() # after marker update
 
@@ -175,6 +178,10 @@ add_task_html = (id, name, color, assigned_at) ->
 
   $("#tasks").append(new_task)
 
+  # checks if task name is truncated,
+  # so must be after layouted (after append())
+  setup_open_marker(new_task)
+
   new_task
 
 task_sorted = () ->
@@ -206,7 +213,7 @@ setup_open_marker = (elem) ->
   )
 
 update_open_marker = (elem) ->
-  if is_trancated(elem.data('name'))
+  if is_trancated(elem)
     elem.find('.marker').show()
   else
     elem.find('.marker').hide()
@@ -221,6 +228,7 @@ open_task = (task) ->
     throw new Error("Can't open task #{task.data('id')}: content is single line")
 
   task.find('.name').html(full_task_name(task.data('name')))
+  task.find('.name').addClass('opened')
   task.find('.task_open').hide()
   task.find('.task_close').show()
   update_open_all_button()
@@ -230,6 +238,7 @@ close_task = (task) ->
     throw new Error("Can't close task #{task.data('id')}: content is single line")
 
   task.find('.name').html(short_task_name(task.data('name')))
+  task.find('.name').removeClass('opened')
   task.find('.task_open').show()
   task.find('.task_close').hide()
   update_open_all_button()
@@ -240,19 +249,22 @@ can_open_task = (elem) ->
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
 
-is_trancated = (name) ->
-  name != limit_task_name_len(name)
+is_trancated = (elem) ->
+  name = elem.data('name')
+  if limit_task_name_len(name) != name
+    return true
+
+  name_elem = elem.find('.name')[0]
+  return name_elem.offsetWidth < name_elem.scrollWidth
 
 short_task_name = (name) ->
-  link_url(html_escape(limit_task_name_len(name))) # @todo avoid linking truncated url
+  link_url(html_escape(limit_task_name_len(name)))
 
 full_task_name = (name) ->
   link_url(html_escape(name))
 
 limit_task_name_len = (name) ->
-  ret = name.replace(/\n[\s\S]*$/, "") # get first line
-  ret = truncate_by_width(ret, task_name_max_width, $('#ruler'))
-  ret
+  name.replace(/\n[\s\S]*$/, "") # get first line
 
 link_url = (name) ->
   name.replace(url_regex(), '<a href="$&" target="_blank" onclick="avoid_open_task(arguments[0])">$&</a>')
