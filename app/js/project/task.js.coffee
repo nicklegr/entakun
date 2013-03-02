@@ -249,7 +249,7 @@ is_task_opened = (elem) ->
 is_long_name = (elem) ->
   # 2行以上あれば必ず切り捨てられる
   name = elem.data('name')
-  if limit_task_name_len(name) != name
+  if get_first_line(name) != name
     return true
 
   # 1行の場合、切り詰められるか判定するために、一旦閉じた状態にする
@@ -268,12 +268,12 @@ is_long_name = (elem) ->
   result
 
 short_task_name = (name) ->
-  link_url(html_escape(limit_task_name_len(name)))
+  link_url(html_escape(get_first_line(name)))
 
 full_task_name = (name) ->
   link_url(html_escape(name))
 
-limit_task_name_len = (name) ->
+get_first_line = (name) ->
   name.replace(/\n[\s\S]*$/, "") # get first line
 
 link_url = (name) ->
