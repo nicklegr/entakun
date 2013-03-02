@@ -251,7 +251,7 @@ is_trancated = (elem) ->
   return name_elem.offsetWidth < name_elem.scrollWidth
 
 short_task_name = (name) ->
-  link_url(html_escape(limit_task_name_len(name))) # @todo avoid linking truncated url
+  link_url(html_escape(limit_task_name_len(name)))
 
 full_task_name = (name) ->
   link_url(html_escape(name))
