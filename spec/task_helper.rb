@@ -67,9 +67,12 @@ module Test
       @task.find('.name').text
     end
 
+    # 現在の開閉状態で、タスクの内容が切り捨てられているかどうか
     def truncated?
+      # この実装だと、「開いているけど切り捨てられている」という状況を検知できないけど、
+      # その判定は難しいので保留する
       id = @task[:id]
-      @page.evaluate_script(%!is_trancated($("##{id}"))!)
+      @page.evaluate_script(%!is_trancated($("##{id}"))!) && close?
     end
 
     def visible?
