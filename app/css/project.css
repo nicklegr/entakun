@@ -553,31 +553,31 @@ div#undo {
   タスクの標準設定を上書きするので最後に
 */
 .color-orange {
-  background-color: rgb(255, 190, 73);
+  background-color: rgb(252, 149, 49);
 }
 
 .color-yellow {
-  background-color: rgb(255, 244, 95);
+  background-color: rgb(255, 246, 89);
 }
 
 .color-green {
-  background-color: rgb(198, 223, 124);
+  background-color: rgb(212, 232, 141);
 }
 
 .color-cyan {
-  background-color: rgb(173, 255, 216);
+  background-color: rgb(95, 217, 253);
 }
 
 .color-blue {
-  background-color: rgb(186, 186, 255);
+  background-color: rgb(164, 124, 219);
 }
 
 .color-pink {
-  background-color: rgb(248, 199, 224);
+  background-color: rgb(252, 152, 188);
 }
 
 .color-gray {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(245, 245, 245);
 }
 
 .brush-orange {
