@@ -611,3 +611,22 @@ div#undo {
 footer {
   text-align: center;
 }
+
+@media print {
+  body {
+    margin-left: 3%;
+    padding-top: 2%;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .column-tasks { width: 46%; }
+  div#incoming-tasks { width: 100%; }
+  .task .name-box { width: 100%; }
+  .task .name { width: 100%; }
+
+  .column-staffs { width: 46%; }
+  .column-staffs-bottom { border-right: none; }
+  div#staff-container { width: 100%; }
+
+  .no-print { display: none; }
+}
