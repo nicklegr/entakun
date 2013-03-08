@@ -627,7 +627,7 @@ footer {
 
   div#incoming-tasks { width: 100%; }
   .task .name-box { width: 100%; }
-  .task .name { width: 100%; }
+  .task .name { width: 96%; }
 
   .print-task-only {
     float: none;
