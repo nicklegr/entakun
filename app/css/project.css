@@ -619,7 +619,12 @@ footer {
     -webkit-print-color-adjust: exact;
   }
 
-  .column-tasks { width: 46%; }
+  .column-tasks {
+    width: 46%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   div#incoming-tasks { width: 100%; }
   .task .name-box { width: 100%; }
   .task .name { width: 100%; }
@@ -629,4 +634,5 @@ footer {
   div#staff-container { width: 100%; }
 
   .no-print { display: none; }
+  .no-float-on-print { float: none; }
 }
