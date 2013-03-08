@@ -69,7 +69,7 @@ setup_trash_toggle = () ->
 
         # 完了タスクを印刷する際は、
         # スタッフリストを非表示にし、タスクをセンタリングする
-        $('.column-tasks').addClass('no-float-on-print')
+        $('.column-tasks').addClass('print-task-only')
         $('.column-staffs').addClass('no-print')
 
         disable_staffs()
@@ -87,7 +87,7 @@ setup_trash_toggle = () ->
         $('#trashbox-img .trash').show()
         $('#trashbox-img .recycle').hide()
 
-        $('.column-tasks').removeClass('no-float-on-print')
+        $('.column-tasks').removeClass('print-task-only')
         $('.column-staffs').removeClass('no-print')
 
         enable_staffs()

@@ -629,10 +629,15 @@ footer {
   .task .name-box { width: 100%; }
   .task .name { width: 100%; }
 
+  .print-task-only {
+    float: none;
+    padding-right: 0;
+    border-right: none;
+  }
+
   .column-staffs { width: 46%; }
   .column-staffs-bottom { border-right: none; }
   div#staff-container { width: 100%; }
 
   .no-print { display: none; }
-  .no-float-on-print { float: none; }
 }
