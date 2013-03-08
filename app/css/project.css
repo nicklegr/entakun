@@ -641,5 +641,8 @@ footer {
   .staff .name { width: 90%; }
   .newest, .newer { width: 10%; }
 
+  div#followee-container { width: 100%; }
+  .followee .name { width: 90%; }
+
   .no-print { display: none; }
 }
