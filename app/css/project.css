@@ -638,6 +638,8 @@ footer {
   .column-staffs { width: 46%; }
   .column-staffs-bottom { border-right: none; }
   div#staff-container { width: 100%; }
+  .staff .name { width: 90%; }
+  .newest, .newer { width: 10%; }
 
   .no-print { display: none; }
 }
