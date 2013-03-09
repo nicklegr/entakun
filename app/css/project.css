@@ -493,8 +493,8 @@ div#undo {
 
 .start-here {
   position: absolute;
-  left: -39px;
-  top: 329px;
+  left: 29px;
+  top: 314px;
 }
 
 .new-task {
@@ -511,7 +511,7 @@ div#undo {
 
 .move-by-drag {
   position: absolute;
-  left: 167px;
+  left: 163px;
   top: 150px;
 }
 
@@ -523,20 +523,20 @@ div#undo {
 
 .to-trash {
   position: absolute;
-  left: 587px;
+  left: 562px;
   top: 177px;
 }
 
 .replay {
   position: absolute;
-  left: 617px;
-  top: 428px;
+  left: 602px;
+  top: 379px;
 }
 
 .arrow-left {
   position: absolute;
-  left: -38px;
-  top: 20px;
+  left: 44px;
+  top: 28px;
 }
 
 .arrow-next-1 {
@@ -553,8 +553,8 @@ div#undo {
 
 .arrow-right {
   position: absolute;
-  left: 926px;
-  top: -40px;
+  left: 915px;
+  top: -28px;
 }
 
 /*
