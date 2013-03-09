@@ -28,7 +28,7 @@ setup_task_list = () ->
         if !$('#show_trashes_check').attr('checked')
           ui.item.hide()
 
-        $('#tasks').append(ui.item)
+        $('#tasks').prepend(ui.item)
   })
 
 setup_task_input = () ->
@@ -58,6 +58,7 @@ load_tasks = () ->
 
   $.each(tasks, (i) ->
     task = add_task_html(this._id, this.name, this.color, this.assigned_at)
+    task.appendTo(task.parent()) # preserve order
     if this.complete
       task.addClass('completed')
       if !$('#show_trashes_check').attr('checked')
@@ -169,10 +170,10 @@ add_task_html = (id, name, color, assigned_at) ->
   })
   new_task.draggable('disable')
 
-  $("#tasks").append(new_task)
+  $("#tasks").prepend(new_task)
 
   # checks if task name is truncated,
-  # so must be after layouted (after append())
+  # so must be after layouted (after prepend())
   setup_open_marker(new_task)
 
   new_task

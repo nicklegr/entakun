@@ -15,7 +15,8 @@ feature 'Task', js: true do
 
   scenario 'Add task' do
     fill_in 'task', with: "task 1\n"
-    expect(Test::Task.at(page, 1).name).to eq('task 1')
+    expect(Test::Task.at(page, 0).name).to eq('task 1')
+    expect(Test::Task.at(page, 1).name).to eq('test task')
   end
 
   scenario 'Edit task' do

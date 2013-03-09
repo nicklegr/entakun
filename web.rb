@@ -115,23 +115,23 @@ class App < Sinatra::Base
     key = params[:project]
     project = Project.where(key: key).first
 
-    # order_by([[:position, :asc], [:created_at, :asc]])を意図
+    # order_by([[:position, :asc], [:created_at, :desc]])を意図
     # なぜか複数のキーでorder_byできないので手動で
     tasks = project.tasks.where(complete: false).to_a.sort{|a, b|
       if a.position && b.position
         a.position <=> b.position
       elsif a.position
-        -1
-      elsif b.position
         1
+      elsif b.position
+        -1
       elsif a.created_at && b.created_at
-        a.created_at <=> b.created_at
+        b.created_at <=> a.created_at
       else
         0
       end
     }
 
-    completes = project.tasks.where(complete: true).order_by(completed_at: :asc)
+    completes = project.tasks.where(complete: true).order_by(completed_at: :desc)
 
     (tasks + completes).to_json
   end

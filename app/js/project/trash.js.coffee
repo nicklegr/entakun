@@ -18,7 +18,7 @@ setup_trashbox = () ->
     drop: (event, ui) ->
       if showing_trashes()
         ui.draggable.removeClass('completed')
-        $('#tasks').append(ui.draggable) # move to last
+        $('#tasks').prepend(ui.draggable) # move to first
         $.post(URL.recycle_task, { project: project_key, task_id: ui.draggable.data('id') }, () ->
           # update position of recycled task
           task_sorted()
