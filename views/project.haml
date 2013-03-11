@@ -91,7 +91,9 @@
           %span#ruler{ style: 'visibility:hidden; position:absolute; white-space:nowrap;' }
           #task-template.task{ style: 'display: none;' }
             .name-box
-              .name (タスク内容)
+              .name
+                .header (タスク内容)
+                .body{ style: "display: none;" }
               .edit{ style: "display: none;" }
                 %img.edit_button.no-print{ src: url_for('/img/pencil.png') }
               .marker
@@ -134,7 +136,9 @@
             .followee-task
               .task
                 .name-box
-                  .name (タスク内容)
+                  .name
+                    .header (タスク内容)
+                    .body{ style: "display: none;" }
                   .marker
                     %img.task_open{ src: url_for('/img/Task_Open.png') }
                     %img.task_close{ src: url_for('/img/Task_Close.png') }

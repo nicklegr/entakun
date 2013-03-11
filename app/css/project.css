@@ -212,7 +212,9 @@ div#incoming-tasks {
 .task .name {
   width: 310px;
   float: left;
+}
 
+.task .name .header {
   white-space: nowrap;
   overflow: hidden; /* "overflow" の値は "visible" 以外のものを指定する */
 
@@ -220,7 +222,8 @@ div#incoming-tasks {
   text-overflow: ellipsis;
 }
 
-.task .name.opened {
+.task .name .header.opened,
+.task .name .body {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;

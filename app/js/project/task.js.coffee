@@ -1,3 +1,5 @@
+TASK_SLIDE_TIME = 100
+
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
@@ -92,7 +94,7 @@ add_task_html = (id, name, color, assigned_at) ->
 
   new_task.attr('id', 'task_' + id)
   new_task.addClass('color-' + color)
-  new_task.find('.name').html(short_task_name(name))
+  set_name(new_task, name)
   new_task.show()
 
   # delete button
@@ -120,10 +122,7 @@ add_task_html = (id, name, color, assigned_at) ->
     org_name = new_task.find('.comment').val()
     new_task.data('name', org_name)
 
-    if is_task_opened(new_task)
-      new_task.find('.name').html(full_task_name(org_name))
-    else
-      new_task.find('.name').html(short_task_name(org_name))
+    set_name(new_task, org_name)
 
     if !is_long_name(new_task)
       init_open_marker(new_task)
@@ -221,8 +220,8 @@ open_task = (task) ->
   if !can_open_task(task)
     throw new Error("Can't open task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(full_task_name(task.data('name')))
-  task.find('.name').addClass('opened')
+  task.find('.name > .header').addClass('opened')
+  task.find('.name > .body').slideDown(TASK_SLIDE_TIME)
   task.find('.task_open').hide()
   task.find('.task_close').show()
   update_open_all_button()
@@ -231,8 +230,8 @@ close_task = (task) ->
   if !can_open_task(task)
     throw new Error("Can't close task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(short_task_name(task.data('name')))
-  task.find('.name').removeClass('opened')
+  task.find('.name > .header').removeClass('opened')
+  task.find('.name > .body').slideUp(TASK_SLIDE_TIME)
   task.find('.task_open').show()
   task.find('.task_close').hide()
   update_open_all_button()
@@ -254,13 +253,13 @@ is_long_name = (elem) ->
     return true
 
   # 1行の場合、切り詰められるか判定するために、一旦閉じた状態にする
-  name_elem = elem.find('.name')
+  name_elem = elem.find('.name > .header')
   opened = name_elem.hasClass('opened')
 
   if opened
     name_elem.removeClass('opened')
 
-  name_elem_raw = elem.find('.name')[0]
+  name_elem_raw = elem.find('.name > .header')[0]
   result = name_elem_raw.offsetWidth < name_elem_raw.scrollWidth
 
   if opened
@@ -268,14 +267,23 @@ is_long_name = (elem) ->
 
   result
 
-short_task_name = (name) ->
-  link_url(html_escape(get_first_line(name)))
+set_name = (elem, name) ->
+  elem.find('.name > .header').html(get_header(name))
+  elem.find('.name > .body').html(get_body(name))
 
-full_task_name = (name) ->
-  link_url(html_escape(name))
+get_header = (name) ->
+  str = get_first_line(name)
+  link_url(html_escape(str))
+
+get_body = (name) ->
+  if name.match(/\n/)
+    str = name.replace(/^.*\n/, "") # cut first line
+    link_url(html_escape(str))
+  else
+    ""
 
 get_first_line = (name) ->
-  name.replace(/\n[\s\S]*$/, "") # get first line
+  name.replace(/\n[\s\S]*$/, "")
 
 link_url = (name) ->
   name.replace(url_regex(), '<a href="$&" target="_blank" onclick="avoid_open_task(arguments[0])">$&</a>')
