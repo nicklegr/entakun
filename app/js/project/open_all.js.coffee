@@ -6,13 +6,13 @@ setup_open_all_button = () ->
       listed_tasks().each(() ->
         if can_open_task($(this))
           if !is_task_opened($(this))
-            open_task($(this))
+            open_task($(this), TASK_OPEN_TIME_SLOW)
       )
     else
       listed_tasks().each(() ->
         if can_open_task($(this))
           if is_task_opened($(this))
-            close_task($(this))
+            close_task($(this), TASK_OPEN_TIME_SLOW)
       )
   )
 

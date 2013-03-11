@@ -1,3 +1,6 @@
+TASK_OPEN_TIME_FAST = 100
+TASK_OPEN_TIME_SLOW = 200
+
 setup_task_list = () ->
   $("#tasks").sortable({
     connectWith: ".assigned-task",
@@ -217,24 +220,48 @@ init_open_marker = (elem) ->
   elem.find('.task_open').show()
   elem.find('.task_close').hide()
 
-open_task = (task) ->
+open_task = (task, time = TASK_OPEN_TIME_FAST) ->
   if !can_open_task(task)
     throw new Error("Can't open task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(full_task_name(task.data('name')))
-  task.find('.name').addClass('opened')
+  name = task.find('.name')
+
+  close_height = name.outerHeight(true)
+
+  name.html(full_task_name(task.data('name')))
+  name.addClass('opened')
   task.find('.task_open').hide()
   task.find('.task_close').show()
+
+  open_height = name.outerHeight(true)
+
+  name.css('height', close_height + 'px')
+  name.animate({height: open_height + 'px'}, time, 'swing', () ->
+    name.css('height', '')
+  )
+
   update_open_all_button()
 
-close_task = (task) ->
+close_task = (task, time = TASK_OPEN_TIME_FAST) ->
   if !can_open_task(task)
     throw new Error("Can't close task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(short_task_name(task.data('name')))
-  task.find('.name').removeClass('opened')
+  name = task.find('.name')
+
+  open_height = name.outerHeight(true)
+
+  name.html(short_task_name(task.data('name')))
+  name.removeClass('opened')
   task.find('.task_open').show()
   task.find('.task_close').hide()
+
+  close_height = name.outerHeight(true)
+
+  name.css('height', open_height + 'px')
+  name.animate({height: close_height + 'px'}, time, 'swing', () ->
+    name.css('height', '')
+  )
+
   update_open_all_button()
 
 can_open_task = (elem) ->
