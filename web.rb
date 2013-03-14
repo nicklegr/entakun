@@ -7,6 +7,9 @@ require 'sinatra/content_for'
 require 'haml'
 require 'coffee-script'
 require './db'
+require './constant'
+
+Tilt::CoffeeScriptTemplate.default_bare = true
 
 class App < Sinatra::Base
   helpers Sinatra::UrlForHelper
@@ -20,18 +23,22 @@ class App < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  set :root, File.dirname(__FILE__)
+  set :views, root + '/views'
+  set :public_folder, root + '/public'
+  set :run, false # this line tells mongrel not to run and to let passenger handle the application
+
   set :haml, :format => :html5
 
-  # タスク・スタッフの色
-  COLORS = [
-    'orange',
-    'yellow',
-    'green',
-    'cyan',
-    'blue',
-    'pink',
-    'gray',
-  ]
+  set :sprockets, Sprockets::Environment.new(root){ |environment|
+    environment.append_path 'app/js'
+    environment.append_path 'app/css'
+
+    if ENV['RACK_ENV'] == 'production'
+      environment.js_compressor  = YUI::JavaScriptCompressor.new(munge: true)
+      environment.css_compressor = YUI::CssCompressor.new
+    end
+  }
 
   def next_color(staffs)
     # 次のスタッフの色を決定する
@@ -74,8 +81,7 @@ class App < Sinatra::Base
 
   post '/new_project' do
     project_key = SecureRandom.hex(8)
-    project = Project.create({ key: project_key, name: '新規プロジェクト' })
-    project.staffs.create(name: '担当者1', color: COLORS.first)
+    Project.new_project(project_key)
 
     redirect url_for("/projects/#{project_key}")
   end
@@ -109,23 +115,23 @@ class App < Sinatra::Base
     key = params[:project]
     project = Project.where(key: key).first
 
-    # order_by([[:position, :asc], [:created_at, :asc]])を意図
+    # order_by([[:position, :asc], [:created_at, :desc]])を意図
     # なぜか複数のキーでorder_byできないので手動で
     tasks = project.tasks.where(complete: false).to_a.sort{|a, b|
       if a.position && b.position
         a.position <=> b.position
       elsif a.position
-        -1
-      elsif b.position
         1
+      elsif b.position
+        -1
       elsif a.created_at && b.created_at
-        a.created_at <=> b.created_at
+        b.created_at <=> a.created_at
       else
         0
       end
     }
 
-    completes = project.tasks.where(complete: true).order_by(completed_at: :asc)
+    completes = project.tasks.where(complete: true).order_by(completed_at: :desc)
 
     (tasks + completes).to_json
   end
@@ -142,7 +148,7 @@ class App < Sinatra::Base
     name = params[:name]
 
     project = Project.where(key: key).first
-    task = project.tasks.create(name: name, complete: false, color: 'gray')
+    task = project.new_task(name)
 
     "#{task._id}"
   end

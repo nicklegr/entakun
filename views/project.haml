@@ -8,7 +8,7 @@
 
 .fade-plane{ style: "display: none;" }
 
-.navbar.navbar-fixed-top
+.navbar.navbar-fixed-top.no-print
   .titlebar
     .container
       .logo
@@ -23,14 +23,17 @@
       .tutorial-button
         %img{ src: url_for('/img/Hatena.png') }
 
+      .print-button
+        %img{ src: url_for('/img/Print.png') }
+
     #bookmark-reminder{ style: "display: none;" }
       %img{ src: url_for('/img/Tutorial/Bookmark_Reminder.png') }
 
 .container
-  .alert{ style: "display: none;" }
+  .alert.no-print{ style: "display: none;" }
     (Alert message)
 
-  #tutorial{ style: "display: none;" }
+  #tutorial.no-print{ style: "display: none;" }
     %img.start-here{ src: url_for('/img/Tutorial/Start_Here.png') }
     %img.new-task{ src: url_for('/img/Tutorial/New_Task.png') }
     %img.created-tasks{ src: url_for('/img/Tutorial/Created_Tasks.png') }
@@ -44,7 +47,7 @@
     %img.arrow-next-2{ src: url_for('/img/Tutorial/Arrow_Next.png') }
     %img.arrow-right{ src: url_for('/img/Tutorial/Arrow_Right.png') }
 
-  .row
+  .row.no-print
     .span1.input-eyecatch
       %img{ src: url_for('/img/Input.png') }
     .column-tasks
@@ -65,7 +68,7 @@
           %input#show_trashes_check{ type: "checkbox" } 完了を表示
 
   .row
-    .palette.span1
+    .palette.span1.no-print
       - @colors.each do |color|
         .color-box{ :"data-color-name" => color }
           .color-box-inner{ class: "color-#{color}" }
@@ -90,7 +93,7 @@
             .name-box
               .name (タスク内容)
               .edit{ style: "display: none;" }
-                %img.edit_button{ src: url_for('/img/pencil.png') }
+                %img.edit_button.no-print{ src: url_for('/img/pencil.png') }
               .marker
                 %img.task_open{ src: url_for('/img/Task_Open.png') }
                 %img.task_close{ src: url_for('/img/Task_Close.png') }
@@ -114,7 +117,7 @@
               .newer
                 %img{ src: url_for('/img/Newer.png') }
               .edit{ style: "display: none;" }
-                %img.edit_button{ src: url_for('/img/pencil.png') }
+                %img.edit_button.no-print{ src: url_for('/img/pencil.png') }
             .assigned-task.sortable
 
       #followee-container
@@ -127,7 +130,7 @@
               .newer
                 %img{ src: url_for('/img/Newer.png') }
               .delete{ style: "display: none;" }
-                %img.edit_button{ src: url_for('/img/cancel.png') }
+                %img.edit_button.no-print{ src: url_for('/img/cancel.png') }
             .followee-task
               .task
                 .name-box
@@ -137,7 +140,7 @@
                     %img.task_close{ src: url_for('/img/Task_Close.png') }
                   .clear
 
-    .column-trash
+    .column-trash.no-print
       .trashbox
         #trashbox-img
           .trash

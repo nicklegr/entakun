@@ -130,9 +130,9 @@ update_followee = (elem, data) ->
         if is_task_opened(task)
           task.find('.name').text(data.task_name)
         else
-          task.find('.name').text(limit_task_name_len(data.task_name))
+          task.find('.name').text(get_first_line(data.task_name))
 
-        if !is_trancated(data.task_name)
+        if !is_long_name(task)
           init_open_marker(task)
 
         update_open_marker(task)

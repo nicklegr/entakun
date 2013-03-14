@@ -18,7 +18,7 @@ setup_trashbox = () ->
     drop: (event, ui) ->
       if showing_trashes()
         ui.draggable.removeClass('completed')
-        $('#tasks').append(ui.draggable) # move to last
+        $('#tasks').prepend(ui.draggable) # move to first
         $.post(URL.recycle_task, { project: project_key, task_id: ui.draggable.data('id') }, () ->
           # update position of recycled task
           task_sorted()
@@ -67,6 +67,11 @@ setup_trash_toggle = () ->
         $('#trashbox-img .trash').hide()
         $('#trashbox-img .recycle').show()
 
+        # 完了タスクを印刷する際は、
+        # スタッフリストを非表示にし、タスクをセンタリングする
+        $('.column-tasks').addClass('print-task-only')
+        $('.column-staffs').addClass('no-print')
+
         disable_staffs()
       else
         $('#tasks .task').not('#task-template').show()
@@ -81,6 +86,9 @@ setup_trash_toggle = () ->
 
         $('#trashbox-img .trash').show()
         $('#trashbox-img .recycle').hide()
+
+        $('.column-tasks').removeClass('print-task-only')
+        $('.column-staffs').removeClass('no-print')
 
         enable_staffs()
 

@@ -1,4 +1,5 @@
-task_name_max_width = 310
+TASK_OPEN_TIME_FAST = 100
+TASK_OPEN_TIME_SLOW = 200
 
 setup_task_list = () ->
   $("#tasks").sortable({
@@ -30,7 +31,7 @@ setup_task_list = () ->
         if !$('#show_trashes_check').attr('checked')
           ui.item.hide()
 
-        $('#tasks').append(ui.item)
+        $('#tasks').prepend(ui.item)
   })
 
 setup_task_input = () ->
@@ -60,6 +61,7 @@ load_tasks = () ->
 
   $.each(tasks, (i) ->
     task = add_task_html(this._id, this.name, this.color, this.assigned_at)
+    task.appendTo(task.parent()) # preserve order
     if this.complete
       task.addClass('completed')
       if !$('#show_trashes_check').attr('checked')
@@ -96,8 +98,6 @@ add_task_html = (id, name, color, assigned_at) ->
   new_task.find('.name').html(short_task_name(name))
   new_task.show()
 
-  setup_open_marker(new_task)
-
   # delete button
   enable_inplace_delete(new_task, URL.delete_task) # reuse code
   new_task.unbind('hover') # but not hover
@@ -117,6 +117,8 @@ add_task_html = (id, name, color, assigned_at) ->
     end_edit_task(new_task)
   )
   new_task.find('.btn.ok').click(() ->
+    end_edit_task(new_task)
+
     # update task title & internal data
     org_name = new_task.find('.comment').val()
     new_task.data('name', org_name)
@@ -126,12 +128,12 @@ add_task_html = (id, name, color, assigned_at) ->
     else
       new_task.find('.name').html(short_task_name(org_name))
 
-    if !is_trancated(org_name)
+    if !is_long_name(new_task)
       init_open_marker(new_task)
 
     update_open_marker(new_task)
 
-    end_edit_task(new_task) # after marker update
+    update_open_all_button() # after marker update
 
     # send to server
     $.post(URL.edit_task,
@@ -171,7 +173,11 @@ add_task_html = (id, name, color, assigned_at) ->
   })
   new_task.draggable('disable')
 
-  $("#tasks").append(new_task)
+  $("#tasks").prepend(new_task)
+
+  # checks if task name is truncated,
+  # so must be after layouted (after prepend())
+  setup_open_marker(new_task)
 
   new_task
 
@@ -204,7 +210,7 @@ setup_open_marker = (elem) ->
   )
 
 update_open_marker = (elem) ->
-  if is_trancated(elem.data('name'))
+  if is_long_name(elem)
     elem.find('.marker').show()
   else
     elem.find('.marker').hide()
@@ -214,22 +220,48 @@ init_open_marker = (elem) ->
   elem.find('.task_open').show()
   elem.find('.task_close').hide()
 
-open_task = (task) ->
+open_task = (task, time = TASK_OPEN_TIME_FAST) ->
   if !can_open_task(task)
     throw new Error("Can't open task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(full_task_name(task.data('name')))
+  name = task.find('.name')
+
+  close_height = name.outerHeight(true)
+
+  name.html(full_task_name(task.data('name')))
+  name.addClass('opened')
   task.find('.task_open').hide()
   task.find('.task_close').show()
+
+  open_height = name.outerHeight(true)
+
+  name.css('height', close_height + 'px')
+  name.animate({height: open_height + 'px'}, time, 'swing', () ->
+    name.css('height', '')
+  )
+
   update_open_all_button()
 
-close_task = (task) ->
+close_task = (task, time = TASK_OPEN_TIME_FAST) ->
   if !can_open_task(task)
     throw new Error("Can't close task #{task.data('id')}: content is single line")
 
-  task.find('.name').html(short_task_name(task.data('name')))
+  name = task.find('.name')
+
+  open_height = name.outerHeight(true)
+
+  name.html(short_task_name(task.data('name')))
+  name.removeClass('opened')
   task.find('.task_open').show()
   task.find('.task_close').hide()
+
+  close_height = name.outerHeight(true)
+
+  name.css('height', open_height + 'px')
+  name.animate({height: close_height + 'px'}, time, 'swing', () ->
+    name.css('height', '')
+  )
+
   update_open_all_button()
 
 can_open_task = (elem) ->
@@ -238,19 +270,39 @@ can_open_task = (elem) ->
 is_task_opened = (elem) ->
   elem.find('.task_close').is(":visible")
 
-is_trancated = (name) ->
-  name != limit_task_name_len(name)
+# 現在のタスク内容は、切り捨てが発生するような長さか？
+# 判定結果は、タスクの開閉状態に依存しない
+#
+# elemが画面内に表示されている必要がある
+is_long_name = (elem) ->
+  # 2行以上あれば必ず切り捨てられる
+  name = elem.data('name')
+  if get_first_line(name) != name
+    return true
+
+  # 1行の場合、切り詰められるか判定するために、一旦閉じた状態にする
+  name_elem = elem.find('.name')
+  opened = name_elem.hasClass('opened')
+
+  if opened
+    name_elem.removeClass('opened')
+
+  name_elem_raw = elem.find('.name')[0]
+  result = name_elem_raw.offsetWidth < name_elem_raw.scrollWidth
+
+  if opened
+    name_elem.addClass('opened')
+
+  result
 
 short_task_name = (name) ->
-  link_url(html_escape(limit_task_name_len(name))) # @todo avoid linking truncated url
+  link_url(html_escape(get_first_line(name)))
 
 full_task_name = (name) ->
   link_url(html_escape(name))
 
-limit_task_name_len = (name) ->
-  ret = name.replace(/\n[\s\S]*$/, "") # get first line
-  ret = truncate_by_width(ret, task_name_max_width, $('#ruler'))
-  ret
+get_first_line = (name) ->
+  name.replace(/\n[\s\S]*$/, "") # get first line
 
 link_url = (name) ->
   name.replace(url_regex(), '<a href="$&" target="_blank" onclick="avoid_open_task(arguments[0])">$&</a>')

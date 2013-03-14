@@ -3,11 +3,19 @@ img.edit_button {
   cursor: pointer;
 }
 
-.tutorial-button {
+.print-button, .tutorial-button {
   float: right;
-  padding-right: 13px;
   padding-top: 8px;
   cursor: pointer;
+}
+
+.print-button {
+  margin-right: 12px;
+}
+
+.tutorial-button {
+  padding-left: 13px; /* marginじゃないのは、クリック判定を広くするため */
+  padding-right: 13px;
 }
 
 .tutorial-button.disabled {
@@ -205,11 +213,19 @@ div#incoming-tasks {
   width: 310px;
   float: left;
 
-  white-space: pre-wrap; /* css-3 */
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  white-space: nowrap;
+  overflow: hidden; /* "overflow" の値は "visible" 以外のものを指定する */
+
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.task .name.opened {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
 
 .task .edit-box {
@@ -477,8 +493,8 @@ div#undo {
 
 .start-here {
   position: absolute;
-  left: -39px;
-  top: 329px;
+  left: 29px;
+  top: 314px;
 }
 
 .new-task {
@@ -495,7 +511,7 @@ div#undo {
 
 .move-by-drag {
   position: absolute;
-  left: 167px;
+  left: 163px;
   top: 150px;
 }
 
@@ -507,20 +523,20 @@ div#undo {
 
 .to-trash {
   position: absolute;
-  left: 587px;
+  left: 562px;
   top: 177px;
 }
 
 .replay {
   position: absolute;
-  left: 617px;
-  top: 428px;
+  left: 602px;
+  top: 379px;
 }
 
 .arrow-left {
   position: absolute;
-  left: -38px;
-  top: 20px;
+  left: 44px;
+  top: 28px;
 }
 
 .arrow-next-1 {
@@ -537,8 +553,8 @@ div#undo {
 
 .arrow-right {
   position: absolute;
-  left: 926px;
-  top: -40px;
+  left: 915px;
+  top: -28px;
 }
 
 /*
@@ -549,27 +565,27 @@ div#undo {
 }
 
 .color-yellow {
-  background-color: rgb(255, 244, 95);
+  background-color: rgb(255, 246, 89);
 }
 
 .color-green {
-  background-color: rgb(198, 223, 124);
+  background-color: rgb(212, 232, 141);
 }
 
 .color-cyan {
-  background-color: rgb(173, 255, 216);
+  background-color: rgb(108, 223, 253);
 }
 
 .color-blue {
-  background-color: rgb(186, 186, 255);
+  background-color: rgb(154, 162, 231);
 }
 
 .color-pink {
-  background-color: rgb(248, 199, 224);
+  background-color: rgb(253, 165, 198);
 }
 
 .color-gray {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(245, 245, 245);
 }
 
 .brush-orange {
@@ -602,4 +618,39 @@ div#undo {
 
 footer {
   text-align: center;
+}
+
+@media print {
+  body {
+    margin-left: 3%;
+    padding-top: 2%;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .column-tasks {
+    width: 46%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  div#incoming-tasks { width: 100%; }
+  .task .name-box { width: 100%; }
+  .task .name { width: 96%; }
+
+  .print-task-only {
+    float: none;
+    padding-right: 0;
+    border-right: none;
+  }
+
+  .column-staffs { width: 46%; }
+  .column-staffs-bottom { border-right: none; }
+  div#staff-container { width: 100%; }
+  .staff-name .name { width: 90%; }
+  .newest, .newer { width: 10%; }
+
+  div#followee-container { width: 100%; }
+  .followee-name .name { width: 90%; }
+
+  .no-print { display: none; }
 }
