@@ -470,14 +470,6 @@ div#undo {
   color: silver;
 }
 
-/*
-  タスク割り当て済みのSortableにドロップしようとしたとき、
-  リストの既存アイテムが動かないようにする
-*/
-.assigned-task > .ui-sortable-placeholder {
-  display: none;
-}
-
 #project-url {
   width: 516px;
 }
