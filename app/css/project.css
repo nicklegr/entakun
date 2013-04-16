@@ -201,7 +201,7 @@ div#incoming-tasks {
 .assigned-task, .followee-task {
   width: auto;
   min-height: 33px;
-  padding: 1px;
+  padding: 1px 1px 0 1px;
 }
 
 .followee-task > .task {
@@ -454,6 +454,11 @@ div#undo {
 /* タスクリストの中のみ、隣のタスクとのマージンを空ける */
 #tasks .task {
   margin-bottom: 3px;
+}
+
+/* デザイン上、割り当て済みタスクはマージンを小さく */
+.assigned-task .task {
+  margin-bottom: 1px;
 }
 
 .task span {
