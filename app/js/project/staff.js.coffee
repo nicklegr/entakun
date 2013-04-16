@@ -16,18 +16,20 @@ load_staffs = () ->
 
     staff = add_staff_html(this._id, this.name, color)
 
-    if this.task_id
-      task = $('#task_' + this.task_id)
-      staff.find('.assigned-task').append(task)
+    if this.task_ids
+      $.each(this.task_ids, (i) ->
+        task = $('#task_' + this)
+        staff.find('.assigned-task').append(task)
 
-      if task.data('assigned_at')
-        assigned_time = Date.parse(task.data('assigned_at'))
-        now = new Date()
+        if task.data('assigned_at')
+          assigned_time = Date.parse(task.data('assigned_at'))
+          now = new Date()
 
-        if now - assigned_time < newest_time
-          set_staff_newest(staff)
-        else if now - assigned_time < newer_time
-          set_staff_newer(staff)
+          if now - assigned_time < newest_time
+            set_staff_newest(staff)
+          else if now - assigned_time < newer_time
+            set_staff_newer(staff)
+      )
   )
 
 setup_add_staff_link = () ->
@@ -74,11 +76,10 @@ add_staff_html = (id, name, color) ->
     containment: 'document',
     distance: 7,
 
+    # @todo disable sorting
+
     receive: (event, ui) ->
-      if $(this).find('.task').length >= 2
-        # Don't assign multiple tasks to one person
-        $(ui.sender).sortable('cancel')
-      else if ui.item.hasClass('completed')
+      if ui.item.hasClass('completed')
         # avoid completed task assign
         $(ui.sender).sortable('cancel')
       else
