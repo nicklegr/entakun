@@ -184,16 +184,16 @@ class App < Sinatra::Base
     id = params[:id]
 
     project = Project.where(key: key).first
-    staff = project.staffs.where(task_id: id).first
+    staff = project.staffs.where({ :task_ids.in => [ id ] }).first
 
     if staff
       # 割り当て済みなら割り当て解除
-      Project.collection.find({ '_id' => project._id, 'staffs._id' => staff._id }).update(
-        {
-          "$pull"=>{"tasks"=>{ '_id' => Moped::BSON::ObjectId(id) } },
-          "$unset"=>{"staffs.$.task_id"=>1},
+      Project.collection.find({ '_id' => project._id, 'staffs._id' => staff._id }).update({
+        "$pull" => {
+          "tasks" => { '_id' => Moped::BSON::ObjectId(id) },
+          "staffs.$.task_ids" => id,
         }
-      )
+      })
     else
       project.tasks.find(id).destroy
     end
@@ -210,9 +210,9 @@ class App < Sinatra::Base
     task.complete = true
     task.completed_at = Time.now
 
-    assigned_staff = project.staffs.where(task_id: id).first
+    assigned_staff = project.staffs.where({ :task_ids.in => [ id ] }).first
     if assigned_staff
-      assigned_staff.remove_attribute(:task_id)
+      assigned_staff.pull(:task_ids, id)
     end
 
     project.save!
@@ -311,14 +311,14 @@ class App < Sinatra::Base
     task = project.tasks.where(_id: task_id, complete: false).first
     if task
       # 誰かに割り当て済みならそちらを解除する
-      old_staff = project.staffs.where(task_id: task_id).first
+      old_staff = project.staffs.where({ :task_ids.in => [ task_id ] }).first
       if old_staff
-        old_staff.remove_attribute(:task_id)
+        old_staff.pull(:task_ids, task_id)
       end
 
       # 割り当て
       staff = project.staffs.find(staff_id)
-      staff.task_id = task_id
+      staff.push(:task_ids, task_id)
 
       task.assigned_at = Time.now
 
@@ -334,8 +334,8 @@ class App < Sinatra::Base
     task_id = params[:task_id]
 
     project = Project.where(key: key).first
-    staff = project.staffs.where(task_id: task_id).first
-    staff.unset(:task_id)
+    staff = project.staffs.where({ :task_ids.in => [ task_id ] }).first
+    staff.pull(:task_ids, task_id)
 
     project.tasks.find(task_id).remove_attribute(:assigned_at)
 
@@ -360,9 +360,9 @@ class App < Sinatra::Base
       if staff
         staff_name = staff.name
 
-        if staff.task_id
+        if staff.task_ids.size >= 1
           # taskは確実にあるはず
-          task = project.tasks.find(staff.task_id)
+          task = project.tasks.find(staff.task_ids.first)
           task_name = task.name
           assigned_at = task.assigned_at
         end

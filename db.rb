@@ -43,7 +43,7 @@ class Staff
   include Mongoid::Timestamps
   field :name, type: String
   field :color, type: String
-  field :task_id, type: Moped::BSON::ObjectId # embedded docはhas_oneできないので
+  field :task_ids, type: Array # Moped::BSON::ObjectId # embedded docはhas_manyできないので
   embedded_in :project
 end
 
