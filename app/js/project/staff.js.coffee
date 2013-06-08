@@ -104,7 +104,7 @@ add_staff_html = (id, name, color) ->
         if !$('#show_trashes_check').attr('checked')
           ui.item.hide()
 
-        $('#tasks').append(ui.item)
+        $('#tasks').prepend(ui.item)
 
         unset_staff_new($(this).closest('.staff'))
 
