@@ -27,6 +27,8 @@ setup_trashbox = () ->
         ui.draggable.addClass('completed')
         $.post(URL.complete_task, { project: project_key, task_id: ui.draggable.data('id') })
 
+      update_trash_count()
+
       if is_intersect($('#trashbox-img'), ui.helper)
         # hide immediately
         $('#trashbox-img').effect('bounce', {}, 150)
@@ -67,6 +69,8 @@ setup_trash_toggle = () ->
         $('#trashbox-img .trash').hide()
         $('#trashbox-img .recycle').show()
 
+        $('#trash-count').hide()
+
         # 完了タスクを印刷する際は、
         # スタッフリストを非表示にし、タスクをセンタリングする
         $('.column-tasks').addClass('print-task-only')
@@ -87,6 +91,8 @@ setup_trash_toggle = () ->
         $('#trashbox-img .trash').show()
         $('#trashbox-img .recycle').hide()
 
+        $('#trash-count').show()
+
         $('.column-tasks').removeClass('print-task-only')
         $('.column-staffs').removeClass('no-print')
 
@@ -97,3 +103,9 @@ setup_trash_toggle = () ->
 
 showing_trashes = () ->
   $('#show_trashes_check').attr("checked")
+
+update_trash_count = () ->
+  # ignore ui-helper element
+  count = $('.completed').not('.ui-draggable-dragging').length
+  count = '' if count == 0
+  $('#trash-count').html(count)

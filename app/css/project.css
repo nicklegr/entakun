@@ -405,6 +405,7 @@ input.follow-project {
 }
 
 #trashbox-img {
+  position: relative;
   width: 100%;
 }
 
@@ -418,6 +419,13 @@ input.follow-project {
   width: 100%;
   margin-left: 10px;
   margin-top: 5px;
+}
+
+#trash-count {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  color: #999;
 }
 
 .drop-here {
