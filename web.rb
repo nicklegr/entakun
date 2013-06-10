@@ -360,7 +360,7 @@ class App < Sinatra::Base
       if staff
         staff_name = staff.name
 
-        if staff.task_ids.size >= 1
+        if staff.task_ids && staff.task_ids.size >= 1
           # taskは確実にあるはず
           task = project.tasks.find(staff.task_ids.first)
           task_name = task.name
