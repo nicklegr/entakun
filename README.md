@@ -26,7 +26,13 @@ entakunの動作には、下記のものが必要です。
 MongoDBのユーザー認証は使用していません。  
 またデータベースも自動的に作成されるので、デフォルト状態で起動させるだけでOKです。
 
-Javaのインストールが難しい場合は、config.ruの下記の記述を削除することで、Javaがなくても動作します。
+Javaは下記のコマンドでインストールできます。(apt環境)
+
+```bash
+sudo apt-get install openjdk-7-jre-headless
+```
+
+インストールが難しい場合は、config.ruの下記の記述を削除することで、Javaがなくても動作します。
 
 ```ruby:config.ru
 if ENV['RACK_ENV'] == 'production'
