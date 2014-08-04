@@ -13,6 +13,7 @@ gem 'mongoid'
 gem 'emk-sinatra-url-for'
 
 group :test do
+  gem 'pry'
   gem 'rake'
   gem 'rspec'
   gem 'capybara'
