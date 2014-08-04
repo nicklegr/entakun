@@ -55,6 +55,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    rake (10.0.3)
     ref (1.0.5)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
@@ -110,6 +111,7 @@ DEPENDENCIES
   emk-sinatra-url-for
   haml
   mongoid
+  rake
   rspec
   sinatra
   sinatra-contrib
