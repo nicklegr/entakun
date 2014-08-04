@@ -57,6 +57,16 @@ $ bundle exec rackup
 nginx + thin, Apache + Phusion Passengerでの動作を確認しています。  
 一般的なsinatra(rack)アプリと同様にセットアップしてください。
 
+## 開発者向け
+
+### テストの実行
+
+```bash
+$ bundle exec rake spec
+```
+
+Firefoxが起動したまま何も起こらないときは、``bundle update selenium-webdriver`` してみてください。
+
 ## スタッフ
 - 企画・デザイン
   - 袴忠 (Hakama Tadashi)
