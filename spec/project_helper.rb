@@ -11,5 +11,9 @@ module Test
     def hide_trash
       @page.uncheck('show_trashes_check')
     end
+
+    def copy_project
+      @page.find('button.copy-button').click
+    end
   end
 end
