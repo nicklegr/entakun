@@ -14,24 +14,24 @@ feature 'Project', js: true do
   end
 
   scenario 'Copy Project' do
+    from_project_key = Test::Project.new(page).key
+
     # copy project
     Test::Project.new(page).copy_project
-    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    activate_last_window
 
-    expect(current_url =~ %r|projects/[0-9a-f]+|).to be_true # assigned new url
+    to_project_key = Test::Project.new(page).key
+
+    expect(from_project_key).not_to eq(to_project_key) # assigned new url
     expect(Test::Task.first(page).name).to eq('test task') # task is also copied
   end
 
   scenario 'Edit Task in Copied Project' do
-    current_url =~ %r|projects/(.+)|
-    from_project_key = $1
+    from_project_key = Test::Project.new(page).key
 
     # copy project
     Test::Project.new(page).copy_project
-    page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
-
-    current_url =~ %r|projects/(.+)|
-    to_project_key = $1
+    activate_last_window
 
     # edit task
     task = Test::Task.first(page)

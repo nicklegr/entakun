@@ -4,6 +4,11 @@ module Test
       @page = page
     end
 
+    def key
+      @page.current_url =~ %r|projects/(.+)|
+      $1
+    end
+
     def show_trash
       @page.check('show_trashes_check')
     end
