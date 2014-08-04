@@ -15,10 +15,19 @@ class Project
   embeds_many :staffs
   validates_uniqueness_of :key
 
-  def self.new_project(key)
+  def self.new_project(key = SecureRandom.hex(8))
     project = Project.create({ key: key, name: '新規プロジェクト' })
     project.staffs.create(name: '担当者1', color: COLORS.first)
     project
+  end
+
+  def self.copy_project(from_key, to_key = SecureRandom.hex(8))
+    from_project = Project.where(key: from_key).first
+
+    to_project = Project.create({ key: to_key, name: 'コピー - ' + from_project.name })
+    to_project.tasks = from_project.tasks.select{|e| !e.complete}.dup
+    to_project.staffs = from_project.staffs.dup
+    to_project
   end
 
   def new_task(name)

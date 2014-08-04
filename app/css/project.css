@@ -3,7 +3,7 @@ img.edit_button {
   cursor: pointer;
 }
 
-.print-button, .tutorial-button {
+.print-button, .tutorial-button, .copy-button {
   float: right;
   padding-top: 8px;
   cursor: pointer;
@@ -11,6 +11,15 @@ img.edit_button {
 
 .print-button {
   margin-right: 12px;
+}
+
+.copy-button {
+  width: 32px;
+  height: 32px;
+  margin-top: 3px;
+  margin-right: 16px;
+  border: none;
+  background: url(../img/Page_Copy.png) no-repeat center center;
 }
 
 .tutorial-button {
