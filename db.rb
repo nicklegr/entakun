@@ -21,6 +21,15 @@ class Project
     project
   end
 
+  def self.copy_project(from_key, to_key = SecureRandom.hex(8))
+    from_project = Project.where(key: from_key).first
+
+    to_project = Project.create({ key: to_key, name: 'コピー - ' + from_project.name })
+    to_project.tasks = from_project.tasks.select{|e| !e.complete}.dup
+    to_project.staffs = from_project.staffs.dup
+    to_project
+  end
+
   def new_task(name)
     tasks.create(name: name, complete: false, color: 'gray')
   end

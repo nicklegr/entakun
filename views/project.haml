@@ -26,6 +26,9 @@
       .print-button
         %img{ src: url_for('/img/Print.png') }
 
+      %form{ action: url_for("/copy_project?project=#{@project_key}"), method: 'POST', target: '_blank' }
+        %button.copy-button{ type: 'submit', alt: 'プロジェクトをコピー' }
+
     #bookmark-reminder{ style: "display: none;" }
       %img{ src: url_for('/img/Tutorial/Bookmark_Reminder.png') }
 

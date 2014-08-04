@@ -85,6 +85,13 @@ class App < Sinatra::Base
     redirect url_for("/projects/#{project.key}")
   end
 
+  post '/copy_project' do
+    from_key = params[:project]
+    new_project = Project.copy_project(from_key)
+
+    redirect url_for("/projects/#{new_project.key}")
+  end
+
   get '/project_name' do
     key = params[:project]
 
