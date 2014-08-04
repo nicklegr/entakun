@@ -15,7 +15,7 @@ class Project
   embeds_many :staffs
   validates_uniqueness_of :key
 
-  def self.new_project(key)
+  def self.new_project(key = SecureRandom.hex(8))
     project = Project.create({ key: key, name: '新規プロジェクト' })
     project.staffs.create(name: '担当者1', color: COLORS.first)
     project

@@ -80,10 +80,9 @@ class App < Sinatra::Base
   end
 
   post '/new_project' do
-    project_key = SecureRandom.hex(8)
-    Project.new_project(project_key)
+    project = Project.new_project()
 
-    redirect url_for("/projects/#{project_key}")
+    redirect url_for("/projects/#{project.key}")
   end
 
   get '/project_name' do
