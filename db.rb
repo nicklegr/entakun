@@ -60,6 +60,9 @@ Mongoid.configure do |config|
   if ENV.key?('MONGOLAB_URI')
     # for heroku
     config.sessions = { default: { uri: ENV['MONGOLAB_URI'] }}
+  elsif ENV.key?('MONGODB_PORT_27017_TCP_ADDR')
+    # for docker
+    config.sessions = { default: { database: 'entakun', hosts: [ "#{ENV['MONGODB_PORT_27017_TCP_ADDR']}:27017" ] }}
   elsif test?
     config.sessions = { default: { database: 'entakun_test', hosts: [ 'localhost:27017' ] }}
   else
