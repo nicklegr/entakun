@@ -22,6 +22,13 @@ end
 
 Capybara.javascript_driver = :poltergeist
 
+# debug output
+# Capybara.register_driver :poltergeist do |app|
+#   Capybara::Poltergeist::Driver.new(app, { debug: true })
+# end
+
+Capybara.ignore_hidden_elements = false
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
