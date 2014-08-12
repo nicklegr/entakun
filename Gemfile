@@ -17,5 +17,6 @@ group :test do
   gem 'rake'
   gem 'rspec'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'database_cleaner'
 end

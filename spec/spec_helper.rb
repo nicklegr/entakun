@@ -5,6 +5,7 @@ Bundler.require :default, Sinatra::Application.environment
 require 'rspec'
 require 'capybara'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 
 require File.dirname(__FILE__) + '/../web'
 disable :run
@@ -19,14 +20,12 @@ Capybara.app = Rack::Builder.new do
   end
 end
 
+Capybara.javascript_driver = :poltergeist
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
 
   config.include Capybara::DSL
-end
-
-def activate_last_window
-  page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
 end
