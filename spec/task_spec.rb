@@ -14,7 +14,8 @@ feature 'Task', js: true do
   end
 
   scenario 'Add task' do
-    fill_in 'task', with: "task 1\n"
+    fill_in 'task', with: "task 1"
+    find('#task').native.send_key(:Enter)
     expect(Test::Task.at(page, 0).name).to eq('task 1')
     expect(Test::Task.at(page, 1).name).to eq('test task')
   end

@@ -18,7 +18,7 @@ module Test
     end
 
     def copy_project
-      @page.find('button.copy-button').click
+      @page.find('button.copy-button').trigger('click')
     end
   end
 end
