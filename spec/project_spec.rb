@@ -18,12 +18,14 @@ feature 'Project', js: true do
 
     # copy project
     Test::Project.new(page).copy_project
-    activate_last_window
 
-    to_project_key = Test::Project.new(page).key
+    new_window = page.driver.window_handles.last
+    page.within_window new_window do
+      to_project_key = Test::Project.new(page).key
 
-    expect(from_project_key).not_to eq(to_project_key) # assigned new url
-    expect(Test::Task.first(page).name).to eq('test task') # task is also copied
+      expect(from_project_key).not_to eq(to_project_key) # assigned new url
+      expect(Test::Task.first(page).name).to eq('test task') # task is also copied
+    end
   end
 
   scenario 'Edit Task in Copied Project' do
@@ -31,17 +33,18 @@ feature 'Project', js: true do
 
     # copy project
     Test::Project.new(page).copy_project
-    activate_last_window
 
-    # edit task
-    task = Test::Task.first(page)
-    task.hover
-    task.start_edit
-    task.set_name 'edited task'
-    task.end_edit
+    new_window = page.driver.window_handles.last
+    page.within_window new_window do
+      # edit task
+      task = Test::Task.first(page)
+      task.hover
+      task.start_edit
+      task.set_name 'edited task'
+      task.end_edit
+    end
 
     # old project doesn't change
-    visit "/projects/#{from_project_key}"
     expect(Test::Task.first(page).name).to eq('test task')
   end
 end
