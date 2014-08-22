@@ -68,6 +68,8 @@ load_tasks = () ->
         task.hide()
   )
 
+  update_trash_count()
+
 add_task = (name) ->
   # send to server
   task_id = null

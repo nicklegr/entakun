@@ -3,7 +3,7 @@ img.edit_button {
   cursor: pointer;
 }
 
-.print-button, .tutorial-button {
+.print-button, .tutorial-button, .copy-button {
   float: right;
   padding-top: 8px;
   cursor: pointer;
@@ -11,6 +11,15 @@ img.edit_button {
 
 .print-button {
   margin-right: 12px;
+}
+
+.copy-button {
+  width: 32px;
+  height: 32px;
+  margin-top: 3px;
+  margin-right: 16px;
+  border: none;
+  background: url(../img/Page_Copy.png) no-repeat center center;
 }
 
 .tutorial-button {
@@ -201,7 +210,7 @@ div#incoming-tasks {
 .assigned-task, .followee-task {
   width: auto;
   min-height: 33px;
-  padding: 1px;
+  padding: 1px 1px 0 1px;
 }
 
 .followee-task > .task {
@@ -405,7 +414,9 @@ input.follow-project {
 }
 
 #trashbox-img {
+  position: relative;
   width: 100%;
+  cursor: pointer;
 }
 
 .trash {
@@ -418,6 +429,13 @@ input.follow-project {
   width: 100%;
   margin-left: 10px;
   margin-top: 5px;
+}
+
+#trash-count {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  color: #999;
 }
 
 .drop-here {
@@ -456,6 +474,11 @@ div#undo {
   margin-bottom: 3px;
 }
 
+/* デザイン上、割り当て済みタスクはマージンを小さく */
+.assigned-task .task {
+  margin-bottom: 1px;
+}
+
 .task span {
   position: absolute;
   margin-left: -1.3em;
@@ -463,14 +486,6 @@ div#undo {
 
 .complete-task {
   color: silver;
-}
-
-/*
-  タスク割り当て済みのSortableにドロップしようとしたとき、
-  リストの既存アイテムが動かないようにする
-*/
-.assigned-task > .ui-sortable-placeholder {
-  display: none;
 }
 
 #project-url {

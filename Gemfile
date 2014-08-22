@@ -1,4 +1,4 @@
-source :rubyforge
+source 'https://rubygems.org'
 
 ruby '1.9.3'
 gem 'sinatra'
@@ -13,7 +13,10 @@ gem 'mongoid'
 gem 'emk-sinatra-url-for'
 
 group :test do
+  gem 'pry'
+  gem 'rake'
   gem 'rspec'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'database_cleaner'
 end

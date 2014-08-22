@@ -1,4 +1,7 @@
 # entakun
+master: [![Build Status](https://travis-ci.org/nicklegr/entakun.svg?branch=master)](https://travis-ci.org/nicklegr/entakun)
+develop: [![Build Status](https://travis-ci.org/nicklegr/entakun.svg?branch=develop)](https://travis-ci.org/nicklegr/entakun)
+
 Webブラウザで使える、付箋に書くように手軽なタスク管理ツールです。  
 1〜6人程度の少人数のチームに向いています。
 
@@ -26,7 +29,13 @@ entakunの動作には、下記のものが必要です。
 MongoDBのユーザー認証は使用していません。  
 またデータベースも自動的に作成されるので、デフォルト状態で起動させるだけでOKです。
 
-Javaのインストールが難しい場合は、config.ruの下記の記述を削除することで、Javaがなくても動作します。
+Javaは下記のコマンドでインストールできます。(apt環境)
+
+```bash
+sudo apt-get install openjdk-7-jre-headless
+```
+
+インストールが難しい場合は、config.ruの下記の記述を削除することで、Javaがなくても動作します。
 
 ```ruby:config.ru
 if ENV['RACK_ENV'] == 'production'
@@ -50,6 +59,16 @@ $ bundle exec rackup
 ## 本番運用
 nginx + thin, Apache + Phusion Passengerでの動作を確認しています。  
 一般的なsinatra(rack)アプリと同様にセットアップしてください。
+
+## 開発者向け
+
+### テストの実行
+
+```bash
+$ bundle exec rake spec
+```
+
+Firefoxが起動したまま何も起こらないときは、``bundle update selenium-webdriver`` してみてください。
 
 ## スタッフ
 - 企画・デザイン
