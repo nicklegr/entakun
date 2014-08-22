@@ -374,7 +374,12 @@ class App < Sinatra::Base
         end
       end
 
-      result << e.update({ staff_name: staff_name, task_name: task_name, assigned_at: assigned_at })
+      result << e.update({
+        project_name: project.name,
+        staff_name: staff_name,
+        task_name: task_name,
+        assigned_at: assigned_at
+      })
     end
 
     result.to_json

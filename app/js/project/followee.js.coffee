@@ -117,7 +117,7 @@ update_followee = (elem, data) ->
   unset_followee_new(elem)
 
   if data.staff_name
-    elem.find('.followee-name > .name').text(data.staff_name)
+    elem.find('.followee-name > .name').text(data.staff_name + ' (' + data.project_name + ')')
 
     task = elem.find('.task')
     if data.task_name
