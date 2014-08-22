@@ -1,5 +1,5 @@
 # entakun
-master: [![Build Status](https://travis-ci.org/nicklegr/entakun.svg?branch=master)](https://travis-ci.org/nicklegr/entakun)
+master: [![Build Status](https://travis-ci.org/nicklegr/entakun.svg?branch=master)](https://travis-ci.org/nicklegr/entakun)  
 develop: [![Build Status](https://travis-ci.org/nicklegr/entakun.svg?branch=develop)](https://travis-ci.org/nicklegr/entakun)
 
 Webブラウザで使える、付箋に書くように手軽なタスク管理ツールです。  
