@@ -30,6 +30,10 @@ img.edit_button {
   margin-right: 13px;
 }
 
+.others-dropdown {
+  margin-top: 3px;
+}
+
 .tutorial-button {
   padding-left: 13px; /* marginじゃないのは、クリック判定を広くするため */
   padding-right: 13px;
