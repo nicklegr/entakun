@@ -14,12 +14,13 @@ img.edit_button {
 }
 
 .copy-button {
-  width: 32px;
-  height: 32px;
-  margin-top: 3px;
-  margin-right: 16px;
+  width: 16px;
+  height: 22px;
+  margin-top: 9px;
+  margin-right: 22px;
   border: none;
   background: url(../img/Page_Copy.png) no-repeat center center;
+  background-size: contain;
 }
 
 .tutorial-button {
