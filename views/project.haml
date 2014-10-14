@@ -20,6 +20,12 @@
         .edit{ style: "display: none;" }
           %img.edit_button{ src: url_for('/img/pencil.png') }
 
+      .others-button.dropdown
+        %img{ :src => url_for('/img/Others.png'), :'data-toggle' => 'dropdown' }
+        %ul{ :class => "dropdown-menu pull-right others-dropdown" }
+          %li
+            %a{ href: url_for('/recent_projects'), target: '_blank' } 最近使ったプロジェクト
+
       .tutorial-button
         %img{ src: url_for('/img/Hatena.png') }
 

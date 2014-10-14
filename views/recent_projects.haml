@@ -5,9 +5,18 @@
         %a{ href: url_for('/'), target: '_blank' }
           %img{ src: url_for('/img/Entaku.png') }
 
-.container
-  %h3 最近アクセスしたプロジェクト
+      #project-name
+        .name 最近使ったプロジェクト
 
+.container
+  %p
+    お気に入りにし忘れたプロジェクトは、ここからたどりつけます。
+  %p
+    このリストはブラウザのCookieに保存されています。
+    %br
+    Cookieを削除すると消えます。また、別のブラウザからは見られません。
+    %br
+    あくまで非常用に使ってくださいね。
   %hr
 
   %ul
