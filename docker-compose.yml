@@ -1,0 +1,15 @@
+web:
+  build: .
+  links:
+    - mongodb
+  ports:
+    - "9292:80"
+  # environment:
+  #   VIRTUAL_HOST: entakun.co
+  restart: always
+mongodb:
+  image: mongo:3.0.4
+  command: mongod --smallfiles
+  restart: always
+  # volumes:
+  #   - ./mongodb:/data/db
