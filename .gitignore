@@ -17,3 +17,5 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+mongodb/
