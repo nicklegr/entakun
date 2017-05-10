@@ -31,6 +31,8 @@ $ ->
     likeApple        : true
   })
 
+  $('[data-toggle="tooltip"]').tooltip()
+
   add_recent_project(project_key)
 
   check_welcome_sequence()

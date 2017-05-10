@@ -20,20 +20,20 @@
         .edit{ style: "display: none;" }
           %img.edit_button{ src: url_for('/img/pencil.png') }
 
-      .others-button.dropdown
+      .others-button.dropdown{ :'data-toggle' => 'tooltip', :'data-placement' => 'bottom', title: 'メニュー' }
         %img{ :src => url_for('/img/Others.png'), :'data-toggle' => 'dropdown' }
         %ul{ :class => "dropdown-menu pull-right others-dropdown" }
           %li
             %a{ href: url_for('/recent_projects'), target: '_blank' } 最近使ったプロジェクト
 
-      .tutorial-button
+      .tutorial-button{ :'data-toggle' => 'tooltip', :'data-placement' => 'bottom', title: 'ヘルプ' }
         %img{ src: url_for('/img/Hatena.png') }
 
-      .print-button
+      .print-button{ :'data-toggle' => 'tooltip', :'data-placement' => 'bottom', title: '印刷' }
         %img{ src: url_for('/img/Print.png') }
 
       %form{ action: url_for("/copy_project?project=#{@project_key}"), method: 'POST', target: '_blank' }
-        %button.copy-button{ type: 'submit', alt: 'プロジェクトをコピー' }
+        %button.copy-button{ type: 'submit', alt: 'プロジェクトをコピー', :'data-toggle' => 'tooltip', :'data-placement' => 'bottom', :'data-html' => "true", title: 'プロジェクトをフォーク<br/>(コピーを作成)' }
 
     #bookmark-reminder{ style: "display: none;" }
       %img{ src: url_for('/img/Tutorial/Bookmark_Reminder.png') }
