@@ -68,8 +68,6 @@ nginx + thin, Apache + Phusion Passengerでの動作を確認しています。
 $ bundle exec rake spec
 ```
 
-Firefoxが起動したまま何も起こらないときは、``bundle update selenium-webdriver`` してみてください。
-
 ## スタッフ
 - 企画・デザイン
   - 袴忠 (Hakama Tadashi)
