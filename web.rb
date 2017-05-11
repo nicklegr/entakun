@@ -259,7 +259,15 @@ class App < Sinatra::Base
     key = params[:project]
     project = Project.where(key: key).first
 
-    project.staffs.to_json
+    staffs = project.staffs
+    staffs.each do |e|
+      next unless e.task_ids
+      e.task_ids.sort_by! do |id|
+        project.tasks.find(id).position
+      end
+    end
+
+    staffs.to_json
   end
 
   post '/new_staff' do
