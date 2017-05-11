@@ -76,8 +76,6 @@ add_staff_html = (id, name, color) ->
     containment: 'document',
     distance: 7,
 
-    # @todo disable sorting
-
     receive: (event, ui) ->
       if ui.item.hasClass('completed')
         # avoid completed task assign
@@ -96,6 +94,12 @@ add_staff_html = (id, name, color) ->
         })
 
         set_staff_newest($(this).closest('.staff'))
+
+      # update event also called. So no need to call assigned_task_sorted() here
+
+    update: (event, ui) ->
+      if $(this).find('.task').length >= 2
+        assigned_task_sorted($(this))
 
     stop: (event, ui) ->
       # if task was completed, hide and move to incoming list
@@ -161,6 +165,11 @@ add_staff_html = (id, name, color) ->
 
   $("#staffs").append(new_staff)
   new_staff
+
+assigned_task_sorted = (elem) ->
+  data = elem.sortable('serialize')
+  data = "project=#{project_key}&" + data
+  $.post(URL.task_sorted, data)
 
 disable_staffs = () ->
   $('.staff-disabler').show('fade', 150)

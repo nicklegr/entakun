@@ -41,7 +41,12 @@ class Task
   field :name, type: String
   field :color, type: String
   field :complete, type: Boolean
+
+  # タスクの並び順。各リストの中でのインデックス。
+  # つまりプロジェクト全体でユニークではない。
+  # 例えば未割り当てタスクと割り当て済みタスクで同じ値になりうる。
   field :position, type: Integer
+
   field :assigned_at, type: Time
   field :completed_at, type: Time
   embedded_in :project
