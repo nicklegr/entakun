@@ -17,6 +17,7 @@ class App < Sinatra::Base
 
   configure do
     mime_type :js, 'application/javascript'
+    mime_type :json, 'application/json'
   end
 
   configure :development do
@@ -409,5 +410,33 @@ class App < Sinatra::Base
     @projects.compact!
 
     haml :recent_projects
+  end
+
+  get '/export_projects' do
+    # @todo 複数のプロジェクトのマージ
+    key = params[:projects]
+
+    project = Project.where(key: key).first
+
+    @cards = project.tasks.map do |task|
+      {
+        "_id" => task.id,
+        "title" => task.name,
+        "members" => [],
+        "labelIds" => [],
+        "listId" => "qQBRoJMhpKHnRXH9s",
+        "sort" => task.position || 0,
+        "swimlaneId" => "gRArzLSPRcgag8HrC",
+        "archived" => false,
+        "createdAt" => "2018-02-04T13:22:59.022Z",
+        "dateLastActivity" => "2018-02-04T13:22:59.022Z",
+        "isOvertime" => false,
+        "userId" => "WbgvtzpbZgvaQKTfo"
+      }
+    end
+    @cards = @cards.to_json
+
+    content_type :json
+    erb :"export_wekan.json", layout => false
   end
 end
