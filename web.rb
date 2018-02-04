@@ -424,7 +424,7 @@ class App < Sinatra::Base
         "title" => task.name,
         "members" => [],
         "labelIds" => [],
-        "listId" => "qQBRoJMhpKHnRXH9s",
+        "listId" => "Inbox", # staffに割り当てられてないカードはInboxへ
         "sort" => task.position || 0,
         "swimlaneId" => "gRArzLSPRcgag8HrC",
         "archived" => false,
@@ -434,7 +434,45 @@ class App < Sinatra::Base
         "userId" => "WbgvtzpbZgvaQKTfo"
       }
     end
+
+    @lists = [
+      {
+        "_id" => "Inbox",
+        "archived" => false,
+        "createdAt" => "2018-02-04T12:56:23.065Z",
+        "title" => "Inbox",
+        "wipLimit" => {
+          "value" => 1,
+          "enabled" => false,
+          "soft" => false
+        },
+        "updatedAt" => "2018-02-04T12:56:23.068Z"
+      },
+    ]
+    @lists += project.staffs.map do |staff|
+      {
+        "_id" => "staff_#{staff.id}",
+        "archived" => false,
+        "createdAt" => "2018-02-04T12:56:23.065Z",
+        "title" => staff.name,
+        "wipLimit" => {
+          "value" => 1,
+          "enabled" => false,
+          "soft" => false
+        },
+        "updatedAt" => "2018-02-04T12:56:23.068Z"
+      }
+    end
+
+    project.staffs.each do |staff|
+      staff.task_ids.each do |task_id|
+        assigned_card = @cards.find{|e| e["_id"].to_s == task_id.to_s}
+        assigned_card["listId"] = "staff_#{staff.id}"
+      end
+    end
+
     @cards = @cards.to_json
+    @lists = @lists.to_json
 
     content_type :json
     erb :"export_wekan.json", layout => false

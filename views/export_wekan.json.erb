@@ -49,44 +49,7 @@
   "title": "test",
   "view": "board-view-lists",
   "modifiedAt": "2018-02-04T13:22:41.417Z",
-  "lists": [
-    {
-      "_id": "qQBRoJMhpKHnRXH9s",
-      "archived": false,
-      "createdAt": "2018-02-04T12:56:23.065Z",
-      "title": "hoge",
-      "wipLimit": {
-        "value": 1,
-        "enabled": false,
-        "soft": false
-      },
-      "updatedAt": "2018-02-04T12:56:23.068Z"
-    },
-    {
-      "_id": "gW5orwAateRoZcgFM",
-      "archived": false,
-      "createdAt": "2018-02-04T12:56:23.070Z",
-      "title": "foo",
-      "wipLimit": {
-        "value": 1,
-        "enabled": false,
-        "soft": false
-      },
-      "updatedAt": "2018-02-04T12:56:23.073Z"
-    },
-    {
-      "_id": "fCuKLx5gT8NbPc6YN",
-      "archived": false,
-      "createdAt": "2018-02-04T12:56:23.075Z",
-      "title": "bar",
-      "wipLimit": {
-        "value": 1,
-        "enabled": false,
-        "soft": false
-      },
-      "updatedAt": "2018-02-04T12:56:23.077Z"
-    }
-  ],
+  "lists": <%= @lists %>,
   "swimlanes": [
     {
       "_id": "gRArzLSPRcgag8HrC",
@@ -105,7 +68,7 @@
   "users": [
     {
       "_id": "WbgvtzpbZgvaQKTfo",
-      "username": "(default)",
+      "username": "default",
       "profile": {}
     }
   ]
