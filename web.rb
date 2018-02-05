@@ -430,9 +430,20 @@ class App < Sinatra::Base
 
     @board_title = project.name
     @cards = project.tasks.map do |task|
+      title = ""
+      description = ""
+      if task.name.match(/(.+?)\n(.+)/m)
+        title = $1
+        description = $2
+      else
+        title = task.name
+        description = ""
+      end
+
       {
         "_id" => task.id,
-        "title" => task.name,
+        "title" => title,
+        "description" => description,
         "members" => [],
         "labelIds" => to_label_id[task.color] ? [ to_label_id[task.color] ] : [],
         "listId" => "Inbox", # staffに割り当てられてないカードはInboxへ
