@@ -428,6 +428,7 @@ class App < Sinatra::Base
       "gray" => nil,
     }
 
+    @board_title = project.name
     @cards = project.tasks.map do |task|
       {
         "_id" => task.id,
