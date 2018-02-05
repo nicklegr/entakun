@@ -17,6 +17,7 @@ class App < Sinatra::Base
 
   configure do
     mime_type :js, 'application/javascript'
+    mime_type :json, 'application/json'
   end
 
   configure :development do
@@ -409,5 +410,93 @@ class App < Sinatra::Base
     @projects.compact!
 
     haml :recent_projects
+  end
+
+  get '/export_wekan' do
+    # @todo 複数のプロジェクトのマージ
+    key = params[:projects]
+
+    project = Project.where(key: key).first
+
+    to_label_id = {
+      "orange" => "color_orange",
+      "yellow" => "color_yellow",
+      "green" => "color_lime",
+      "cyan" => "color_sky",
+      "blue" => "color_purple",
+      "pink" => "color_pink",
+      "gray" => nil,
+    }
+
+    @board_title = project.name
+    @cards = project.tasks.map do |task|
+      title = ""
+      description = ""
+      if task.name.match(/(.+?)\n(.+)/m)
+        title = $1
+        description = $2
+      else
+        title = task.name
+        description = ""
+      end
+
+      {
+        "_id" => task.id,
+        "title" => title,
+        "description" => description,
+        "members" => [],
+        "labelIds" => to_label_id[task.color] ? [ to_label_id[task.color] ] : [],
+        "listId" => "Inbox", # staffに割り当てられてないカードはInboxへ
+        "sort" => task.position || 0,
+        "swimlaneId" => "gRArzLSPRcgag8HrC",
+        "archived" => false,
+        "createdAt" => "2018-02-04T13:22:59.022Z",
+        "dateLastActivity" => "2018-02-04T13:22:59.022Z",
+        "isOvertime" => false,
+        "userId" => "WbgvtzpbZgvaQKTfo"
+      }
+    end
+
+    @lists = [
+      {
+        "_id" => "Inbox",
+        "archived" => false,
+        "createdAt" => "2018-02-04T12:56:23.065Z",
+        "title" => "Inbox",
+        "wipLimit" => {
+          "value" => 1,
+          "enabled" => false,
+          "soft" => false
+        },
+        "updatedAt" => "2018-02-04T12:56:23.068Z"
+      },
+    ]
+    @lists += project.staffs.map do |staff|
+      {
+        "_id" => "staff_#{staff.id}",
+        "archived" => false,
+        "createdAt" => "2018-02-04T12:56:23.065Z",
+        "title" => staff.name,
+        "wipLimit" => {
+          "value" => 1,
+          "enabled" => false,
+          "soft" => false
+        },
+        "updatedAt" => "2018-02-04T12:56:23.068Z"
+      }
+    end
+
+    project.staffs.each do |staff|
+      staff.task_ids.each do |task_id|
+        assigned_card = @cards.find{|e| e["_id"].to_s == task_id.to_s}
+        assigned_card["listId"] = "staff_#{staff.id}"
+      end
+    end
+
+    @cards = @cards.to_json
+    @lists = @lists.to_json
+
+    content_type :json
+    erb :"export_wekan.json", layout => false
   end
 end
