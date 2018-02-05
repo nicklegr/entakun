@@ -418,12 +418,22 @@ class App < Sinatra::Base
 
     project = Project.where(key: key).first
 
+    to_label_id = {
+      "orange" => "color_orange",
+      "yellow" => "color_yellow",
+      "green" => "color_lime",
+      "cyan" => "color_sky",
+      "blue" => "color_purple",
+      "pink" => "color_pink",
+      "gray" => nil,
+    }
+
     @cards = project.tasks.map do |task|
       {
         "_id" => task.id,
         "title" => task.name,
         "members" => [],
-        "labelIds" => [],
+        "labelIds" => to_label_id[task.color] ? [ to_label_id[task.color] ] : [],
         "listId" => "Inbox", # staffに割り当てられてないカードはInboxへ
         "sort" => task.position || 0,
         "swimlaneId" => "gRArzLSPRcgag8HrC",
