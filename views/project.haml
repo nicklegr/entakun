@@ -26,7 +26,7 @@
           %li
             %a{ href: url_for('/recent_projects'), target: '_blank' } 最近使ったプロジェクト
           %li
-            %a{ href: url_for("/export_projects?projects=#{@project_key}"), target: '_blank' } プロジェクトをエクスポート(Wekan)
+            %a{ href: url_for("/export_wekan?projects=#{@project_key}"), target: '_blank' } プロジェクトをエクスポート(Wekan)
 
       .tutorial-button{ :'data-toggle' => 'tooltip', :'data-placement' => 'bottom', title: 'ヘルプ' }
         %img{ src: url_for('/img/Hatena.png') }

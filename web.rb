@@ -412,7 +412,7 @@ class App < Sinatra::Base
     haml :recent_projects
   end
 
-  get '/export_projects' do
+  get '/export_wekan' do
     # @todo 複数のプロジェクトのマージ
     key = params[:projects]
 
